@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
-import GameReducer from './Game';
+import fingerPrintReducer from './fingerPrintReducer';
 export const Store = configureStore({
   reducer: {
-    game: GameReducer,
+    fingerPrintRef: fingerPrintReducer,
   },
 });

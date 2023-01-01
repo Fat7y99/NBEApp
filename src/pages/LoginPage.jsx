@@ -3,13 +3,11 @@ import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
 import LogoHeader from '../components/LoginComponents/LogoHeader';
 import LoginBody from '../components/LoginComponents/LoginBody';
 import Footer from '../components/LoginComponents/Footer';
-import {useRef} from 'react';
-import FingerPrintSheet from '../components/LoginComponents/temp';
+import FingerPrintSheet from '../components/LoginComponents/FingerPrintSheet';
 const LoginPage = () => {
   const onPressHandler = () => {
     console.log('presseddddd!');
   };
-
   return (
     <View style={styles.entireContaier}>
       <ImageBackground
@@ -20,7 +18,7 @@ const LoginPage = () => {
         <LogoHeader></LogoHeader>
         <LoginBody></LoginBody>
         <Footer></Footer>
-        <FingerPrintSheet pRef={panelRef}></FingerPrintSheet>
+        {/* <FingerPrintSheet></FingerPrintSheet> */}
       </ImageBackground>
     </View>
   );

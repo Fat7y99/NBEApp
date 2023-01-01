@@ -4,10 +4,9 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
 import ForgotPassword from './ForgotPassword';
-import FingerPrintSheet from './temp';
-import {useRef} from 'react';
+import {useSelector} from 'react-redux';
 const LoginBody = () => {
-  const panelRef = useRef(null);
+  //   panelRef = useSelector(state => state.fingerPrintRef.ref);
 
   return (
     <View style={styles.loginBodyContainer}>
