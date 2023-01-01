@@ -1,5 +1,5 @@
 package com.nbeapp;
-
+import com.surajit.rnrg.RNRadialGradientPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;

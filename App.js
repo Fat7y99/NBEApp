@@ -1,4 +1,5 @@
 import React from 'react';
+import Sayed from './src/components/LoginComponents/temp';
 import {StyleSheet, StatusBar, Text, useColorScheme, View} from 'react-native';
 import LoginPage from './src/pages/LoginPage';
 
