@@ -1,18 +1,17 @@
 import React from 'react';
-import Sayed from './src/components/LoginComponents/FingerPrintSheet';
-import {StyleSheet, StatusBar, Text, useColorScheme, View} from 'react-native';
+import {StyleSheet, StatusBar, View} from 'react-native';
 import LoginPage from './src/pages/LoginPage';
 import {Provider} from 'react-redux';
-
 import {Store} from './src/redux/Store';
-import {sayed} from './src/redux/fingerPrintReducer';
+import {addCarsData} from './src/config/firebase';
 const App = () => {
-  sayed();
+  addCarsData();
   return (
     <Provider store={Store}>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
         <LoginPage></LoginPage>
+        {/* <FirebaseTesting></FirebaseTesting> */}
       </View>
     </Provider>
   );
