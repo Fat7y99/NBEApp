@@ -19,6 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 export const signUp = async (email, password) => {
   await firebase
     .auth()
@@ -28,7 +29,7 @@ export const signUp = async (email, password) => {
     });
 };
 
-export const loginU = async (email, password) => {
+export const login = async (email, password) => {
   try {
     const user = await firebase
       .auth()

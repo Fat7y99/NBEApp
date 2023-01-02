@@ -17,15 +17,21 @@ const LoginBody = () => {
       <PasswordInput></PasswordInput>
       <ForgotPassword></ForgotPassword>
       <View style={styles.loginStyle}>
-        <PrimaryButton></PrimaryButton>
+        <PrimaryButton
+          height={50}
+          width={275}
+          title="Log In"
+          backgroundColor="#007236"
+          textColor="white"></PrimaryButton>
         <Pressable onPress={() => panelRef.current.togglePanel()}>
           <Image
-            style={{marginLeft: 21}}
+            // style={{marginLeft: 15}}
             source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
         </Pressable>
       </View>
       <View
         style={{
+          marginTop: 10,
           justifyContent: 'center',
           flexDirection: 'row',
         }}>
@@ -60,7 +66,8 @@ const styles = StyleSheet.create({
   },
   loginStyle: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
+    marginTop: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
   },

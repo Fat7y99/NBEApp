@@ -1,10 +1,12 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
-const LogoHeader = () => {
+const LogoHeader = porps => {
   return (
     <View style={styles.logoContainer}>
-      <View style={styles.languageContainer}>
-        <Text style={styles.languageText}>AR</Text>
-      </View>
+      {porps.visible ?? (
+        <View style={styles.languageContainer}>
+          <Text style={styles.languageText}>AR</Text>
+        </View>
+      )}
       <Image
         style={styles.logoStyle}
         source={require('../../../assets/images/LoginImages/logo.png')}></Image>
@@ -16,7 +18,8 @@ const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 50,
+    marginTop: 50,
+    marginBottom: 25,
     marginHorizontal: 25,
   },
   languageContainer: {
