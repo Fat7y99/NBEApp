@@ -3,10 +3,10 @@ import {StyleSheet, StatusBar, View} from 'react-native';
 import LoginPage from './src/pages/LoginPage';
 import {Provider} from 'react-redux';
 import {Store} from './src/redux/Store';
-import {signUp, addCarsData} from './src/config/firebase';
+import {signUp, loginU} from './src/services/firebase';
 const App = () => {
-  // signUp('fathyy@gamail.com', 123698745);
-  addCarsData();
+  loginU('fathyy@gamail.com', 123698745);
+  // addCarsData();
   return (
     <Provider store={Store}>
       <View style={styles.entireContaier}>
