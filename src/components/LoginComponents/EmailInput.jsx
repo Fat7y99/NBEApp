@@ -1,5 +1,13 @@
 import {StyleSheet, View, Text, Image, TextInput} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {setUserName} from '../../redux/login';
 const EmailInput = () => {
+  const dispatch = useDispatch();
+  const onSubmitEmail = e => {
+    console.log(e.nativeEvent.text);
+
+    dispatch(setUserName(e.nativeEvent.text));
+  };
   return (
     <View style={[styles.emailStyle, {padding: 5, flexDirection: 'row'}]}>
       <Image
@@ -10,6 +18,7 @@ const EmailInput = () => {
         <Text style={[styles.labelStyle]}>Username</Text>
         <View style={{flexDirection: 'row'}}>
           <TextInput
+            onEndEditing={onSubmitEmail}
             style={styles.textInputStyle}
             selectionColor={'white'}></TextInput>
         </View>

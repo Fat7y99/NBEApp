@@ -4,10 +4,14 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
 import ForgotPassword from './ForgotPassword';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {login} from '../../services/firebase';
 const LoginBody = () => {
   //   panelRef = useSelector(state => state.fingerPrintRef.ref);
+  const email = useSelector(state => state.login.userName);
+  const password = useSelector(state => state.login.password);
 
+  // const dispatch = useDispatch();
   return (
     <View style={styles.loginBodyContainer}>
       <Text style={styles.loginBodyStyle}>
@@ -21,6 +25,10 @@ const LoginBody = () => {
           height={50}
           width={275}
           title="Log In"
+          callBackFunction={() => {
+            console.log(email, password);
+            login(email, password);
+          }}
           backgroundColor="#007236"
           textColor="white"></PrimaryButton>
         <Pressable onPress={() => panelRef.current.togglePanel()}>

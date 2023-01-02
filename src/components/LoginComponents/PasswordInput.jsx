@@ -6,11 +6,19 @@ import {
   Image,
   TextInput,
 } from 'react-native';
+import {setPassword} from '../../redux/login';
+
 import {useState} from 'react';
+import {useDispatch} from 'react-redux';
 const PasswordInput = () => {
   const [isVisisble, SetVisible] = useState(false);
   const togglePassword = () => {
     SetVisible(prev => !prev);
+  };
+  const dispatch = useDispatch();
+  const onSubmitPassword = e => {
+    console.log(e.nativeEvent.text);
+    dispatch(setPassword(e.nativeEvent.text));
   };
   return (
     <View style={[styles.passwordStyle, {padding: 5, flexDirection: 'row'}]}>
@@ -22,6 +30,8 @@ const PasswordInput = () => {
         <Text style={[styles.labelStyle, {color: '#007236'}]}>Password</Text>
         <View style={{flexDirection: 'row'}}>
           <TextInput
+            onChg
+            onEndEditing={onSubmitPassword}
             secureTextEntry={!isVisisble}
             style={[styles.textInputStyle, {color: 'black'}]}
             selectionColor={'black'}></TextInput>

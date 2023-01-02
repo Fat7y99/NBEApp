@@ -23,13 +23,9 @@ const PrimaryButton = props => {
     },
   });
 
-  const onPressHandler = () => {
-    console.log('presseddddd!');
-  };
-
   return (
     <Pressable
-      onPress={onPressHandler}
+      onPress={props.callBackFunction}
       style={pressData =>
         pressData.pressed
           ? [styles.primaryContainer, styles.pressed]

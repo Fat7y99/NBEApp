@@ -1,0 +1,112 @@
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {Colors} from '../constants/Colors';
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
+import {Images} from '../constants/Images';
+import LogoHeader from '../components/LoginComponents/LogoHeader';
+import PrimaryButton from '../components/LoginComponents/PrimaryButton';
+
+const styles = StyleSheet.create({
+  root: {flex: 1, backgroundColor: Colors.backgroundColor, padding: 20},
+  codeFieldRoot: {marginTop: 20},
+  cell: {
+    width: 45,
+    height: 65,
+    justifyContent: 'flex-end',
+
+    alignItems: 'center',
+    borderRadius: 10,
+    textAlign: 'center',
+    backgroundColor: 'white',
+  },
+  focusCell: {
+    color: 'black',
+  },
+});
+
+const OTPFields = () => {
+  const otpCount = 5;
+  const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: otpCount});
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
+
+  return (
+    <View style={styles.root}>
+      <LogoHeader
+        image={Images.backButton}
+        firstColor={Colors.primaryGreenColor}
+        logoImage={Images.primaryLogo}></LogoHeader>
+
+      <Text style={{fontSize: 20, fontWeight: '700', color: '#1C2437'}}>
+        Verification
+      </Text>
+      <Text style={{fontSize: 16, fontWeight: '400', color: '#B7B7B7'}}>
+        Enter 5 digit code we sent to +20 101 131 5412
+      </Text>
+
+      <CodeField
+        ref={ref}
+        value={value}
+        onChangeText={setValue}
+        cellCount={otpCount}
+        rootStyle={styles.codeFieldRoot}
+        keyboardType="number-pad"
+        textContentType="oneTimeCode"
+        renderCell={({index, symbol, isFocused}) => (
+          <View
+            key={index}
+            style={[
+              styles.cell,
+              (symbol || isFocused) && {justifyContent: 'center'},
+            ]}>
+            <Text
+              style={[
+                {fontSize: 25, fontWeight: '700'},
+                symbol ? {color: '#1C2437'} : {color: '#B7B7B7'},
+                isFocused && styles.focusCell,
+              ]}
+              onLayout={getCellOnLayoutHandler(index)}>
+              {symbol || (isFocused ? <Cursor /> : '-')}
+            </Text>
+          </View>
+        )}
+      />
+
+      <Text
+        style={{
+          marginTop: 20,
+          fontSize: 16,
+          fontWeight: '400',
+          color: '#B7B7B7',
+        }}>
+        Didn’t receive the code?
+      </Text>
+      <Text style={{fontSize: 19, fontWeight: '700', color: '#1C2437'}}>
+        Request new one in 00:12
+      </Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          position: 'relative',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+        }}>
+        <PrimaryButton
+          title="Submit"
+          backgroundColor="#007236"
+          textColor="white"></PrimaryButton>
+      </View>
+    </View>
+  );
+};
+
+export default OTPFields;
