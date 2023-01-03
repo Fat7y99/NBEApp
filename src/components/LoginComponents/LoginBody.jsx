@@ -6,7 +6,7 @@ import PrimaryButton from './PrimaryButton';
 import ForgotPassword from './ForgotPassword';
 import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../../services/firebase';
-const LoginBody = () => {
+const LoginBody = ({navigation}) => {
   //   panelRef = useSelector(state => state.fingerPrintRef.ref);
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
@@ -28,6 +28,7 @@ const LoginBody = () => {
           callBackFunction={() => {
             console.log(email, password);
             login(email, password);
+            navigation.navigate('OTPPage');
           }}
           backgroundColor="#007236"
           textColor="white"></PrimaryButton>

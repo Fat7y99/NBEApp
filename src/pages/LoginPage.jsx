@@ -1,22 +1,22 @@
-import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
+import {View, ImageBackground, StyleSheet} from 'react-native';
 
 import LogoHeader from '../components/LoginComponents/LogoHeader';
 import LoginBody from '../components/LoginComponents/LoginBody';
 import Footer from '../components/LoginComponents/Footer';
 import FingerPrintSheet from '../components/LoginComponents/FingerPrintSheet';
-const LoginPage = () => {
+const LoginPage = ({navigation}) => {
   const onPressHandler = () => {
     console.log('presseddddd!');
   };
   return (
     <View style={styles.entireContaier}>
       <ImageBackground
-        imageStyle={styles.imageStyle}
+        // imageStyle={styles.imageStyle}
         style={styles.entireContaier}
-        resizeMode="cover"
+        resizeMode="stretch"
         source={require('../../assets/images/LoginImages/loginBackground.png')}>
         <LogoHeader></LogoHeader>
-        <LoginBody></LoginBody>
+        <LoginBody navigation={navigation}></LoginBody>
         <Footer></Footer>
         {/* <FingerPrintSheet></FingerPrintSheet> */}
       </ImageBackground>

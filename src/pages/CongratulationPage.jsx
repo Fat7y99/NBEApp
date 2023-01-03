@@ -16,12 +16,13 @@ const CongratulationPage = () => {
         <LogoHeader visible={false}></LogoHeader>
       </View>
       <ImageBackground
+        style={{height: 670}}
         // style={{sc: 0.5}}
         resizeMode="stretch"
         source={require('../../assets/images/CongratulationsPage/manCard.png')}>
         <View
           style={{
-            height: '91%',
+            flex: 1,
             flexDirection: 'column',
           }}>
           <View style={{marginHorizontal: 25}}>
@@ -35,6 +36,8 @@ const CongratulationPage = () => {
           <View
             style={{
               flex: 1,
+              // backgroundColor: 'red',
+              margin: 25,
               justifyContent: 'flex-end',
               alignItems: 'center',
             }}>
