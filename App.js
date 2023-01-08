@@ -8,9 +8,12 @@ import {signUp, login} from './src/services/firebase';
 import OTPFields from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import {postData, fetchData} from './src/services/API';
 const App = () => {
-  login('fathyy@gamail.com', 123698745);
+  console.log('sayedddddd');
+  fetchData();
+  // postData();
+  // login('fathyy@gamail.com', 123698745);
   const Stack = createNativeStackNavigator();
   // addCarsData();
   return (
