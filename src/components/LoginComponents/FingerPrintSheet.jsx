@@ -1,22 +1,31 @@
-import {View, Text, Button, Image} from 'react-native';
+import {View, Text, Animated, Image} from 'react-native';
 
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import RadialGradient from 'react-native-radial-gradient';
-import {useDispatch, useSelector} from 'react-redux';
-import {setRef} from '../../redux/fingerPrintReducer';
+import {useState} from 'react';
+
+const bottomSheetRef = {current: null};
+
 function FingerPrintSheet() {
-  pRef = useSelector(state => state.fingerPrintRef.ref);
-  const dispatch = useDispatch();
+  const [isOpen, SetOpen] = useState(false);
   const onCancelHandler = () => {
     console.log('Canceleeeeeed');
+    console.log('Canceleeeeeed');
+    bottomSheetRef.current.togglePanel();
+
+    console.log('Canceleeeeeed');
+
+    // SetOpen(false);
   };
 
   return (
     <BottomSheet
       isOpen={true}
       sliderMinHeight={-10}
-      ref={ref => dispatch(setRef(ref))}>
+      ref={ref => {
+        bottomSheetRef.current = ref;
+      }}>
       <View>
         <Text style={{color: '#1C2437', fontSize: 20, fontWeight: '700'}}>
           Fingerprint for NBE Mobile
@@ -95,3 +104,6 @@ function FingerPrintSheet() {
   );
 }
 export default FingerPrintSheet;
+export const toggleBottomSheet = () => {
+  bottomSheetRef.current.togglePanel();
+};

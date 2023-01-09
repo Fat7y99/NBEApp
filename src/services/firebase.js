@@ -24,17 +24,21 @@ export const signUp = async (email, password) => {
   await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(() => {
+    .then(response => {
+      response.user.updateProfile({
+        displayName: 'Fathy Nabil',
+      });
       console.log('Added');
     });
 };
 
 export const login = async (email, password) => {
   try {
-    const user = await firebase
+    const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
-    console.log('Signed', user);
+    console.log(response.user.displayName);
+    console.log('Signed', await response.user?.getIdToken());
   } catch (error) {
     console.log('Done', error.message);
   }

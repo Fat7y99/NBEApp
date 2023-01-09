@@ -2,49 +2,61 @@ import React from 'react';
 import {StyleSheet, StatusBar, View} from 'react-native';
 import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
-import {Provider} from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
 import {Store} from './src/redux/Store';
 import {signUp, login} from './src/services/firebase';
 import OTPFields from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {postData, fetchData} from './src/services/API';
-const App = () => {
-  console.log('sayedddddd');
-  fetchData();
-  // postData();
-  // login('fathyy@gamail.com', 123698745);
-  const Stack = createNativeStackNavigator();
-  // addCarsData();
+import {useRef} from 'react';
+import {initializeRef} from './src/redux/fingerPrintReducer';
+import FingerPrintSheet from './src/components/LoginComponents/FingerPrintSheet';
+const appWrapper = () => {
   return (
     <Provider store={Store}>
-      <NavigationContainer>
-        <View style={styles.entireContaier}>
-          <StatusBar backgroundColor="transparent" translucent={true} />
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}>
-            <Stack.Screen name="LoginPage" component={LoginPage} />
-            <Stack.Screen name="OTPPage" component={OTPFields} />
-            <Stack.Screen
-              name="CongratulationPage"
-              component={CongratulationPage}
-            />
-          </Stack.Navigator>
-          {/* <OTPFields></OTPFields> */}
-          {/* <CongratulationPage></CongratulationPage> */}
-          {/* <LoginPage></LoginPage> */}
-          {/* <FirebaseTesting></FirebaseTesting> */}
-        </View>
-      </NavigationContainer>
+      <App></App>
     </Provider>
   );
 };
+const App = () => {
+  console.log('Starting...');
+  // const ref = useRef()
+  // console.log('SAYED',ref);
+  // fetchData();
+  // postData();
+  login('fathy.nabil2022@gamail.com', 123698745);
+  const Stack = createNativeStackNavigator();
+  // addCarsData();
+  return (
+    <NavigationContainer>
+      <View style={styles.entireContaier}>
+        <StatusBar backgroundColor="transparent" translucent={true} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="OTPPage" component={OTPFields} />
+          <Stack.Screen
+            name="CongratulationPage"
+            component={CongratulationPage}
+          />
+        </Stack.Navigator>
+        {/* <OTPFields></OTPFields> */}
+        {/* <CongratulationPage></CongratulationPage> */}
+        {/* <LoginPage></LoginPage> */}
+        {/* <FirebaseTesting></FirebaseTesting> */}
+        <FingerPrintSheet></FingerPrintSheet>
+      </View>
+    </NavigationContainer>
+  );
+};
 
-export default App;
+export default appWrapper;
 const styles = StyleSheet.create({
   entireContaier: {
     flex: 1,
+    // backgroundColor: 'rgba(255, 0, 0, 0.5)',
   },
 });

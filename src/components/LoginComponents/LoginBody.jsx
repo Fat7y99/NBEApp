@@ -4,13 +4,15 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import PrimaryButton from './PrimaryButton';
 import ForgotPassword from './ForgotPassword';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
+import {toggleBottomSheet} from './FingerPrintSheet';
 const LoginBody = ({navigation}) => {
-  //   panelRef = useSelector(state => state.fingerPrintRef.ref);
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
-
+  const onClickHandler = () => {
+    toggleBottomSheet();
+  };
   // const dispatch = useDispatch();
   return (
     <View style={styles.loginBodyContainer}>
@@ -32,7 +34,7 @@ const LoginBody = ({navigation}) => {
           }}
           backgroundColor="#007236"
           textColor="white"></PrimaryButton>
-        <Pressable onPress={() => panelRef.current.togglePanel()}>
+        <Pressable onPress={onClickHandler}>
           <Image
             // style={{marginLeft: 15}}
             source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
