@@ -10,41 +10,52 @@ import {setPassword} from '../../redux/login';
 
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-const PasswordInput = () => {
+const PasswordInput = ({
+  isSecured,
+  prefixIcon,
+  label,
+  onChangeHandler,
+  maxLength,
+  value,
+  placeHolder,
+}) => {
   const [isVisisble, SetVisible] = useState(false);
   const togglePassword = () => {
     SetVisible(prev => !prev);
   };
-  const dispatch = useDispatch();
-  const onSubmitPassword = e => {
-    console.log(e.nativeEvent.text);
-    dispatch(setPassword(e.nativeEvent.text));
-  };
+
   return (
-    <View style={[styles.passwordStyle, {padding: 5, flexDirection: 'row'}]}>
-      <Image
-        style={{margin: 20}}
-        source={require('../../../assets/images/LoginImages/passwordIcon.png')}
-      />
+    <View
+      style={[
+        styles.passwordStyle,
+        {padding: 5, height: 65, flexDirection: 'row'},
+      ]}>
+      <Image style={{margin: 20}} source={prefixIcon} />
       <View style={{width: '100%'}}>
-        <Text style={[styles.labelStyle, {color: '#007236'}]}>Password</Text>
+        <Text style={[styles.passwordLabelStyle, {color: '#007236'}]}>
+          {label}
+        </Text>
         <View style={{flexDirection: 'row'}}>
           <TextInput
-            onChg
-            onEndEditing={onSubmitPassword}
-            secureTextEntry={!isVisisble}
+            placeholder={placeHolder}
+            maxLength={maxLength}
+            value={value}
+            onChangeText={onChangeHandler}
+            secureTextEntry={isSecured ?? !isVisisble}
             style={[styles.textInputStyle, {color: 'black'}]}
             selectionColor={'black'}></TextInput>
-          <Pressable onPress={togglePassword}>
-            <Image
-              style={{height: 20, width: 16, marginLeft: 20}}
-              source={
-                isVisisble
-                  ? require('../../../assets/images/LoginImages/view.png')
-                  : require('../../../assets/images/LoginImages/eyeIcon.png')
-              }
-            />
-          </Pressable>
+          {isSecured ?? (
+            <Pressable onPress={togglePassword}>
+              <Image
+                style={{marginLeft: 20}}
+                source={
+                  isVisisble
+                    ? require('../../../assets/images/LoginImages/view.png')
+                    : require('../../../assets/images/LoginImages/eyeIcon.png')
+                }
+              />
+            </Pressable>
+          )}
         </View>
       </View>
     </View>
@@ -57,7 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 10,
+    marginBottom: 20,
     borderColor: '#007236',
     borderRadius: 10,
   },

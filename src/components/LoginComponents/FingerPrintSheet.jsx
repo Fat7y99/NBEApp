@@ -3,12 +3,10 @@ import {View, Text, Animated, Image} from 'react-native';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import RadialGradient from 'react-native-radial-gradient';
-import {useState} from 'react';
 
 const bottomSheetRef = {current: null};
 
 function FingerPrintSheet() {
-  const [isOpen, SetOpen] = useState(false);
   const onCancelHandler = () => {
     console.log('Canceleeeeeed');
     console.log('Canceleeeeeed');
@@ -21,7 +19,7 @@ function FingerPrintSheet() {
 
   return (
     <BottomSheet
-      isOpen={true}
+      isOpen={false}
       sliderMinHeight={-10}
       ref={ref => {
         bottomSheetRef.current = ref;

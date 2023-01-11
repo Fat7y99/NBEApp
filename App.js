@@ -9,9 +9,9 @@ import OTPFields from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {postData, fetchData} from './src/services/API';
-import {useRef} from 'react';
-import {initializeRef} from './src/redux/fingerPrintReducer';
+import MobileNumberPage from './src/pages/MobileNumberPage';
 import FingerPrintSheet from './src/components/LoginComponents/FingerPrintSheet';
+import SettingPasswordPage from './src/pages/SettingPasswordPage';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -25,14 +25,15 @@ const App = () => {
   // console.log('SAYED',ref);
   // fetchData();
   // postData();
-  login('fathy.nabil2022@gamail.com', 123698745);
+  // login('fathy.nabil2022@gamail.com', 123698745);
   const Stack = createNativeStackNavigator();
   // addCarsData();
   return (
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        <Stack.Navigator
+        <SettingPasswordPage></SettingPasswordPage>
+        {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,
           }}>
@@ -42,12 +43,12 @@ const App = () => {
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}
         {/* <FirebaseTesting></FirebaseTesting> */}
-        <FingerPrintSheet></FingerPrintSheet>
+        {/* <FingerPrintSheet></FingerPrintSheet> */}
       </View>
     </NavigationContainer>
   );

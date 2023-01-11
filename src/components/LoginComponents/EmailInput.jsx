@@ -9,7 +9,11 @@ const EmailInput = () => {
     dispatch(setUserName(e.nativeEvent.text));
   };
   return (
-    <View style={[styles.emailStyle, {padding: 5, flexDirection: 'row'}]}>
+    <View
+      style={[
+        styles.emailStyle,
+        {padding: 5, height: 65, flexDirection: 'row'},
+      ]}>
       <Image
         style={{margin: 20}}
         source={require('../../../assets/images/LoginImages/userNameIcon.png')}
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
     // 1.5px solid ;
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 10,
+    marginBottom: 20,
     borderWidth: 1.5,
     borderColor: 'rgba(255, 255, 255, 0.5)',
   },

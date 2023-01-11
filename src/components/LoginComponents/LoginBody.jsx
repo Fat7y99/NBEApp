@@ -19,9 +19,16 @@ const LoginBody = ({navigation}) => {
       <Text style={styles.loginBodyStyle}>
         Welcome to {`\n`}The National Bank of Egypt
       </Text>
-      <EmailInput></EmailInput>
-      <PasswordInput></PasswordInput>
-      <ForgotPassword></ForgotPassword>
+      <View style={{marginHorizontal: 20}}>
+        <EmailInput></EmailInput>
+        <PasswordInput
+          label="Password"
+          prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
+      </View>
+      <ForgotPassword
+        onChangeHandler={() =>
+          dispatch(setPassword(e.nativeEvent.text))
+        }></ForgotPassword>
       <View style={styles.loginStyle}>
         <PrimaryButton
           height={50}
@@ -45,6 +52,7 @@ const LoginBody = ({navigation}) => {
           marginTop: 10,
           justifyContent: 'center',
           flexDirection: 'row',
+          marginTop: 30,
         }}>
         <Text style={{color: 'white'}}>Don’t have an account?</Text>
         <Text
@@ -70,9 +78,9 @@ const styles = StyleSheet.create({
     margin: 25,
   },
   loginBodyContainer: {
+    marginTop: 60,
     flexDirection: 'column',
     flex: 1,
-
     justifyContent: 'center',
   },
   loginStyle: {
