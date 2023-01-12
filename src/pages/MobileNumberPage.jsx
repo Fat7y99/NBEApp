@@ -116,7 +116,7 @@ const MobileNumberPage = ({navigation}) => {
             justifyContent: 'flex-end',
           }}>
           <PrimaryButton
-            callBackFunction={() => navigation.navigate('CongratulationPage')}
+            callBackFunction={() => navigation.navigate('OTPPage')}
             title="Submit"
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>

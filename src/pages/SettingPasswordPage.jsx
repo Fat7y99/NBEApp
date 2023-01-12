@@ -103,6 +103,7 @@ const SettingPasswordPage = ({navigation}) => {
     ) {
       console.log('Great');
     }
+    navigation.navigate('CongratulationPage');
   };
   // onChangeHandler();
   const validationsList = [

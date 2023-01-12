@@ -113,7 +113,9 @@ const OTPFields = ({navigation}) => {
               justifyContent: 'flex-end',
             }}>
             <PrimaryButton
-              callBackFunction={() => navigation.navigate('CongratulationPage')}
+              callBackFunction={() =>
+                navigation.navigate('SettingPasswordPage')
+              }
               title="Submit"
               backgroundColor="#007236"
               textColor="white"></PrimaryButton>

@@ -46,7 +46,7 @@ const LoginBody = ({navigation}) => {
             callBackFunction={() => {
               console.log(email, password);
               login(email, password);
-              navigation.navigate('OTPPage');
+              navigation.navigate('MobileNumberPage');
             }}
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>

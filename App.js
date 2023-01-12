@@ -32,18 +32,27 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        <CongratulationPage></CongratulationPage>
-        {/* <Stack.Navigator
+        {/* <CongratulationPage></CongratulationPage> */}
+        <Stack.Navigator
           screenOptions={{
             headerShown: false,
+            presentation: 'fullScreenModal',
+            animation: 'slide_from_right',
           }}>
           <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="MobileNumberPage" component={MobileNumberPage} />
+
           <Stack.Screen name="OTPPage" component={OTPFields} />
+          <Stack.Screen
+            name="SettingPasswordPage"
+            component={SettingPasswordPage}
+          />
+
           <Stack.Screen
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator> */}
+        </Stack.Navigator>
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}
