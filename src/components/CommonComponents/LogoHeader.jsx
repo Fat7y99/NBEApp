@@ -1,4 +1,5 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
+import {Colors} from '../../constants/Colors';
 const LogoHeader = props => {
   const styles = StyleSheet.create({
     logoContainer: {
@@ -20,7 +21,7 @@ const LogoHeader = props => {
       fontSize: 16,
       fontFamily: 'Roboto',
       fontWeight: '700',
-      color: '#007236',
+      color: Colors.primaryGreenColor,
     },
     logoStyle: {
       alignSelf: 'flex-end',

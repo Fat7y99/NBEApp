@@ -3,7 +3,7 @@ import {View, Text, Animated, Image} from 'react-native';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import RadialGradient from 'react-native-radial-gradient';
-
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 const bottomSheetRef = {current: null};
 
 function FingerPrintSheet() {
@@ -25,13 +25,18 @@ function FingerPrintSheet() {
         bottomSheetRef.current = ref;
       }}>
       <View>
-        <Text style={{color: '#1C2437', fontSize: 20, fontWeight: '700'}}>
+        <Text
+          style={{
+            color: Colors.darkBlueColor,
+            fontSize: 20,
+            fontWeight: '700',
+          }}>
           Fingerprint for NBE Mobile
         </Text>
 
         <Text
           style={{
-            color: '#1C2437',
+            color: Colors.darkBlueColor,
             marginVertical: 12.5,
             fontSize: 16,
             fontWeight: '400',
@@ -58,7 +63,7 @@ function FingerPrintSheet() {
               source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
           </RadialGradient>
 
-          <Text style={{color: '#B7B7B7', marginVertical: 12.5}}>
+          <Text style={{color: Colors.greyColor, marginVertical: 12.5}}>
             Touch the fingerprint sensor
           </Text>
         </View>
@@ -88,7 +93,7 @@ function FingerPrintSheet() {
             }}>
             <Text
               style={{
-                color: '#007236',
+                color: Colors.primaryGreenColor,
                 fontSize: 16,
                 margin: 20,
                 fontWeight: '700',

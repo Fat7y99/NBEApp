@@ -30,15 +30,14 @@ const styles = StyleSheet.create({
   },
   specialLinks: {
     fontWeight: '700',
-    color: '#1C2437',
+    color: Colors.darkBlueColor,
     justifyContent: 'flex-end',
   },
 });
 
 const SettingPasswordPage = ({navigation}) => {
-  const validColor = '#007236';
-  const nonValidColor = '#B7B7B7';
-
+  const validColor = Colors.primaryGreenColor;
+  const nonValidColor = Colors.greyColor;
   const initialValidations = {
     Lower: false,
     Upper: false,
@@ -139,7 +138,7 @@ const SettingPasswordPage = ({navigation}) => {
 
             fontWeight: '700',
             // fontFamily: 'Roboto',
-            color: '#1C2437',
+            color: Colors.darkBlueColor,
           }}>
           Mobile number
         </Text>
@@ -149,7 +148,7 @@ const SettingPasswordPage = ({navigation}) => {
             fontWeight: '400',
             marginTop: 5,
             marginBottom: 20,
-            color: '#B7B7B7',
+            color: Colors.greyColor,
           }}>
           Enter the mobile number registred in the bank
         </Text>
@@ -200,7 +199,7 @@ const SettingPasswordPage = ({navigation}) => {
                   }}></View>
                 <Text
                   style={{
-                    color: '#1C2437',
+                    color: Colors.darkBlueColor,
                     fontWeight: '400',
                     fontSize: 16,
                   }}>
@@ -226,7 +225,7 @@ const SettingPasswordPage = ({navigation}) => {
                     }}></View>
                   <Text
                     style={{
-                      color: '#1C2437',
+                      color: Colors.darkBlueColor,
                       fontWeight: '400',
                       fontSize: 16,
                     }}>

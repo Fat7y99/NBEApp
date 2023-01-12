@@ -5,7 +5,7 @@ import CongratulationPage from './src/pages/CongratulationPage';
 import {Provider, useDispatch} from 'react-redux';
 import {Store} from './src/redux/Store';
 import {signUp, login} from './src/services/firebase';
-import OTPFields from './src/pages/OTPPage';
+import OTPPage from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {postData, fetchData} from './src/services/API';
@@ -32,8 +32,8 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        {/* <CongratulationPage></CongratulationPage> */}
-        <Stack.Navigator
+        <OTPPage></OTPPage>
+        {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,
             presentation: 'fullScreenModal',
@@ -42,7 +42,7 @@ const App = () => {
           <Stack.Screen name="LoginPage" component={LoginPage} />
           <Stack.Screen name="MobileNumberPage" component={MobileNumberPage} />
 
-          <Stack.Screen name="OTPPage" component={OTPFields} />
+          <Stack.Screen name="OTPPage" component={OTPPage} />
           <Stack.Screen
             name="SettingPasswordPage"
             component={SettingPasswordPage}
@@ -52,7 +52,7 @@ const App = () => {
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}

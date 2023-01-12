@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {View, Text, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {
   CodeField,
@@ -34,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const OTPFields = ({navigation}) => {
+const OTPPage = ({navigation}) => {
   const otpCount = 5;
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: otpCount});
@@ -50,13 +44,14 @@ const OTPFields = ({navigation}) => {
           image={Images.backButton}
           firstColor={Colors.primaryGreenColor}
           logoImage={Images.primaryLogo}></LogoHeader>
+
         <View style={[styles.root, {padding: 20}]}>
           <Text
             style={{
               fontSize: 20,
               fontWeight: '700',
               // fontFamily: 'Roboto',
-              color: '#1C2437',
+              color: Colors.darkBlueColor,
             }}>
             Verification
           </Text>
@@ -82,7 +77,7 @@ const OTPFields = ({navigation}) => {
                 <Text
                   style={[
                     {fontSize: 25, fontWeight: '700'},
-                    symbol ? {color: '#1C2437'} : {color: '#B7B7B7'},
+                    symbol ? {color: Colors.darkBlueColor} : {color: '#B7B7B7'},
                     isFocused && styles.focusCell,
                   ]}
                   onLayout={getCellOnLayoutHandler(index)}>
@@ -101,7 +96,12 @@ const OTPFields = ({navigation}) => {
             }}>
             Didn’t receive the code?
           </Text>
-          <Text style={{fontSize: 19, fontWeight: '700', color: '#1C2437'}}>
+          <Text
+            style={{
+              fontSize: 19,
+              fontWeight: '700',
+              color: Colors.darkBlueColor,
+            }}>
             Request new one in 00:12
           </Text>
           <View
@@ -126,4 +126,4 @@ const OTPFields = ({navigation}) => {
   );
 };
 
-export default OTPFields;
+export default OTPPage;

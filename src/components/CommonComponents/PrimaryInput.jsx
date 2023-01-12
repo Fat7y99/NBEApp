@@ -7,7 +7,7 @@ import {
   TextInput,
 } from 'react-native';
 import {setPassword} from '../../redux/login';
-
+import {Colors} from '../../constants/Colors';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 const PasswordInput = ({
@@ -32,7 +32,11 @@ const PasswordInput = ({
       ]}>
       <Image style={{margin: 20}} source={prefixIcon} />
       <View style={{width: '100%'}}>
-        <Text style={[styles.passwordLabelStyle, {color: '#007236'}]}>
+        <Text
+          style={[
+            styles.passwordLabelStyle,
+            {color: Colors.primaryGreenColor},
+          ]}>
           {label}
         </Text>
         <View style={{flexDirection: 'row'}}>
@@ -69,14 +73,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
-    borderColor: '#007236',
+    borderColor: Colors.primaryGreenColor,
     borderRadius: 10,
   },
   passwordLabelStyle: {
     fontSize: 14,
     fontFamily: 'Roboto',
     fontWeight: '700',
-    color: '#007236',
+    color: Colors.primaryGreenColor,
   },
   textInputStyle: {
     color: 'white',

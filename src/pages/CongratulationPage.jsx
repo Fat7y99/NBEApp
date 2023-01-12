@@ -5,7 +5,7 @@ const CongratulationPage = () => {
   return (
     <View
       style={{
-        backgroundColor: '#007236',
+        backgroundColor: Colors.primaryGreenColor,
         flex: 1,
       }}>
       <View
@@ -42,10 +42,8 @@ const CongratulationPage = () => {
           <View
             style={{
               flex: 1,
-              // backgroundColor: 'red',
               margin: 25,
               left: '5.2%',
-
               justifyContent: 'flex-end',
               alignItems: 'center',
             }}>
@@ -55,7 +53,6 @@ const CongratulationPage = () => {
               textColor="#007236"></PrimaryButton>
           </View>
         }
-        {/* <Text style={{flex: 1}}>saassf</Text> */}
       </ImageBackground>
     </View>
   );

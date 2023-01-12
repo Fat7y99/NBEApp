@@ -6,7 +6,7 @@ import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import PasswordInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-
+import Footer from '../components/MobileNumberComponents/Footer';
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -22,8 +22,22 @@ const styles = StyleSheet.create({
   },
   specialLinks: {
     fontWeight: '700',
-    color: '#1C2437',
+    color: Colors.darkBlueColor,
     justifyContent: 'flex-end',
+  },
+  labelStyle: {
+    fontSize: 20,
+
+    fontWeight: '700',
+    // fontFamily: 'Roboto',
+    color: Colors.darkBlueColor,
+  },
+  secondaryLabel: {
+    fontSize: 16,
+    fontWeight: '400',
+    marginTop: 5,
+    marginBottom: 20,
+    color: '#B7B7B7',
   },
 });
 
@@ -79,24 +93,8 @@ const MobileNumberPage = ({navigation}) => {
         firstColor={Colors.primaryGreenColor}
         logoImage={Images.primaryLogo}></LogoHeader>
       <View style={[styles.root, {paddingHorizontal: 20}]}>
-        <Text
-          style={{
-            fontSize: 20,
-
-            fontWeight: '700',
-            // fontFamily: 'Roboto',
-            color: '#1C2437',
-          }}>
-          Mobile number
-        </Text>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: '400',
-            marginTop: 5,
-            marginBottom: 20,
-            color: '#B7B7B7',
-          }}>
+        <Text style={styles.labelStyle}>Mobile number</Text>
+        <Text style={styles.secondaryLabel}>
           Enter the mobile number registred in the bank
         </Text>
         <PasswordInput
@@ -106,28 +104,8 @@ const MobileNumberPage = ({navigation}) => {
           label="Mobile number"
           isSecured={false}
           prefixIcon={require('../../assets/images/OTPPage/phoneIcon.png')}></PasswordInput>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            position: 'relative',
-            marginBottom: 20,
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-          }}>
-          <PrimaryButton
-            callBackFunction={() => navigation.navigate('OTPPage')}
-            title="Submit"
-            backgroundColor="#007236"
-            textColor="white"></PrimaryButton>
-          <Text style={styles.footerStyle}>
-            By signing up, you agree to our
-            <Text style={styles.specialLinks}> Terms of Service </Text>
-            and acknowledge that you have read our
-            <Text style={styles.specialLinks}> Privacy Policy</Text>.
-          </Text>
-        </View>
       </View>
+      <Footer navigation={navigation}></Footer>
     </View>
   );
 };

@@ -17,7 +17,7 @@ const ForgotPassword = () => {
         <CheckBox
           disabled={false}
           value={toggleCheckBox}
-          tintColors={{false: '#FFFFFF', true: '#007236'}}
+          tintColors={{false: '#FFFFFF', true: Colors.primaryGreenColor}}
           onValueChange={newValue => setToggleCheckBox(newValue)}
         />
         <Text style={[styles.labelStyle, {fontWeight: '400'}]}>
