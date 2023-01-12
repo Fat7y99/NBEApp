@@ -47,7 +47,7 @@ const PasswordInput = ({
           {isSecured ?? (
             <Pressable onPress={togglePassword}>
               <Image
-                style={{marginLeft: 20}}
+                style={{marginLeft: 20, height: 16, width: 20}}
                 source={
                   isVisisble
                     ? require('../../../assets/images/LoginImages/view.png')

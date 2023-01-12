@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
-import LogoHeader from '../components/LoginComponents/LogoHeader';
-import PrimaryButton from '../components/LoginComponents/PrimaryButton';
-import PasswordInput from '../components/LoginComponents/PasswordInput';
+import LogoHeader from '../components/CommonComponents/LogoHeader';
+import PrimaryButton from '../components/CommonComponents/PrimaryButton';
+import PasswordInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const styles = StyleSheet.create({

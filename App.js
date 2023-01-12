@@ -10,7 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {postData, fetchData} from './src/services/API';
 import MobileNumberPage from './src/pages/MobileNumberPage';
-import FingerPrintSheet from './src/components/LoginComponents/FingerPrintSheet';
+import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import SettingPasswordPage from './src/pages/SettingPasswordPage';
 const appWrapper = () => {
   return (
@@ -32,7 +32,7 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        <SettingPasswordPage></SettingPasswordPage>
+        <CongratulationPage></CongratulationPage>
         {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,

@@ -1,10 +1,18 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
-import LogoHeader from '../components/LoginComponents/LogoHeader';
-import PrimaryButton from '../components/LoginComponents/PrimaryButton';
-import PasswordInput from '../components/LoginComponents/PasswordInput';
+import LogoHeader from '../components/CommonComponents/LogoHeader';
+import PrimaryButton from '../components/CommonComponents/PrimaryButton';
+import PasswordInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const styles = StyleSheet.create({
@@ -29,45 +37,94 @@ const styles = StyleSheet.create({
 
 const SettingPasswordPage = ({navigation}) => {
   const validColor = '#007236';
-
-  const initialValidations = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-  };
-  const [Validations, SetValidations] = useState(initialValidations);
   const nonValidColor = '#B7B7B7';
 
-  const onChangeHandler = id => {
+  const initialValidations = {
+    Lower: false,
+    Upper: false,
+    Minimum: false,
+    Number: false,
+    Special: false,
+  };
+  const [Passwords, SetPasswords] = useState({
+    password: '',
+    confirmPassword: '',
+  });
+  const [Validations, SetValidations] = useState(initialValidations);
+  const Lower = /[a-z]/;
+  const Upper = /[A-Z]/;
+  const Number = /[0-9]/;
+  const Special = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+  const onChangeHandler = passwordText => {
+    // console.log(passwordText);
+
+    // console.log('lower', Lower.test(passwordText));
+    // console.log('upper', Upper.test(passwordText));
+    // console.log('number', Number.test(passwordText));
+    // console.log('special', Special.test(passwordText));
+    // console.log('length', passwordText.length > 8);
     SetValidations(prevState => {
       return {
         ...prevState,
-        [+id]: !prevState[id], //change to TRUE if needed
+        Lower: Lower.test(passwordText),
+        Upper: Upper.test(passwordText),
+        Minimum: passwordText.length > 8,
+        Number: Number.test(passwordText),
+        Special: Special.test(passwordText),
       };
     });
+
+    SetPasswords(prevPasswords => {
+      return {
+        ...prevPasswords,
+        password: passwordText,
+      };
+    });
+  };
+  const onConfirmPasswordHandler = password => {
+    SetPasswords(prevPasswords => {
+      return {
+        ...prevPasswords,
+        confirmPassword: password,
+      };
+    });
+  };
+  const onSubmitHandler = () => {
+    let valid = true;
+    for (const key in Validations) {
+      valid &= Validations[key];
+    }
+    if (
+      Passwords.password === Passwords.confirmPassword &&
+      Passwords.password.length &&
+      Passwords.confirmPassword.length &&
+      valid
+    ) {
+      console.log('Great');
+    }
   };
   // onChangeHandler();
   const validationsList = [
     {
       first: 'Lower case letter',
-      id1: 0,
+      id1: 'Lower',
       second: 'Upper case letter',
-      id2: 1,
+      id2: 'Upper',
     },
     {
       first: 'Minimum 8 characters',
-      id1: 2,
+      id1: 'Minimum',
       second: 'Number',
-      id2: 3,
+      id2: 'Number',
     },
     {
       first: 'Special character',
-      id1: 4,
+      id1: 'Special',
       second: null,
     },
   ];
+
   return (
     <View style={styles.root}>
       <LogoHeader
@@ -95,15 +152,17 @@ const SettingPasswordPage = ({navigation}) => {
           }}>
           Enter the mobile number registred in the bank
         </Text>
-        <TextInput onChangeText={onChangeHandler}></TextInput>
         <PasswordInput
           maxLength={17}
           placeHolder="Write your password here"
           label="Password"
+          onChangeHandler={onChangeHandler}
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
+
         <PasswordInput
           maxLength={17}
           placeHolder="Re-Write your password here"
+          onChangeHandler={onConfirmPasswordHandler}
           label="Confirm Password"
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
 
@@ -184,12 +243,16 @@ const SettingPasswordPage = ({navigation}) => {
             flex: 1,
             alignItems: 'center',
             position: 'relative',
+            // marginTop: 60,
             marginBottom: 20,
             flexDirection: 'column',
             justifyContent: 'flex-end',
           }}>
           <PrimaryButton
-            callBackFunction={() => navigation.navigate('CongratulationPage')}
+            callBackFunction={() => {
+              onSubmitHandler();
+              // navigation.navigate('CongratulationPage')
+            }}
             title="Submit"
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>

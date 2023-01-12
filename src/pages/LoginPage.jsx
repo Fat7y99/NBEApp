@@ -1,9 +1,9 @@
 import {View, ImageBackground, StyleSheet} from 'react-native';
 
-import LogoHeader from '../components/LoginComponents/LogoHeader';
+import LogoHeader from '../components/CommonComponents/LogoHeader';
 import LoginBody from '../components/LoginComponents/LoginBody';
 import Footer from '../components/LoginComponents/Footer';
-import FingerPrintSheet from '../components/LoginComponents/FingerPrintSheet';
+import FingerPrintSheet from '../components/CommonComponents/FingerPrintSheet';
 const LoginPage = ({navigation}) => {
   const onPressHandler = () => {
     console.log('presseddddd!');
