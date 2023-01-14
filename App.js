@@ -32,8 +32,8 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        <OTPPage></OTPPage>
-        {/* <Stack.Navigator
+        {/* <OTPPage></OTPPage> */}
+        <Stack.Navigator
           screenOptions={{
             headerShown: false,
             presentation: 'fullScreenModal',
@@ -52,12 +52,12 @@ const App = () => {
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator> */}
+        </Stack.Navigator>
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}
         {/* <FirebaseTesting></FirebaseTesting> */}
-        {/* <FingerPrintSheet></FingerPrintSheet> */}
+        <FingerPrintSheet></FingerPrintSheet>
       </View>
     </NavigationContainer>
   );

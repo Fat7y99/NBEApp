@@ -1,6 +1,6 @@
 import {StyleSheet, View, Text} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-
+import {Colors} from '../../constants/Colors';
 import {useState} from 'react';
 const ForgotPassword = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
