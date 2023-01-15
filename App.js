@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, StatusBar, View} from 'react-native';
 import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
-import {Provider, useDispatch} from 'react-redux';
+import {Provider} from 'react-redux';
 import {Store} from './src/redux/Store';
 import {signUp, login} from './src/services/firebase';
 import OTPPage from './src/pages/OTPPage';
@@ -12,6 +12,7 @@ import {postData, fetchData} from './src/services/API';
 import MobileNumberPage from './src/pages/MobileNumberPage';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import SettingPasswordPage from './src/pages/SettingPasswordPage';
+import ProfilePage from './src/pages/ProfilePage';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -21,8 +22,6 @@ const appWrapper = () => {
 };
 const App = () => {
   console.log('Starting...');
-  // const ref = useRef()
-  // console.log('SAYED',ref);
   // fetchData();
   // postData();
   // login('fathy.nabil2022@gamail.com', 123698745);
@@ -32,8 +31,7 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        {/* <OTPPage></OTPPage> */}
-        <Stack.Navigator
+        {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,
             presentation: 'fullScreenModal',
@@ -41,23 +39,21 @@ const App = () => {
           }}>
           <Stack.Screen name="LoginPage" component={LoginPage} />
           <Stack.Screen name="MobileNumberPage" component={MobileNumberPage} />
-
           <Stack.Screen name="OTPPage" component={OTPPage} />
           <Stack.Screen
             name="SettingPasswordPage"
             component={SettingPasswordPage}
           />
-
           <Stack.Screen
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}
         {/* <FirebaseTesting></FirebaseTesting> */}
-        <FingerPrintSheet></FingerPrintSheet>
+        <ProfilePage></ProfilePage>
       </View>
     </NavigationContainer>
   );

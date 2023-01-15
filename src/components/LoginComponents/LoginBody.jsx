@@ -12,16 +12,20 @@ import EmailInput from './EmailInput';
 import PasswordInput from '../CommonComponents/PrimaryInput';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
 import {toggleBottomSheet} from '../CommonComponents/FingerPrintSheet';
+import {toggleSheet} from '../../redux/fingerPrint';
 const LoginBody = ({navigation}) => {
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
   const onClickHandler = () => {
-    toggleBottomSheet();
+    // navigation.navigate('MyModal');
+    console.log('sayed');
+    dispatch(toggleSheet(true));
   };
   // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   return (
     <KeyboardAvoidingView style={styles.loginBodyContainer} behavior="padding">
       <View style={styles.loginBodyContainer}>

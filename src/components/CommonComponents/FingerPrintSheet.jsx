@@ -1,112 +1,117 @@
-import {View, Text, Animated, Image} from 'react-native';
-
-import BottomSheet from 'react-native-simple-bottom-sheet';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import {
+  Modal,
+  TouchableWithoutFeedback,
+  Pressable,
+  Text,
+  View,
+  Image,
+} from 'react-native';
+import {Colors} from '../../constants/Colors';
 import RadialGradient from 'react-native-radial-gradient';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-const bottomSheetRef = {current: null};
+import {useDispatch, useSelector} from 'react-redux';
+import {toggleSheet} from '../../redux/fingerPrint';
 
-function FingerPrintSheet() {
-  const onCancelHandler = () => {
-    console.log('Canceleeeeeed');
-    console.log('Canceleeeeeed');
-    bottomSheetRef.current.togglePanel();
-
-    console.log('Canceleeeeeed');
-
-    // SetOpen(false);
+export default function FingerPrintSheet() {
+  const isOpened = useSelector(state => state.fingerPrint.isOpened);
+  const dispatch = useDispatch();
+  const toggleBottomSheet = () => {
+    dispatch(toggleSheet(!isOpened));
   };
 
   return (
-    <BottomSheet
-      isOpen={false}
-      sliderMinHeight={-10}
-      ref={ref => {
-        bottomSheetRef.current = ref;
-      }}>
-      <View>
-        <Text
+    <Modal
+      animationType="fade"
+      animationDuration={1000}
+      transparent={true}
+      presentationStyle="overFullScreen"
+      statusBarTranslucent={true}
+      visible={isOpened}>
+      <Pressable
+        style={{flex: 1, backgroundColor: 'rgba(28, 36, 55, 0.77)'}}
+        onPress={toggleBottomSheet}>
+        <View
           style={{
-            color: Colors.darkBlueColor,
-            fontSize: 20,
-            fontWeight: '700',
+            justifyContent: 'flex-end',
+            flex: 1,
           }}>
-          Fingerprint for NBE Mobile
-        </Text>
-
-        <Text
-          style={{
-            color: Colors.darkBlueColor,
-            marginVertical: 12.5,
-            fontSize: 16,
-            fontWeight: '400',
-          }}>
-          Log in with your fingerprint
-        </Text>
-        <View style={{flexDirection: 'column', alignItems: 'center'}}>
-          <RadialGradient
-            colors={['white', '#00C974']}
-            stops={[0.38, 1]}
-            center={[44, 44]}
-            radius={50}
-            style={{
-              width: 88,
-              overflow: 'hidden',
-              height: 88,
-              marginVertical: 12.5,
-              borderRadius: 50,
-              justifyContent: 'center',
-              alignItems: 'center',
-              shadowColor: '#00C974',
-            }}>
-            <Image
-              source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
-          </RadialGradient>
-
-          <Text style={{color: Colors.greyColor, marginVertical: 12.5}}>
-            Touch the fingerprint sensor
-          </Text>
-        </View>
-        {/* <LinearGradient
-            colors={['#00C974', '#ffffff']}
-            start={{x: 1, y: 1}}
-            end={{x: 0, y: 0}}
-            style={{
-              width: 88,
-              height: 88,
-              //   backgroundColor: 'red',
-              borderRadius: 50,
-              justifyContent: 'center',
-              alignItems: 'center',
-              shadowColor: 'red',
-            }}>
-            <View>
-              <Image
-                source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
-            </View>
-          </LinearGradient> */}
-        <Pressable onPress={onCancelHandler}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-            }}>
-            <Text
+          <TouchableWithoutFeedback>
+            <View
               style={{
-                color: Colors.primaryGreenColor,
-                fontSize: 16,
-                margin: 20,
-                fontWeight: '700',
+                height: 290,
+                backgroundColor: 'white',
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+                paddingHorizontal: 18,
+                paddingTop: 18,
               }}>
-              Cancel
-            </Text>
-          </View>
-        </Pressable>
-      </View>
-    </BottomSheet>
+              <Text
+                style={{
+                  color: Colors.darkBlueColor,
+                  fontSize: 20,
+                  fontWeight: '700',
+                }}>
+                Fingerprint for NBE Mobile
+              </Text>
+
+              <Text
+                style={{
+                  color: Colors.darkBlueColor,
+                  marginVertical: 12.5,
+                  fontSize: 16,
+                  fontWeight: '400',
+                }}>
+                Log in with your fingerprint
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}>
+                <RadialGradient
+                  colors={['white', '#00C974']}
+                  stops={[0.38, 1]}
+                  center={[44, 44]}
+                  radius={50}
+                  style={{
+                    width: 88,
+                    overflow: 'hidden',
+                    height: 88,
+                    marginVertical: 12.5,
+                    borderRadius: 50,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    shadowColor: '#00C974',
+                  }}>
+                  <Image
+                    source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
+                </RadialGradient>
+
+                <Text style={{color: Colors.greyColor, marginVertical: 12.5}}>
+                  Touch the fingerprint sensor
+                </Text>
+              </View>
+
+              <Pressable onPress={toggleBottomSheet}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                  }}>
+                  <Text
+                    style={{
+                      color: Colors.primaryGreenColor,
+                      fontSize: 16,
+
+                      fontWeight: '700',
+                    }}>
+                    Cancel
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+      </Pressable>
+    </Modal>
   );
 }
-export default FingerPrintSheet;
-export const toggleBottomSheet = () => {
-  bottomSheetRef.current.togglePanel();
-};

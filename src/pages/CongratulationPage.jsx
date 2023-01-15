@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
+import {Colors} from '../constants/Colors';
 const CongratulationPage = () => {
   return (
     <View
