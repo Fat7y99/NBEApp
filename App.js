@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, StatusBar, View} from 'react-native';
+
 import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
 import {Provider} from 'react-redux';
@@ -31,13 +32,13 @@ const App = () => {
     <NavigationContainer>
       <View style={styles.entireContaier}>
         <StatusBar backgroundColor="transparent" translucent={true} />
-        {/* <Stack.Navigator
+        <Stack.Navigator
           screenOptions={{
             headerShown: false,
             presentation: 'fullScreenModal',
             animation: 'slide_from_right',
           }}>
-          <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="LoginPage" component={ProfilePage} />
           <Stack.Screen name="MobileNumberPage" component={MobileNumberPage} />
           <Stack.Screen name="OTPPage" component={OTPPage} />
           <Stack.Screen
@@ -48,12 +49,12 @@ const App = () => {
             name="CongratulationPage"
             component={CongratulationPage}
           />
-        </Stack.Navigator> */}
+        </Stack.Navigator>
         {/* <OTPFields></OTPFields> */}
         {/* <CongratulationPage></CongratulationPage> */}
         {/* <LoginPage></LoginPage> */}
         {/* <FirebaseTesting></FirebaseTesting> */}
-        <ProfilePage></ProfilePage>
+        {/* <ProfilePage></ProfilePage> */}
       </View>
     </NavigationContainer>
   );
