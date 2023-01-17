@@ -1,4 +1,5 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {Colors} from '../../constants/Colors';
 const LogoHeader = props => {
   const styles = StyleSheet.create({
@@ -27,16 +28,21 @@ const LogoHeader = props => {
       alignSelf: 'flex-end',
     },
   });
+  const backFunction = () => {
+    props.navigation.goBack();
+  };
   return (
     <View style={styles.logoContainer}>
       {props.visible ?? (
-        <View style={styles.languageContainer}>
-          {props.image ? (
-            <Image source={props.image}></Image>
-          ) : (
-            <Text style={styles.languageText}>AR</Text>
-          )}
-        </View>
+        <Pressable onPress={props.onClickHandler ?? backFunction}>
+          <View style={styles.languageContainer}>
+            {props.image ? (
+              <Image source={props.image}></Image>
+            ) : (
+              <Text style={styles.languageText}>AR</Text>
+            )}
+          </View>
+        </Pressable>
       )}
       <Image
         style={styles.logoStyle}

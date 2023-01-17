@@ -89,6 +89,7 @@ const MobileNumberPage = ({navigation}) => {
   return (
     <View style={styles.root}>
       <LogoHeader
+        navigation={navigation}
         image={Images.backButton}
         firstColor={Colors.primaryGreenColor}
         logoImage={Images.primaryLogo}></LogoHeader>

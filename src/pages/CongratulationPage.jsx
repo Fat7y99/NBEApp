@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import {Colors} from '../constants/Colors';
-const CongratulationPage = () => {
+const CongratulationPage = ({navigation}) => {
   return (
     <View
       style={{
@@ -14,7 +14,7 @@ const CongratulationPage = () => {
           flexDirection: 'row',
           justifyContent: 'flex-end',
         }}>
-        <LogoHeader visible={false}></LogoHeader>
+        <LogoHeader navigation={navigation} visible={false}></LogoHeader>
       </View>
       <ImageBackground
         style={{

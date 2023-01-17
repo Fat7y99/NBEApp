@@ -50,7 +50,6 @@ const LoginBody = ({navigation}) => {
             callBackFunction={() => {
               console.log(email, password);
               login(email, password);
-              navigation.navigate('MobileNumberPage');
             }}
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>
@@ -65,10 +64,15 @@ const LoginBody = ({navigation}) => {
             marginTop: 10,
             justifyContent: 'center',
             flexDirection: 'row',
-            marginTop: 30,
+            marginVertical: 30,
           }}>
           <Text style={{color: 'white'}}>Don’t have an account?</Text>
           <Text
+            onPress={() => {
+              navigation.navigate('MobileNumberPage');
+
+              console.log('SignUp');
+            }}
             style={{
               marginLeft: 5,
               textDecorationLine: 'underline',

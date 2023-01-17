@@ -41,6 +41,7 @@ const OTPPage = ({navigation}) => {
     <KeyboardAvoidingView style={styles.root} behavior="height">
       <View style={styles.root}>
         <LogoHeader
+          navigation={navigation}
           image={Images.backButton}
           firstColor={Colors.primaryGreenColor}
           logoImage={Images.primaryLogo}></LogoHeader>

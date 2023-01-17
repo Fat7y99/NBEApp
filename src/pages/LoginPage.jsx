@@ -10,7 +10,7 @@ const LoginPage = ({navigation}) => {
         style={styles.entireContaier}
         resizeMode="stretch"
         source={require('../../assets/images/LoginImages/loginBackground.png')}>
-        <LogoHeader></LogoHeader>
+        <LogoHeader onClickHandler={() => console.log('Arabic')}></LogoHeader>
         <LoginBody navigation={navigation}></LoginBody>
         <Footer></Footer>
       </ImageBackground>
