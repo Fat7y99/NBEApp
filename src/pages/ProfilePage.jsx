@@ -1,7 +1,8 @@
-import {View, Text, Image} from 'react-native';
+import {View, StatusBar, Text, Image, ImageBackground} from 'react-native';
 import {NavigationContainer, useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {useNavigation} from '@react-navigation/native';
 
 import {Colors} from '../constants/Colors';
 import {useEffect} from 'react';
@@ -9,10 +10,18 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 function HomeScreen({navigation}) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Pressable
-        onPress={() => {
-          navigation.openDrawer();
-        }}>
+      <Pressable>
+        <View style={{width: 280}}>
+          <ImageBackground
+            // height: 132px;
+            // width: 347px;
+            // left: 0px;
+            // top: 0px;
+            // border-radius: 22px;
+
+            imageStyle={{height: 132, width: 347}}
+            source={require('../../assets/images/ProfilePage/balancecontainer.png')}></ImageBackground>
+        </View>
         <Text>Home!</Text>
       </Pressable>
     </View>
@@ -102,7 +111,7 @@ const TabNavigator = () => {
           //   background: rgba(241, 243, 251, 1);
         };
       }}>
-      <Tab.Screen name="Home" component={SettingsScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Transfer" component={SettingsScreen} />
       <Tab.Screen name="Beneficiaries" component={SettingsScreen} />
       <Tab.Screen name="ATMs" component={SettingsScreen} />
@@ -111,25 +120,66 @@ const TabNavigator = () => {
   );
 };
 
-const ProfilePage = () => {
+const ProfilePage = props => {
   const Drawer = createDrawerNavigator();
+  // const navigation = useNavigation();
+
   // MaterialCommunityIcons
   return (
     <View style={{flex: 1}}>
       {/* <Drawer.Group> */}
+
       <Drawer.Navigator initialRouteName="TabNavigator">
         <Drawer.Screen
           name="TabNavigator"
           component={TabNavigator}
-          options={{
-            // header: props => {
-            //   return <View></View>;
-            // },
+          options={({navigation}) => ({
+            header: () => {
+              // return <Text>Sayed</Text>;
+              return (
+                <View
+                  style={{
+                    // marginTop: 150,
+                    // backgroundColor: 'red',
+                    // flex: 1,
+                    marginTop: 50,
+                    marginHorizontal: 25,
+                    marginBottom: 35,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Pressable onPress={() => navigation.openDrawer()}>
+                    <Image
+                      source={require('../../assets/images/ProfilePage/drawerIcon.png')}></Image>
+                  </Pressable>
+                  <Pressable>
+                    <View style={{marginHorizontal: 7}}>
+                      <Image
+                        source={require('../../assets/images/ProfilePage/avatar.png')}></Image>
+                    </View>
+                  </Pressable>
+                  <Text style={{width: 90, fontSize: 14, fontWeight: '300'}}>
+                    Good morning <Text style={{fontWeight: '700'}}>Ahmad</Text>
+                  </Text>
+                  <View
+                    style={{
+                      alignItems: 'flex-end',
+                      // backgroundColor: 'red',
+                      flex: 1,
+                    }}>
+                    <Pressable>
+                      <Image
+                        source={require('../../assets/images/ProfilePage/notifications.png')}></Image>
+                    </Pressable>
+                  </View>
+                </View>
+              );
+            },
             headerStyle: {
               backgroundColor: 'transparent',
             },
             drawerLabel: 'Home Screen',
-          }}
+          })}
         />
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={SettingsScreen} />
