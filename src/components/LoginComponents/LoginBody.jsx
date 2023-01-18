@@ -6,8 +6,10 @@ import {
   Pressable,
   KeyboardAvoidingView,
   ScrollView,
+  Button,
 } from 'react-native';
-
+import {useRef} from 'react';
+import {SheetManager} from 'react-native-actions-sheet';
 import EmailInput from './EmailInput';
 import PasswordInput from '../CommonComponents/PrimaryInput';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
@@ -16,7 +18,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
 import {toggleBottomSheet} from '../CommonComponents/FingerPrintSheet';
 import {toggleSheet} from '../../redux/fingerPrint';
+import ActionSheetExample from '../CommonComponents/ActionSheetExample';
+
 const LoginBody = ({navigation}) => {
+  // const actionSheetRef = useRef(null);
+  const logoutModalRef = useRef(null);
+
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
   const onClickHandler = () => {
@@ -48,8 +55,11 @@ const LoginBody = ({navigation}) => {
             width={275}
             title="Log In"
             callBackFunction={() => {
-              console.log(email, password);
-              login(email, password);
+              // console.log(email, password);
+              console.log('ezay');
+              SheetManager.show('fingerPrint-sheet');
+              // logoutModalRef.current.show();
+              // login(email, password);
             }}
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>

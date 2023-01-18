@@ -14,6 +14,11 @@ import MobileNumberPage from './src/pages/MobileNumberPage';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import SettingPasswordPage from './src/pages/SettingPasswordPage';
 import ProfilePage from './src/pages/ProfilePage';
+import {ActionSheetProvider, SheetManager} from 'react-native-actions-sheet';
+import {SheetProvider} from 'react-native-actions-sheet';
+import './src/components/CommonComponents/sheets';
+import ActionSheetExample from './src/components/CommonComponents/ActionSheetExample';
+import {registerSheet} from 'react-native-actions-sheet';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -23,6 +28,7 @@ const appWrapper = () => {
 };
 const App = () => {
   console.log('Starting...');
+
   // fetchData();
   // postData();
   // login('fathy.nabil2022@gamail.com', 123698745);
@@ -30,32 +36,37 @@ const App = () => {
   // addCarsData();
   return (
     <NavigationContainer>
-      <View style={styles.entireContaier}>
-        <StatusBar backgroundColor="transparent" translucent={true} />
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            presentation: 'fullScreenModal',
-            animation: 'slide_from_right',
-          }}>
-          <Stack.Screen name="LoginPage" component={ProfilePage} />
-          <Stack.Screen name="MobileNumberPage" component={MobileNumberPage} />
-          <Stack.Screen name="OTPPage" component={OTPPage} />
-          <Stack.Screen
-            name="SettingPasswordPage"
-            component={SettingPasswordPage}
-          />
-          <Stack.Screen
-            name="CongratulationPage"
-            component={CongratulationPage}
-          />
-        </Stack.Navigator>
-        {/* <OTPFields></OTPFields> */}
-        {/* <CongratulationPage></CongratulationPage> */}
-        {/* <LoginPage></LoginPage> */}
-        {/* <FirebaseTesting></FirebaseTesting> */}
-        {/* <ProfilePage></ProfilePage> */}
-      </View>
+      <SheetProvider>
+        <View style={styles.entireContaier}>
+          <StatusBar backgroundColor="transparent" translucent={true} />
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              presentation: 'fullScreenModal',
+              animation: 'slide_from_right',
+            }}>
+            <Stack.Screen name="LoginPage" component={LoginPage} />
+            <Stack.Screen
+              name="MobileNumberPage"
+              component={MobileNumberPage}
+            />
+            <Stack.Screen name="OTPPage" component={OTPPage} />
+            <Stack.Screen
+              name="SettingPasswordPage"
+              component={SettingPasswordPage}
+            />
+            <Stack.Screen
+              name="CongratulationPage"
+              component={CongratulationPage}
+            />
+          </Stack.Navigator>
+          {/* <OTPFields></OTPFields> */}
+          {/* <CongratulationPage></CongratulationPage> */}
+          {/* <LoginPage></LoginPage> */}
+          {/* <FirebaseTesting></FirebaseTesting> */}
+          {/* <ProfilePage></ProfilePage> */}
+        </View>
+      </SheetProvider>
     </NavigationContainer>
   );
 };
