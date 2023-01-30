@@ -39,7 +39,9 @@ const App = () => {
       <SheetProvider>
         <View style={styles.entireContaier}>
           <StatusBar backgroundColor="transparent" translucent={true} />
-          <Stack.Navigator
+          <HomePage></HomePage>
+
+          {/* <Stack.Navigator
             screenOptions={{
               headerShown: false,
               presentation: 'fullScreenModal',
@@ -60,7 +62,7 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
         </View>
       </SheetProvider>
     </NavigationContainer>

@@ -1,12 +1,15 @@
-import {View, StatusBar, Text, Image, ImageBackground} from 'react-native';
+import {View, FlatList, Text, Image, ImageBackground} from 'react-native';
 import {NavigationContainer, useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 
 import {Colors} from '../../constants/Colors';
 import {useEffect} from 'react';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import LogoHeader from '../../components/CommonComponents/LogoHeader';
+import {Images} from '../../constants/Images';
+import {useState} from 'react';
 function HomeScreen({navigation}) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -103,12 +106,187 @@ const TabsNavigator = () => {
 
 const HomePage = props => {
   const Drawer = createDrawerNavigator();
-
+  const [activeDrawerItem, setActiveDrawerItem] = useState('Account Summary');
+  const drawerItems = [
+    {
+      name: 'Account Summary',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/accountSummary.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeAccountSummary.png'),
+    },
+    {
+      name: 'Open Certificates & Deposits',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/certificates.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeCertificates.png'),
+    },
+    {
+      name: 'Payement Services',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/paymentServices.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activePaymentServices.png'),
+    },
+    {
+      name: 'Cards Services',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/cardsServices.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeCardsServices.png'),
+    },
+    {
+      name: 'Hard Token',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/hardToken.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeHardToken.png'),
+    },
+    {
+      name: 'Offers',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/offers.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeOffers.png'),
+    },
+    {
+      name: 'Customer Services',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/customerServices.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeCustomerServices.png'),
+    },
+    {
+      name: 'Calculators',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/calculations.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/activeCalculations.png'),
+    },
+    {
+      name: 'Dark Mode',
+      inactiveicon: require('../../../assets/images/ProfilePage/DrawerIcons/darkMode.png'),
+      activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/lightMode.png'),
+    },
+  ];
   return (
     <View style={{flex: 1}}>
-      <Drawer.Navigator initialRouteName="TabNavigator">
-        <Drawer.Screen
-          name="TabNavigator"
+      <Drawer.Navigator
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: '#c6cbef',
+            width: '85%',
+            borderTopRightRadius: 40,
+            borderBottomEndRadius: 40,
+          },
+        }}
+        drawerContent={props => (
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: Colors.backgroundColor,
+              borderTopRightRadius: 40,
+              borderBottomEndRadius: 40,
+            }}>
+            <LogoHeader
+              reverse={true}
+              logoImage={Images.primaryLogo}></LogoHeader>
+            <FlatList
+              data={drawerItems}
+              keyExtractor={item => item.name}
+              renderItem={drawerItem => (
+                <Pressable
+                  onPress={() => {
+                    props.navigation.closeDrawer();
+                    setActiveDrawerItem(drawerItem.item.name);
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      borderRadius: 13,
+                      alignItems: 'center',
+                      width: 300,
+                      height: 40,
+
+                      backgroundColor:
+                        activeDrawerItem === drawerItem.item.name
+                          ? Colors.primaryGreenColor
+                          : 'transparent',
+                      marginHorizontal: 15,
+                      marginBottom: 13,
+                    }}>
+                    <View
+                      style={{
+                        height: 30,
+                        width: 30,
+                        backgroundColor: ' rgba(27, 27, 27, 0.2)',
+                        borderRadius: 12,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginVertical: 50,
+                        marginHorizontal: 10,
+                      }}>
+                      <Image
+                        source={
+                          activeDrawerItem === drawerItem.item.name
+                            ? drawerItem.item.activeicon
+                            : drawerItem.item.inactiveicon
+                        }></Image>
+                    </View>
+
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: '500',
+                        // color: '#1B1B1B',
+                        color:
+                          activeDrawerItem === drawerItem.item.name
+                            ? 'white'
+                            : '#1B1B1B',
+                      }}>
+                      {drawerItem.item.name}
+                    </Text>
+                  </View>
+                </Pressable>
+              )}></FlatList>
+            {/* {drawerItems.map(drawerItem => (
+              
+            ))} */}
+            <View style={{flex: 1}}>
+              <Pressable
+                onPress={() => {
+                  props.navigation.closeDrawer();
+                  console.log('LogOut');
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    borderRadius: 13,
+                    alignItems: 'center',
+                    width: 300,
+                    height: 40,
+
+                    backgroundColor: 'transparent',
+                    marginHorizontal: 15,
+                    marginBottom: 13,
+                  }}>
+                  <View
+                    style={{
+                      height: 30,
+                      width: 30,
+                      backgroundColor: ' rgba(27, 27, 27, 0.2)',
+                      borderRadius: 12,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginVertical: 50,
+                      marginHorizontal: 10,
+                    }}>
+                    <Image
+                      source={require('../../../assets/images/ProfilePage/DrawerIcons/logout.png')}></Image>
+                  </View>
+
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: '500',
+                      // color: '#1B1B1B',
+                      color: '#1B1B1B',
+                    }}>
+                    Log Out
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          </View>
+        )}
+        initialRouteName="TabNavigator">
+        {/* <Drawer.Screen
+          name="Home"
           component={TabsNavigator}
           options={({navigation}) => ({
             header: () => {
@@ -152,8 +330,8 @@ const HomePage = props => {
             },
             drawerLabel: 'Home Screen',
           })}
-        />
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        /> */}
+
         <Drawer.Screen name="Notifications" component={SettingsScreen} />
       </Drawer.Navigator>
     </View>

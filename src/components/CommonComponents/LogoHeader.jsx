@@ -4,7 +4,7 @@ import {Colors} from '../../constants/Colors';
 const LogoHeader = props => {
   const styles = StyleSheet.create({
     logoContainer: {
-      flexDirection: 'row',
+      flexDirection: props.reverse ? 'row-reverse' : 'row',
       justifyContent: 'space-between',
       marginTop: 50,
       marginBottom: 25,
