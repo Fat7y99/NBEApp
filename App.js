@@ -13,7 +13,7 @@ import {postData, fetchData} from './src/services/API';
 import MobileNumberPage from './src/pages/MobileNumberPage';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import SettingPasswordPage from './src/pages/SettingPasswordPage';
-import ProfilePage from './src/pages/ProfilePage';
+import HomePage from './src/pages/ProfilePages/HomePage';
 import {ActionSheetProvider, SheetManager} from 'react-native-actions-sheet';
 import {SheetProvider} from 'react-native-actions-sheet';
 import './src/components/CommonComponents/sheets';
@@ -59,12 +59,8 @@ const App = () => {
               name="CongratulationPage"
               component={CongratulationPage}
             />
+            <Stack.Screen name="HomePage" component={HomePage} />
           </Stack.Navigator>
-          {/* <OTPFields></OTPFields> */}
-          {/* <CongratulationPage></CongratulationPage> */}
-          {/* <LoginPage></LoginPage> */}
-          {/* <FirebaseTesting></FirebaseTesting> */}
-          {/* <ProfilePage></ProfilePage> */}
         </View>
       </SheetProvider>
     </NavigationContainer>

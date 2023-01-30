@@ -45,6 +45,7 @@ const LoginBody = ({navigation}) => {
             title="Log In"
             callBackFunction={() => {
               console.log(email, password);
+              navigation.navigate('HomePage');
               // login(email, password);
             }}
             backgroundColor="#007236"

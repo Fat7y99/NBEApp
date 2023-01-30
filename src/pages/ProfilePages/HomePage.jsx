@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 
-import {Colors} from '../constants/Colors';
+import {Colors} from '../../constants/Colors';
 import {useEffect} from 'react';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 function HomeScreen({navigation}) {
@@ -13,14 +13,8 @@ function HomeScreen({navigation}) {
       <Pressable>
         <View style={{width: 280}}>
           <ImageBackground
-            // height: 132px;
-            // width: 347px;
-            // left: 0px;
-            // top: 0px;
-            // border-radius: 22px;
-
             imageStyle={{height: 132, width: 347}}
-            source={require('../../assets/images/ProfilePage/balancecontainer.png')}></ImageBackground>
+            source={require('../../../assets/images/ProfilePage/balancecontainer.png')}></ImageBackground>
         </View>
         <Text>Home!</Text>
       </Pressable>
@@ -36,7 +30,7 @@ function SettingsScreen() {
   );
 }
 
-const TabNavigator = () => {
+const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -51,48 +45,42 @@ const TabNavigator = () => {
           },
           tabBarIcon: ({focused}) => {
             let imageSource = null;
-            console.log('focused', focused);
-            isFocused = focused;
-            // console.log(route.name);
             switch (route.name) {
               case 'Home':
                 imageSource = focused
-                  ? require('../../assets/images/ProfilePage/activeHome.png')
-                  : require('../../assets/images/ProfilePage/Home.png');
+                  ? require('../../../assets/images/ProfilePage/activeHome.png')
+                  : require('../../../assets/images/ProfilePage/Home.png');
                 break;
 
               case 'Transfer':
                 imageSource = focused
-                  ? require('../../assets/images/ProfilePage/activeTransfer.png')
-                  : require('../../assets/images/ProfilePage/Transfer.png');
+                  ? require('../../../assets/images/ProfilePage/activeTransfer.png')
+                  : require('../../../assets/images/ProfilePage/Transfer.png');
                 break;
 
               case 'Beneficiaries':
                 imageSource = focused
-                  ? require('../../assets/images/ProfilePage/activeBeneficiaries.png')
-                  : require('../../assets/images/ProfilePage/Beneficiaries.png');
+                  ? require('../../../assets/images/ProfilePage/activeBeneficiaries.png')
+                  : require('../../../assets/images/ProfilePage/Beneficiaries.png');
 
                 break;
               case 'ATMs':
                 imageSource = focused
-                  ? require('../../assets/images/ProfilePage/activeATMs.png')
-                  : require('../../assets/images/ProfilePage/ATMs.png');
+                  ? require('../../../assets/images/ProfilePage/activeATMs.png')
+                  : require('../../../assets/images/ProfilePage/ATMs.png');
                 break;
               case 'Air Pay':
                 imageSource = focused
-                  ? require('../../assets/images/ProfilePage/activeAirPay.png')
-                  : require('../../assets/images/ProfilePage/AirPay.png');
+                  ? require('../../../assets/images/ProfilePage/activeAirPay.png')
+                  : require('../../../assets/images/ProfilePage/AirPay.png');
                 break;
             }
-            //   const imageSource =
-            //     `../../assets/images/ProfilePage/${route.name}.png`.toString();
+
             return <Image source={imageSource}></Image>;
           },
           tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: Colors.greyColor,
           tabBarActiveBackgroundColor: 'green',
-          // tabBarInactiveBackgroundColor: 'red',
-
           tabBarItemStyle: {
             width: 70,
             height: 70,
@@ -101,14 +89,7 @@ const TabNavigator = () => {
             marginVertical: 5,
             marginHorizontal: 5,
             borderRadius: 16,
-            // backgroundColor: isFocused ? Colors.primaryGreenColor : '#F1F3FB',
-            // ({focused}) => {
-            //   console.log('hello');
-            //   console.log(focused);
-            //   return focused ? Colors.primaryGreenColor : '#F1F3FB';
-            // },
           },
-          //   background: rgba(241, 243, 251, 1);
         };
       }}>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -120,28 +101,20 @@ const TabNavigator = () => {
   );
 };
 
-const ProfilePage = props => {
+const HomePage = props => {
   const Drawer = createDrawerNavigator();
-  // const navigation = useNavigation();
 
-  // MaterialCommunityIcons
   return (
     <View style={{flex: 1}}>
-      {/* <Drawer.Group> */}
-
       <Drawer.Navigator initialRouteName="TabNavigator">
         <Drawer.Screen
           name="TabNavigator"
-          component={TabNavigator}
+          component={TabsNavigator}
           options={({navigation}) => ({
             header: () => {
-              // return <Text>Sayed</Text>;
               return (
                 <View
                   style={{
-                    // marginTop: 150,
-                    // backgroundColor: 'red',
-                    // flex: 1,
                     marginTop: 50,
                     marginHorizontal: 25,
                     marginBottom: 35,
@@ -150,12 +123,12 @@ const ProfilePage = props => {
                   }}>
                   <Pressable onPress={() => navigation.openDrawer()}>
                     <Image
-                      source={require('../../assets/images/ProfilePage/drawerIcon.png')}></Image>
+                      source={require('../../../assets/images/ProfilePage/drawerIcon.png')}></Image>
                   </Pressable>
                   <Pressable>
                     <View style={{marginHorizontal: 7}}>
                       <Image
-                        source={require('../../assets/images/ProfilePage/avatar.png')}></Image>
+                        source={require('../../../assets/images/ProfilePage/avatar.png')}></Image>
                     </View>
                   </Pressable>
                   <Text style={{width: 90, fontSize: 14, fontWeight: '300'}}>
@@ -164,12 +137,11 @@ const ProfilePage = props => {
                   <View
                     style={{
                       alignItems: 'flex-end',
-                      // backgroundColor: 'red',
                       flex: 1,
                     }}>
                     <Pressable>
                       <Image
-                        source={require('../../assets/images/ProfilePage/notifications.png')}></Image>
+                        source={require('../../../assets/images/ProfilePage/notifications.png')}></Image>
                     </Pressable>
                   </View>
                 </View>
@@ -184,9 +156,8 @@ const ProfilePage = props => {
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={SettingsScreen} />
       </Drawer.Navigator>
-      {/* </Drawer.Group> */}
     </View>
   );
 };
 
-export default ProfilePage;
+export default HomePage;
