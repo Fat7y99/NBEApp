@@ -5,8 +5,6 @@ import {
   Image,
   Pressable,
   KeyboardAvoidingView,
-  ScrollView,
-  Button,
 } from 'react-native';
 import {useRef} from 'react';
 import {SheetManager} from 'react-native-actions-sheet';
@@ -16,22 +14,15 @@ import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
-import {toggleBottomSheet} from '../CommonComponents/FingerPrintSheet';
-import {toggleSheet} from '../../redux/fingerPrint';
-import ActionSheetExample from '../CommonComponents/ActionSheetExample';
-
+import {setPassword} from '../../redux/login';
 const LoginBody = ({navigation}) => {
-  // const actionSheetRef = useRef(null);
   const logoutModalRef = useRef(null);
 
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
   const onClickHandler = () => {
-    // navigation.navigate('MyModal');
-    console.log('sayed');
-    dispatch(toggleSheet(true));
+    SheetManager.show('fingerPrint-sheet');
   };
-  // const dispatch = useDispatch();
   const dispatch = useDispatch();
   return (
     <KeyboardAvoidingView style={styles.loginBodyContainer} behavior="padding">
@@ -42,23 +33,18 @@ const LoginBody = ({navigation}) => {
         <View style={{marginHorizontal: 20}}>
           <EmailInput></EmailInput>
           <PasswordInput
+            onChangeHandler={text => dispatch(setPassword(text))}
             label="Password"
             prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
         </View>
-        <ForgotPassword
-          onChangeHandler={() =>
-            dispatch(setPassword(e.nativeEvent.text))
-          }></ForgotPassword>
+        <ForgotPassword></ForgotPassword>
         <View style={styles.loginStyle}>
           <PrimaryButton
             height={50}
             width={275}
             title="Log In"
             callBackFunction={() => {
-              // console.log(email, password);
-              console.log('ezay');
-              SheetManager.show('fingerPrint-sheet');
-              // logoutModalRef.current.show();
+              console.log(email, password);
               // login(email, password);
             }}
             backgroundColor="#007236"

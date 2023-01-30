@@ -3,10 +3,9 @@ import {useDispatch} from 'react-redux';
 import {setUserName} from '../../redux/login';
 const EmailInput = () => {
   const dispatch = useDispatch();
-  const onSubmitEmail = e => {
-    console.log(e.nativeEvent.text);
-
-    dispatch(setUserName(e.nativeEvent.text));
+  const onSubmitEmail = text => {
+    console.log(text);
+    dispatch(setUserName(text));
   };
   return (
     <View
@@ -22,7 +21,7 @@ const EmailInput = () => {
         <Text style={[styles.labelStyle]}>Username</Text>
         <View style={{flexDirection: 'row'}}>
           <TextInput
-            onEndEditing={onSubmitEmail}
+            onChangeText={onSubmitEmail}
             style={styles.textInputStyle}
             selectionColor={'white'}></TextInput>
         </View>
