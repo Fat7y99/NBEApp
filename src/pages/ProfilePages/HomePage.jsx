@@ -11,16 +11,189 @@ import LogoHeader from '../../components/CommonComponents/LogoHeader';
 import {Images} from '../../constants/Images';
 import {useState} from 'react';
 function HomeScreen({navigation}) {
+  const [isBalanceVisible, SetBalanceVisibility] = useState(false);
+  const showBalanceHandler = () => {
+    SetBalanceVisibility(prevState => !prevState);
+  };
+  const Categories = [
+    {
+      name: 'Accounts',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts.png'),
+      backgroundColor: 'rgba(0, 201, 116, 0.15)',
+    },
+    {
+      name: 'Cards',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Cards.png'),
+      backgroundColor: 'rgba(0, 173, 248, 0.15)',
+    },
+    {
+      name: 'Utilities',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Utilities.png'),
+      backgroundColor: 'rgba(246, 167, 33, 0.15)',
+    },
+    {
+      name: 'History',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/History.png'),
+      backgroundColor: 'rgba(255, 0, 46, 0.15)',
+    },
+  ];
+  const Accounts = [
+    {
+      name: 'Ayman',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account1.png'),
+    },
+    {
+      name: 'Alex',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account2.png'),
+    },
+    {
+      name: 'Soha',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account3.png'),
+    },
+    {
+      name: 'Hala',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account4.png'),
+    },
+    {
+      name: 'Mohamed',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account5.png'),
+    },
+    {
+      name: 'Alaa',
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account6.png'),
+    },
+  ];
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Pressable>
-        <View style={{width: 280}}>
-          <ImageBackground
-            imageStyle={{height: 132, width: 347}}
-            source={require('../../../assets/images/ProfilePage/balancecontainer.png')}></ImageBackground>
-        </View>
-        <Text>Home!</Text>
-      </Pressable>
+    <View style={{flex: 1, backgroundColor: '#F0F2FA'}}>
+      <View
+        style={{
+          alignSelf: 'center',
+          height: 132,
+          width: 347,
+          backgroundColor: '#003D1D',
+          borderRadius: 22,
+          overflow: 'hidden',
+        }}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={require('../../../assets/images/ProfilePage/balanceContainer.png')}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginHorizontal: 19,
+              marginTop: 11,
+              marginBottom: 20,
+            }}>
+            <Text
+              style={{
+                color: '#F7F7F7',
+                fontSize: 16,
+                fontWeight: '400',
+              }}>
+              Balance
+            </Text>
+            <Image
+              style={{height: 27, width: 27}}
+              source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
+          </View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Pressable onPress={showBalanceHandler}>
+              <Text
+                style={{
+                  color: '#F7F7F7',
+                  fontSize: isBalanceVisible ? 25 : 22,
+                  fontWeight: '700',
+                }}>
+                {isBalanceVisible
+                  ? '$2,374,654.25'
+                  : 'Press here to show balance'}{' '}
+              </Text>
+            </Pressable>
+          </View>
+        </ImageBackground>
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <FlatList
+          horizontal={true}
+          data={Categories}
+          style={{
+            flex: 1,
+            // backgroundColor: 'red',
+          }}
+          contentContainerStyle={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            marginVertical: 30,
+          }}
+          renderItem={item => (
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View
+                style={{
+                  backgroundColor: item.item.backgroundColor,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: 59,
+                  width: 59,
+                  borderRadius: 13,
+                  marginHorizontal: 18,
+                }}>
+                <Image source={item.item.icon}></Image>
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: '400',
+                  color: Colors.darkBlueColor,
+                }}>
+                {item.item.name}
+              </Text>
+            </View>
+          )}></FlatList>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginHorizontal: 25,
+        }}>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: '700',
+            color: Colors.darkBlueColor,
+          }}>
+          Send money
+        </Text>
+        <Text>View All</Text>
+      </View>
+      <FlatList
+        horizontal={true}
+        data={Accounts}
+        style={{marginLeft: 15}}
+        renderItem={item => (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 86,
+              marginTop: 10,
+              width: 77,
+              borderRadius: 18,
+              backgroundColor: 'white',
+              marginHorizontal: 6,
+            }}>
+            <Image
+              style={{height: 33.5, width: 110}}
+              source={item.item.icon}></Image>
+            <Text>{item.item.name}</Text>
+          </View>
+        )}></FlatList>
     </View>
   );
 }
@@ -41,6 +214,7 @@ const TabsNavigator = () => {
       screenOptions={({route, index}) => {
         return {
           headerShown: false,
+
           tabBarStyle: {
             height: 80,
             borderTopStartRadius: 20,
@@ -82,6 +256,7 @@ const TabsNavigator = () => {
             return <Image source={imageSource}></Image>;
           },
           tabBarActiveTintColor: 'white',
+          tabBarInactiveBackgroundColor: '#F1F3FB',
           tabBarInactiveTintColor: Colors.greyColor,
           tabBarActiveBackgroundColor: 'green',
           tabBarItemStyle: {
@@ -399,43 +574,53 @@ const HomePage = props => {
             </View>
           </View>
         )}
-        initialRouteName="TabNavigator">
-        {/* <Drawer.Screen
-          name="Home"
+        initialRouteName="TabsNavigator">
+        <Drawer.Screen
+          name="TabsNavigator"
           component={TabsNavigator}
           options={({navigation}) => ({
             header: () => {
               return (
                 <View
                   style={{
-                    marginTop: 50,
-                    marginHorizontal: 25,
-                    marginBottom: 35,
-                    flexDirection: 'row',
+                    backgroundColor: '#F0F2FA',
                     alignItems: 'center',
+
+                    flexDirection: 'row',
                   }}>
-                  <Pressable onPress={() => navigation.openDrawer()}>
-                    <Image
-                      source={require('../../../assets/images/ProfilePage/drawerIcon.png')}></Image>
-                  </Pressable>
-                  <Pressable>
-                    <View style={{marginHorizontal: 7}}>
-                      <Image
-                        source={require('../../../assets/images/ProfilePage/avatar.png')}></Image>
-                    </View>
-                  </Pressable>
-                  <Text style={{width: 90, fontSize: 14, fontWeight: '300'}}>
-                    Good morning <Text style={{fontWeight: '700'}}>Ahmad</Text>
-                  </Text>
                   <View
                     style={{
-                      alignItems: 'flex-end',
-                      flex: 1,
+                      marginTop: 50,
+                      marginHorizontal: 25,
+                      marginBottom: 35,
+                      backgroundColor: '#F0F2FA',
+                      flexDirection: 'row',
+                      alignItems: 'center',
                     }}>
-                    <Pressable>
+                    <Pressable onPress={() => navigation.openDrawer()}>
                       <Image
-                        source={require('../../../assets/images/ProfilePage/notifications.png')}></Image>
+                        source={require('../../../assets/images/ProfilePage/drawerIcon.png')}></Image>
                     </Pressable>
+                    <Pressable>
+                      <View style={{marginHorizontal: 7}}>
+                        <Image
+                          source={require('../../../assets/images/ProfilePage/avatar.png')}></Image>
+                      </View>
+                    </Pressable>
+                    <Text style={{width: 90, fontSize: 14, fontWeight: '300'}}>
+                      Good morning{' '}
+                      <Text style={{fontWeight: '700'}}>Ahmad</Text>
+                    </Text>
+                    <View
+                      style={{
+                        alignItems: 'flex-end',
+                        flex: 1,
+                      }}>
+                      <Pressable>
+                        <Image
+                          source={require('../../../assets/images/ProfilePage/notifications.png')}></Image>
+                      </Pressable>
+                    </View>
                   </View>
                 </View>
               );
@@ -445,9 +630,9 @@ const HomePage = props => {
             },
             drawerLabel: 'Home Screen',
           })}
-        /> */}
+        />
 
-        <Drawer.Screen name="Notifications" component={SettingsScreen} />
+        {/* <Drawer.Screen name="TabNavigator" component={TabsNavigator} /> */}
       </Drawer.Navigator>
     </View>
   );

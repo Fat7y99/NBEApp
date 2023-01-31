@@ -20,9 +20,7 @@ const CongratulationPage = ({navigation}) => {
         style={{
           flex: 1,
           right: '5.2%',
-          // marginTop: '10%',
         }}
-        // style={{sc: 0.5}}
         resizeMode="contain"
         source={require('../../assets/images/CongratulationsPage/manCard.png')}>
         <View

@@ -35,6 +35,81 @@ const styles = StyleSheet.create({
   },
 });
 
+const ValidationEntry = ({validation}) => {
+  return (
+    <View
+      key={index}
+      style={{
+        justifyContent: 'space-between',
+        width: '100%',
+      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginBottom: 12,
+          paddingRight: 10,
+          width: '100%',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: 170,
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              height: 12,
+              width: 12,
+              borderRadius: 55,
+              marginRight: 10,
+              backgroundColor: Validations[validation.id1]
+                ? validColor
+                : nonValidColor,
+            }}></View>
+          <Text
+            style={{
+              color: Colors.darkBlueColor,
+              fontWeight: '400',
+              fontSize: 16,
+            }}>
+            {validation.first}
+          </Text>
+        </View>
+        {validation.second ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 130,
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                height: 12,
+                width: 12,
+                borderRadius: 55,
+                marginRight: 10,
+                backgroundColor: Validations[validation.id2]
+                  ? validColor
+                  : nonValidColor,
+              }}></View>
+            <Text
+              style={{
+                color: Colors.darkBlueColor,
+                fontWeight: '400',
+                fontSize: 16,
+              }}>
+              {validation.second}
+            </Text>
+          </View>
+        ) : (
+          ''
+        )}
+      </View>
+    </View>
+  );
+};
+
 const SettingPasswordPage = ({navigation}) => {
   const validColor = Colors.primaryGreenColor;
   const nonValidColor = Colors.greyColor;
@@ -56,13 +131,6 @@ const SettingPasswordPage = ({navigation}) => {
   const Special = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
   const onChangeHandler = passwordText => {
-    // console.log(passwordText);
-
-    // console.log('lower', Lower.test(passwordText));
-    // console.log('upper', Upper.test(passwordText));
-    // console.log('number', Number.test(passwordText));
-    // console.log('special', Special.test(passwordText));
-    // console.log('length', passwordText.length > 8);
     SetValidations(prevState => {
       return {
         ...prevState,
@@ -104,7 +172,6 @@ const SettingPasswordPage = ({navigation}) => {
     }
     navigation.navigate('CongratulationPage');
   };
-  // onChangeHandler();
   const validationsList = [
     {
       first: 'Lower case letter',
@@ -168,83 +235,13 @@ const SettingPasswordPage = ({navigation}) => {
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
 
         {validationsList.map((validation, index) => (
-          <View
-            key={index}
-            style={{
-              justifyContent: 'space-between',
-              width: '100%',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginBottom: 12,
-                paddingRight: 10,
-                width: '100%',
-              }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: 170,
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    height: 12,
-                    width: 12,
-                    borderRadius: 55,
-                    marginRight: 10,
-                    backgroundColor: Validations[validation.id1]
-                      ? validColor
-                      : nonValidColor,
-                  }}></View>
-                <Text
-                  style={{
-                    color: Colors.darkBlueColor,
-                    fontWeight: '400',
-                    fontSize: 16,
-                  }}>
-                  {validation.first}
-                </Text>
-              </View>
-              {validation.second ? (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    width: 130,
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{
-                      height: 12,
-                      width: 12,
-                      borderRadius: 55,
-                      marginRight: 10,
-                      backgroundColor: Validations[validation.id2]
-                        ? validColor
-                        : nonValidColor,
-                    }}></View>
-                  <Text
-                    style={{
-                      color: Colors.darkBlueColor,
-                      fontWeight: '400',
-                      fontSize: 16,
-                    }}>
-                    {validation.second}
-                  </Text>
-                </View>
-              ) : (
-                ''
-              )}
-            </View>
-          </View>
+          <ValidationEntry validation={validation}></ValidationEntry>
         ))}
         <View
           style={{
             flex: 1,
             alignItems: 'center',
             position: 'relative',
-            // marginTop: 60,
             marginBottom: 20,
             flexDirection: 'column',
             justifyContent: 'flex-end',
@@ -252,7 +249,6 @@ const SettingPasswordPage = ({navigation}) => {
           <PrimaryButton
             callBackFunction={() => {
               onSubmitHandler();
-              // navigation.navigate('CongratulationPage')
             }}
             title="Submit"
             backgroundColor="#007236"

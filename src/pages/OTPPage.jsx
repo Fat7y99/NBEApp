@@ -87,7 +87,6 @@ const OTPPage = ({navigation}) => {
               </View>
             )}
           />
-
           <Text
             style={{
               marginTop: 20,
