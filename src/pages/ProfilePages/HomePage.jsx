@@ -3,7 +3,7 @@ import {NavigationContainer, useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
-
+import {Switch} from 'react-native-gesture-handler';
 import {Colors} from '../../constants/Colors';
 import {useEffect} from 'react';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
@@ -154,6 +154,8 @@ const HomePage = props => {
       activeicon: require('../../../assets/images/ProfilePage/DrawerIcons/lightMode.png'),
     },
   ];
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <View style={{flex: 1}}>
       <Drawer.Navigator
@@ -177,14 +179,11 @@ const HomePage = props => {
               reverse={true}
               logoImage={Images.primaryLogo}></LogoHeader>
             <FlatList
+              style={{height: '45%'}}
               data={drawerItems}
               keyExtractor={item => item.name}
-              renderItem={drawerItem => (
-                <Pressable
-                  onPress={() => {
-                    props.navigation.closeDrawer();
-                    setActiveDrawerItem(drawerItem.item.name);
-                  }}>
+              renderItem={drawerItem =>
+                drawerItem.item.name === 'Dark Mode' ? (
                   <View
                     style={{
                       flexDirection: 'row',
@@ -193,10 +192,7 @@ const HomePage = props => {
                       width: 300,
                       height: 40,
 
-                      backgroundColor:
-                        activeDrawerItem === drawerItem.item.name
-                          ? Colors.primaryGreenColor
-                          : 'transparent',
+                      backgroundColor: 'transparent',
                       marginHorizontal: 15,
                       marginBottom: 13,
                     }}>
@@ -211,32 +207,103 @@ const HomePage = props => {
                         marginVertical: 50,
                         marginHorizontal: 10,
                       }}>
-                      <Image
-                        source={
-                          activeDrawerItem === drawerItem.item.name
-                            ? drawerItem.item.activeicon
-                            : drawerItem.item.inactiveicon
-                        }></Image>
+                      <Image source={drawerItem.item.inactiveicon}></Image>
                     </View>
 
-                    <Text
+                    <View
                       style={{
-                        fontSize: 18,
-                        fontWeight: '500',
-                        // color: '#1B1B1B',
-                        color:
-                          activeDrawerItem === drawerItem.item.name
-                            ? 'white'
-                            : '#1B1B1B',
+                        flexDirection: 'row',
+                        flex: 1,
+                        justifyContent: 'space-between',
                       }}>
-                      {drawerItem.item.name}
-                    </Text>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          fontWeight: '500',
+                          color: Colors.fontColor,
+                        }}>
+                        Dark Mode
+                      </Text>
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          alignSelf: 'flex-end',
+                          borderRadius: 15,
+                        }}>
+                        <Switch
+                          trackColor={{
+                            true: 'transparent',
+                            false: 'transparent',
+                          }}
+                          thumbColor={
+                            isEnabled ? Colors.primaryGreenColor : '#B3B3B3'
+                          }
+                          onValueChange={toggleSwitch}
+                          value={isEnabled}
+                        />
+                      </View>
+                    </View>
                   </View>
-                </Pressable>
-              )}></FlatList>
+                ) : (
+                  <Pressable
+                    onPress={() => {
+                      props.navigation.closeDrawer();
+                      setActiveDrawerItem(drawerItem.item.name);
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        borderRadius: 13,
+                        alignItems: 'center',
+                        width: 300,
+                        height: 40,
+
+                        backgroundColor:
+                          activeDrawerItem === drawerItem.item.name
+                            ? Colors.primaryGreenColor
+                            : 'transparent',
+                        marginHorizontal: 15,
+                        marginBottom: 13,
+                      }}>
+                      <View
+                        style={{
+                          height: 30,
+                          width: 30,
+                          backgroundColor: ' rgba(27, 27, 27, 0.2)',
+                          borderRadius: 12,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          marginVertical: 50,
+                          marginHorizontal: 10,
+                        }}>
+                        <Image
+                          source={
+                            activeDrawerItem === drawerItem.item.name
+                              ? drawerItem.item.activeicon
+                              : drawerItem.item.inactiveicon
+                          }></Image>
+                      </View>
+
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          fontWeight: '500',
+                          // color: Colors.fontColor,
+                          color:
+                            activeDrawerItem === drawerItem.item.name
+                              ? 'white'
+                              : Colors.fontColor,
+                        }}>
+                        {drawerItem.item.name}
+                      </Text>
+                    </View>
+                  </Pressable>
+                )
+              }></FlatList>
             {/* {drawerItems.map(drawerItem => (
               
             ))} */}
+
             <View style={{flex: 1}}>
               <Pressable
                 onPress={() => {
@@ -263,7 +330,6 @@ const HomePage = props => {
                       borderRadius: 12,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      marginVertical: 50,
                       marginHorizontal: 10,
                     }}>
                     <Image
@@ -274,13 +340,62 @@ const HomePage = props => {
                     style={{
                       fontSize: 18,
                       fontWeight: '500',
-                      // color: '#1B1B1B',
-                      color: '#1B1B1B',
+                      color: Colors.fontColor,
                     }}>
                     Log Out
                   </Text>
                 </View>
               </Pressable>
+              <View
+                style={{
+                  elevation: 5,
+                  height: 89,
+                  width: 286,
+                  backgroundColor: 'white',
+                  borderRadius: 29,
+                  alignSelf: 'center',
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginHorizontal: 15,
+                    flex: 1,
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    style={{height: 50, width: 50}}
+                    source={require('../../../assets/images/ProfilePage/avatar.png')}></Image>
+                  <View style={{marginLeft: 10}}>
+                    <Text
+                      style={{
+                        fontWeight: '500',
+                        color: Colors.fontColor,
+                        fontSize: 18,
+                      }}>
+                      Ahmad Sami
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: '400',
+                        fontSize: 14,
+                        color: '#4D4D4D',
+                      }}>
+                      +20 101 131 5412
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      justifyContent: 'flex-end',
+                    }}>
+                    <Pressable>
+                      <Image
+                        source={require('../../../assets/images/ProfilePage/dotsButton.png')}></Image>
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
             </View>
           </View>
         )}
