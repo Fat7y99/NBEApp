@@ -19,6 +19,7 @@ import LogoHeader from '../../components/CommonComponents/LogoHeader';
 import {Images} from '../../constants/Images';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
+import {SheetManager} from 'react-native-actions-sheet';
 const SectionHeader = ({title}) => {
   return (
     <View
@@ -44,7 +45,6 @@ function HomeScreen({navigation}) {
   const showBalanceHandler = () => {
     SetBalanceVisibility(prevState => !prevState);
   };
-  const user = useSelector(state => state.user);
   const Categories = [
     {
       name: 'Accounts',
@@ -67,66 +67,9 @@ function HomeScreen({navigation}) {
       backgroundColor: 'rgba(255, 0, 46, 0.15)',
     },
   ];
-  const Accounts = [
-    {
-      name: 'Ayman',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account1.png'),
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount1.png?alt=media&token=bae213bd-b339-4015-9a4b-fd76e67f1b4b',
-    },
-    {
-      name: 'Alex',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account2.png'),
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount2.png?alt=media&token=8c081a0f-a24e-4653-afd9-d59179175069',
-    },
-    {
-      name: 'Soha',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account3.png'),
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount3.png?alt=media&token=3d2c9f48-89aa-415c-b66c-e22e0ac68985',
-    },
-    {
-      name: 'Alaa',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account4.png'),
 
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount6.png?alt=media&token=ce784a8c-4fb3-4023-8a23-1bee3e7a1eb7',
-    },
-    {
-      name: 'Mohamed',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account5.png'),
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount4.png?alt=media&token=1e621221-4af4-4457-a475-6fa86bb46df0',
-    },
-    {
-      name: 'Hala',
-      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account6.png'),
-      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount5.png?alt=media&token=389de0bd-c07f-44b4-9f6c-2057a4d60a31',
-    },
-  ];
-  // const HistoryData = [
-  //   {
-  //     name: 'Carrefour',
-  //     date: '15-12-2021',
-  //     amount: 250.21,
-  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
-  //   },
-  //   {
-  //     name: 'Amazon',
-  //     date: '02-12-2021',
-  //     amount: 3004.21,
-  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Amazon.png'),
-  //   },
-  //   {
-  //     name: 'Jumia',
-  //     date: '28-11-2021',
-  //     amount: 2146.63,
-  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Jumia.png'),
-  //   },
-  //   {
-  //     name: 'Carrefour2',
-  //     date: '15-12-2021',
-  //     amount: 250.21,
-  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
-  //   },
-  // ];
   const HistoryData = useSelector(state => state.user.history);
+  const Accounts = useSelector(state => state.user.accounts);
   console.log(HistoryData);
   return (
     <View
@@ -160,9 +103,14 @@ function HomeScreen({navigation}) {
               }}>
               Balance
             </Text>
-            <Image
-              style={{height: 27, width: 27}}
-              source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
+            <Pressable
+              onPress={() => {
+                SheetManager.show('fingerPrint-sheet');
+              }}>
+              <Image
+                style={{height: 27, width: 27}}
+                source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
+            </Pressable>
           </View>
           <View
             style={{
