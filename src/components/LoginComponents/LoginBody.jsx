@@ -14,6 +14,7 @@ import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
+import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
 const LoginBody = ({navigation}) => {
   const logoutModalRef = useRef(null);
@@ -45,7 +46,11 @@ const LoginBody = ({navigation}) => {
             title="Log In"
             callBackFunction={() => {
               console.log(email, password);
-              navigation.navigate('HomePage');
+              login('fathy.nabil2022@gamail.com', 123698745).then(userData => {
+                dispatch(setUserData(userData));
+
+                navigation.navigate('HomePage');
+              });
               // login(email, password);
             }}
             backgroundColor="#007236"

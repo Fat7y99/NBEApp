@@ -1,4 +1,12 @@
-import {View, FlatList, Text, Image, ImageBackground} from 'react-native';
+import {
+  View,
+  ScrollView,
+  FlatList,
+  Text,
+  SafeAreaView,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import {NavigationContainer, useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
@@ -10,6 +18,7 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import LogoHeader from '../../components/CommonComponents/LogoHeader';
 import {Images} from '../../constants/Images';
 import {useState} from 'react';
+import {useSelector} from 'react-redux';
 const SectionHeader = ({title}) => {
   return (
     <View
@@ -35,6 +44,7 @@ function HomeScreen({navigation}) {
   const showBalanceHandler = () => {
     SetBalanceVisibility(prevState => !prevState);
   };
+  const user = useSelector(state => state.user);
   const Categories = [
     {
       name: 'Accounts',
@@ -60,57 +70,68 @@ function HomeScreen({navigation}) {
   const Accounts = [
     {
       name: 'Ayman',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account1.png'),
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account1.png'),
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount1.png?alt=media&token=bae213bd-b339-4015-9a4b-fd76e67f1b4b',
     },
     {
       name: 'Alex',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account2.png'),
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account2.png'),
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount2.png?alt=media&token=8c081a0f-a24e-4653-afd9-d59179175069',
     },
     {
       name: 'Soha',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account3.png'),
-    },
-    {
-      name: 'Hala',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account4.png'),
-    },
-    {
-      name: 'Mohamed',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account5.png'),
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account3.png'),
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount3.png?alt=media&token=3d2c9f48-89aa-415c-b66c-e22e0ac68985',
     },
     {
       name: 'Alaa',
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account6.png'),
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account4.png'),
+
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount6.png?alt=media&token=ce784a8c-4fb3-4023-8a23-1bee3e7a1eb7',
+    },
+    {
+      name: 'Mohamed',
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account5.png'),
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount4.png?alt=media&token=1e621221-4af4-4457-a475-6fa86bb46df0',
+    },
+    {
+      name: 'Hala',
+      // icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account6.png'),
+      icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/Accounts%2Faccount5.png?alt=media&token=389de0bd-c07f-44b4-9f6c-2057a4d60a31',
     },
   ];
-  const HistoryData = [
-    {
-      name: 'Carrefour',
-      date: '15-12-2021',
-      amount: 250.21,
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
-    },
-    {
-      name: 'Amazon',
-      date: '02-12-2021',
-      amount: 3004.21,
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Amazon.png'),
-    },
-    {
-      name: 'Jumia',
-      date: '28-11-2021',
-      amount: 2146.63,
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Jumia.png'),
-    },
-    {
-      name: 'Carrefour2',
-      date: '15-12-2021',
-      amount: 250.21,
-      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
-    },
-  ];
+  // const HistoryData = [
+  //   {
+  //     name: 'Carrefour',
+  //     date: '15-12-2021',
+  //     amount: 250.21,
+  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
+  //   },
+  //   {
+  //     name: 'Amazon',
+  //     date: '02-12-2021',
+  //     amount: 3004.21,
+  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Amazon.png'),
+  //   },
+  //   {
+  //     name: 'Jumia',
+  //     date: '28-11-2021',
+  //     amount: 2146.63,
+  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Jumia.png'),
+  //   },
+  //   {
+  //     name: 'Carrefour2',
+  //     date: '15-12-2021',
+  //     amount: 250.21,
+  //     icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
+  //   },
+  // ];
+  const HistoryData = useSelector(state => state.user.history);
+  console.log(HistoryData);
   return (
-    <View style={{flex: 1, backgroundColor: '#F0F2FA'}}>
+    <View
+      style={{flex: 1, backgroundColor: '#F0F2FA'}}
+      keyboardShouldPersistTaps="always">
       <View
         style={{
           alignSelf: 'center',
@@ -224,7 +245,7 @@ function HomeScreen({navigation}) {
               }}>
               <Image
                 style={{height: 33.5, width: 110}}
-                source={item.item.icon}></Image>
+                source={{uri: item.item.icon}}></Image>
               <Text>{item.item.name}</Text>
             </View>
           )}></FlatList>
@@ -234,8 +255,9 @@ function HomeScreen({navigation}) {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={HistoryData}
+        initialNumToRender={3}
         style={{marginHorizontal: 25}}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.name + Math.random()}
         ItemSeparatorComponent={() => (
           <View
             style={{
@@ -245,40 +267,45 @@ function HomeScreen({navigation}) {
             }}
           />
         )}
-        renderItem={item => (
-          <View style={{flexDirection: 'row', marginVertical: 10}}>
-            <Image source={item.item.icon}></Image>
-            <View style={{marginLeft: 10}}>
-              <Text
-                style={{
-                  fontWeight: '400',
-                  color: Colors.darkBlueColor,
-                  fontSize: 18,
-                }}>
-                {item.item.name}
-              </Text>
-              <Text
-                style={{
-                  fontWeight: '400',
-                  fontSize: 14,
-                  marginVertical: 8,
-                  color: Colors.greyColor,
-                }}>
-                {item.item.date}
-              </Text>
+        renderItem={item => {
+          console.log(item);
+          return (
+            <View style={{flexDirection: 'row', marginVertical: 10}}>
+              <Image
+                source={{uri: item.item.icon}}
+                style={{height: 50, width: 50}}></Image>
+              <View style={{marginLeft: 10}}>
+                <Text
+                  style={{
+                    fontWeight: '400',
+                    color: Colors.darkBlueColor,
+                    fontSize: 18,
+                  }}>
+                  {item.item.name}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: '400',
+                    fontSize: 14,
+                    marginVertical: 8,
+                    color: Colors.greyColor,
+                  }}>
+                  {item.item.date}
+                </Text>
+              </View>
+              <View style={{flex: 1, alignItems: 'flex-end'}}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: '700',
+                    color: Colors.darkBlueColor,
+                  }}>
+                  ${item.item.amount}
+                </Text>
+              </View>
             </View>
-            <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: '700',
-                  color: Colors.darkBlueColor,
-                }}>
-                ${item.item.amount}
-              </Text>
-            </View>
-          </View>
-        )}></FlatList>
+          );
+        }}></FlatList>
     </View>
   );
 }

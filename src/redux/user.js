@@ -5,16 +5,16 @@ export const userSlice = createSlice({
     userName: '',
     uid: '',
     token: '',
+    accounts: [],
+    history: [],
   },
   reducers: {
     setUserData: (state, action) => {
-      return {
-        ...action.payload,
-      };
+      return {...action.payload};
     },
   },
 });
 
-export const {setUserName, setPassword} = userSlice.actions;
+export const {setUserData} = userSlice.actions;
 
 export default userSlice.reducer;

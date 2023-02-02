@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import loginReducer from './login';
 import fingerPrintReducer from './fingerPrint';
+import userReducer from './user';
 export const Store = configureStore({
   reducer: {
     login: loginReducer,
     fingerPrint: fingerPrintReducer,
+    user: userReducer,
   },
 });

@@ -5,7 +5,12 @@ import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
 import {Provider} from 'react-redux';
 import {Store} from './src/redux/Store';
-import {signUp, login} from './src/services/firebase';
+import {
+  signUp,
+  login,
+  addHistoryData,
+  getHistoryData,
+} from './src/services/firebase';
 import OTPPage from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -28,7 +33,11 @@ const appWrapper = () => {
 };
 const App = () => {
   console.log('Starting...');
-
+  // addHistoryData();
+  // addHistoryData();
+  // getHistoryData().then(historyData => {
+  //   console.log(historyData);
+  // });
   // fetchData();
   // postData();
   // login('fathy.nabil2022@gamail.com', 123698745);
@@ -39,9 +48,9 @@ const App = () => {
       <SheetProvider>
         <View style={styles.entireContaier}>
           <StatusBar backgroundColor="transparent" translucent={true} />
-          <HomePage></HomePage>
+          {/* <OTPPage></OTPPage> */}
 
-          {/* <Stack.Navigator
+          <Stack.Navigator
             screenOptions={{
               headerShown: false,
               presentation: 'fullScreenModal',
@@ -62,7 +71,7 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
-          </Stack.Navigator> */}
+          </Stack.Navigator>
         </View>
       </SheetProvider>
     </NavigationContainer>
