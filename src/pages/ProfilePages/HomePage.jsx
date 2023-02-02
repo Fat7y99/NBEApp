@@ -10,6 +10,26 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import LogoHeader from '../../components/CommonComponents/LogoHeader';
 import {Images} from '../../constants/Images';
 import {useState} from 'react';
+const SectionHeader = ({title}) => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 25,
+      }}>
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: '700',
+          color: Colors.darkBlueColor,
+        }}>
+        {title}
+      </Text>
+      <Text>View All</Text>
+    </View>
+  );
+};
 function HomeScreen({navigation}) {
   const [isBalanceVisible, SetBalanceVisibility] = useState(false);
   const showBalanceHandler = () => {
@@ -61,6 +81,32 @@ function HomeScreen({navigation}) {
     {
       name: 'Alaa',
       icon: require('../../../assets/images/ProfilePage/HomePageImages/Accounts/account6.png'),
+    },
+  ];
+  const HistoryData = [
+    {
+      name: 'Carrefour',
+      date: '15-12-2021',
+      amount: 250.21,
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
+    },
+    {
+      name: 'Amazon',
+      date: '02-12-2021',
+      amount: 3004.21,
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Amazon.png'),
+    },
+    {
+      name: 'Jumia',
+      date: '28-11-2021',
+      amount: 2146.63,
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Jumia.png'),
+    },
+    {
+      name: 'Carrefour2',
+      date: '15-12-2021',
+      amount: 250.21,
+      icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
     },
   ];
   return (
@@ -156,42 +202,81 @@ function HomeScreen({navigation}) {
             </View>
           )}></FlatList>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 25,
-        }}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '700',
-            color: Colors.darkBlueColor,
-          }}>
-          Send money
-        </Text>
-        <Text>View All</Text>
+      <SectionHeader title="Send money"></SectionHeader>
+      <View>
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          data={Accounts}
+          style={{marginLeft: 15, marginBottom: 20}}
+          keyExtractor={item => item.name}
+          renderItem={item => (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 86,
+                marginTop: 10,
+                width: 77,
+                borderRadius: 18,
+                backgroundColor: 'white',
+                marginHorizontal: 6,
+              }}>
+              <Image
+                style={{height: 33.5, width: 110}}
+                source={item.item.icon}></Image>
+              <Text>{item.item.name}</Text>
+            </View>
+          )}></FlatList>
       </View>
+      <SectionHeader title="History"></SectionHeader>
+
       <FlatList
-        horizontal={true}
-        data={Accounts}
-        style={{marginLeft: 15}}
-        renderItem={item => (
+        showsVerticalScrollIndicator={false}
+        data={HistoryData}
+        style={{marginHorizontal: 25}}
+        keyExtractor={item => item.name}
+        ItemSeparatorComponent={() => (
           <View
             style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 86,
-              marginTop: 10,
-              width: 77,
-              borderRadius: 18,
-              backgroundColor: 'white',
-              marginHorizontal: 6,
-            }}>
-            <Image
-              style={{height: 33.5, width: 110}}
-              source={item.item.icon}></Image>
-            <Text>{item.item.name}</Text>
+              height: 1,
+              width: '100%',
+              backgroundColor: Colors.greyColor,
+            }}
+          />
+        )}
+        renderItem={item => (
+          <View style={{flexDirection: 'row', marginVertical: 10}}>
+            <Image source={item.item.icon}></Image>
+            <View style={{marginLeft: 10}}>
+              <Text
+                style={{
+                  fontWeight: '400',
+                  color: Colors.darkBlueColor,
+                  fontSize: 18,
+                }}>
+                {item.item.name}
+              </Text>
+              <Text
+                style={{
+                  fontWeight: '400',
+                  fontSize: 14,
+                  marginVertical: 8,
+                  color: Colors.greyColor,
+                }}>
+                {item.item.date}
+              </Text>
+            </View>
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: Colors.darkBlueColor,
+                }}>
+                ${item.item.amount}
+              </Text>
+            </View>
           </View>
         )}></FlatList>
     </View>
