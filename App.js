@@ -22,8 +22,7 @@ import HomePage from './src/pages/ProfilePages/HomePage';
 import {ActionSheetProvider, SheetManager} from 'react-native-actions-sheet';
 import {SheetProvider} from 'react-native-actions-sheet';
 import './src/components/CommonComponents/sheets';
-import ActionSheetExample from './src/components/CommonComponents/ActionSheetExample';
-import {registerSheet} from 'react-native-actions-sheet';
+
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -49,8 +48,8 @@ const App = () => {
         <View style={styles.entireContaier}>
           <StatusBar backgroundColor="transparent" translucent={true} />
           {/* <OTPPage></OTPPage> */}
-
-          <Stack.Navigator
+          <HomePage></HomePage>
+          {/* <Stack.Navigator
             screenOptions={{
               headerShown: false,
               presentation: 'fullScreenModal',
@@ -71,7 +70,7 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
         </View>
       </SheetProvider>
     </NavigationContainer>

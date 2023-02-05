@@ -1,45 +1,18 @@
-import {
-  View,
-  ScrollView,
-  FlatList,
-  Text,
-  SafeAreaView,
-  Image,
-  ImageBackground,
-} from 'react-native';
-import {NavigationContainer, useIsFocused} from '@react-navigation/native';
+import {View, FlatList, Text, Image, ImageBackground} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {useNavigation} from '@react-navigation/native';
 import {Switch} from 'react-native-gesture-handler';
 import {Colors} from '../../constants/Colors';
-import {useEffect} from 'react';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import LogoHeader from '../../components/CommonComponents/LogoHeader';
 import {Images} from '../../constants/Images';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {SheetManager} from 'react-native-actions-sheet';
-const SectionHeader = ({title}) => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: 25,
-      }}>
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: '700',
-          color: Colors.darkBlueColor,
-        }}>
-        {title}
-      </Text>
-      <Text>View All</Text>
-    </View>
-  );
-};
+import SectionHeader from '../../components/HomeComponents/SectionHeader';
+import ActionsButtonContainer from '../../components/HomeComponents/ActionsButtonContainer';
+import {SelectList} from 'react-native-dropdown-select-list';
+
 function HomeScreen({navigation}) {
   const [isBalanceVisible, SetBalanceVisibility] = useState(false);
   const showBalanceHandler = () => {
@@ -72,192 +45,294 @@ function HomeScreen({navigation}) {
   const Accounts = useSelector(state => state.user.accounts);
   console.log(HistoryData);
   return (
-    <View
-      style={{flex: 1, backgroundColor: '#F0F2FA'}}
-      keyboardShouldPersistTaps="always">
-      <View
-        style={{
-          alignSelf: 'center',
-          height: 132,
-          width: 347,
-          backgroundColor: '#003D1D',
-          borderRadius: 22,
-          overflow: 'hidden',
-        }}>
-        <ImageBackground
-          style={{flex: 1}}
-          source={require('../../../assets/images/ProfilePage/balanceContainer.png')}>
+    <FlatList
+      ListHeaderComponent={() => (
+        <View
+          style={{flex: 1, backgroundColor: '#F0F2FA'}}
+          keyboardShouldPersistTaps="always">
+          <View
+            style={{
+              alignSelf: 'center',
+              height: 132,
+              width: 347,
+              backgroundColor: '#003D1D',
+              borderRadius: 22,
+              overflow: 'hidden',
+            }}>
+            <ImageBackground
+              style={{flex: 1}}
+              source={require('../../../assets/images/ProfilePage/balanceContainer.png')}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginHorizontal: 19,
+                  marginTop: 11,
+                  marginBottom: 20,
+                }}>
+                <Text
+                  style={{
+                    color: '#F7F7F7',
+                    fontSize: 16,
+                    fontWeight: '400',
+                  }}>
+                  Balance
+                </Text>
+                <Pressable
+                  onPress={() => {
+                    SheetManager.show('fingerPrint-sheet');
+                  }}>
+                  <Image
+                    style={{height: 27, width: 27}}
+                    source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
+                </Pressable>
+              </View>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Pressable onPress={showBalanceHandler}>
+                  <Text
+                    style={{
+                      color: '#F7F7F7',
+                      fontSize: isBalanceVisible ? 25 : 22,
+                      fontWeight: '700',
+                    }}>
+                    {isBalanceVisible
+                      ? '$2,374,654.25'
+                      : 'Press here to show balance'}{' '}
+                  </Text>
+                </Pressable>
+              </View>
+            </ImageBackground>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <FlatList
+              horizontal={true}
+              data={Categories}
+              style={{
+                flex: 1,
+                // backgroundColor: 'red',
+              }}
+              contentContainerStyle={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+                marginVertical: 30,
+              }}
+              renderItem={item => (
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <View
+                    style={{
+                      backgroundColor: item.item.backgroundColor,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: 59,
+                      width: 59,
+                      borderRadius: 13,
+                      marginHorizontal: 18,
+                    }}>
+                    <Image source={item.item.icon}></Image>
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: '400',
+                      color: Colors.darkBlueColor,
+                    }}>
+                    {item.item.name}
+                  </Text>
+                </View>
+              )}></FlatList>
+          </View>
+          <SectionHeader title="Send money"></SectionHeader>
+          <View>
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              data={Accounts}
+              style={{marginLeft: 15, marginBottom: 20}}
+              keyExtractor={item => item.name}
+              renderItem={item => (
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 86,
+                    marginTop: 10,
+                    width: 77,
+                    borderRadius: 18,
+                    backgroundColor: 'white',
+                    marginHorizontal: 6,
+                  }}>
+                  <Image
+                    style={{height: 33.5, width: 110}}
+                    source={{uri: item.item.icon}}></Image>
+                  <Text>{item.item.name}</Text>
+                </View>
+              )}></FlatList>
+          </View>
+          <SectionHeader title="History"></SectionHeader>
+        </View>
+      )}
+      showsVerticalScrollIndicator={false}
+      data={HistoryData}
+      // style={{marginHorizontal: 25}}
+      keyExtractor={item => item.name + Math.random()}
+      ItemSeparatorComponent={() => (
+        <View
+          style={{
+            height: 1,
+            alignSelf: 'center',
+            width: '88%',
+            backgroundColor: Colors.greyColor,
+          }}
+        />
+      )}
+      renderItem={item => {
+        // console.log(item);
+        return (
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginHorizontal: 19,
-              marginTop: 11,
-              marginBottom: 20,
+              marginHorizontal: 25,
+              marginVertical: 10,
             }}>
-            <Text
-              style={{
-                color: '#F7F7F7',
-                fontSize: 16,
-                fontWeight: '400',
-              }}>
-              Balance
-            </Text>
-            <Pressable
-              onPress={() => {
-                SheetManager.show('fingerPrint-sheet');
-              }}>
-              <Image
-                style={{height: 27, width: 27}}
-                source={require('../../../assets/images/LoginImages/fingerPrintIcon.png')}></Image>
-            </Pressable>
-          </View>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Pressable onPress={showBalanceHandler}>
+            <Image
+              source={{uri: item.item.icon}}
+              style={{height: 50, width: 50}}></Image>
+            <View style={{marginLeft: 10}}>
               <Text
                 style={{
-                  color: '#F7F7F7',
-                  fontSize: isBalanceVisible ? 25 : 22,
-                  fontWeight: '700',
-                }}>
-                {isBalanceVisible
-                  ? '$2,374,654.25'
-                  : 'Press here to show balance'}{' '}
-              </Text>
-            </Pressable>
-          </View>
-        </ImageBackground>
-      </View>
-      <View style={{flexDirection: 'row'}}>
-        <FlatList
-          horizontal={true}
-          data={Categories}
-          style={{
-            flex: 1,
-            // backgroundColor: 'red',
-          }}
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-            marginVertical: 30,
-          }}
-          renderItem={item => (
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <View
-                style={{
-                  backgroundColor: item.item.backgroundColor,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: 59,
-                  width: 59,
-                  borderRadius: 13,
-                  marginHorizontal: 18,
-                }}>
-                <Image source={item.item.icon}></Image>
-              </View>
-              <Text
-                style={{
-                  fontSize: 16,
                   fontWeight: '400',
                   color: Colors.darkBlueColor,
+                  fontSize: 18,
                 }}>
                 {item.item.name}
               </Text>
+              <Text
+                style={{
+                  fontWeight: '400',
+                  fontSize: 14,
+                  marginVertical: 8,
+                  color: Colors.greyColor,
+                }}>
+                {item.item.date}
+              </Text>
             </View>
-          )}></FlatList>
-      </View>
-      <SectionHeader title="Send money"></SectionHeader>
-      <View>
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          data={Accounts}
-          style={{marginLeft: 15, marginBottom: 20}}
-          keyExtractor={item => item.name}
-          renderItem={item => (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 86,
-                marginTop: 10,
-                width: 77,
-                borderRadius: 18,
-                backgroundColor: 'white',
-                marginHorizontal: 6,
-              }}>
-              <Image
-                style={{height: 33.5, width: 110}}
-                source={{uri: item.item.icon}}></Image>
-              <Text>{item.item.name}</Text>
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: Colors.darkBlueColor,
+                }}>
+                ${item.item.amount}
+              </Text>
             </View>
-          )}></FlatList>
-      </View>
-      <SectionHeader title="History"></SectionHeader>
+          </View>
+        );
+      }}></FlatList>
+  );
+}
 
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={HistoryData}
-        initialNumToRender={3}
-        style={{marginHorizontal: 25}}
-        keyExtractor={item => item.name + Math.random()}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              width: '100%',
-              backgroundColor: Colors.greyColor,
-            }}
-          />
-        )}
-        renderItem={item => {
-          console.log(item);
-          return (
-            <View style={{flexDirection: 'row', marginVertical: 10}}>
-              <Image
-                source={{uri: item.item.icon}}
-                style={{height: 50, width: 50}}></Image>
-              <View style={{marginLeft: 10}}>
-                <Text
-                  style={{
-                    fontWeight: '400',
-                    color: Colors.darkBlueColor,
-                    fontSize: 18,
-                  }}>
-                  {item.item.name}
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: '400',
-                    fontSize: 14,
-                    marginVertical: 8,
-                    color: Colors.greyColor,
-                  }}>
-                  {item.item.date}
-                </Text>
-              </View>
-              <View style={{flex: 1, alignItems: 'flex-end'}}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: '700',
-                    color: Colors.darkBlueColor,
-                  }}>
-                  ${item.item.amount}
-                </Text>
-              </View>
-            </View>
-          );
-        }}></FlatList>
+function BeneficiariesScreen() {
+  return (
+    <View style={{flex: 1, marginHorizontal: 20}}>
+      <View style={{flexDirection: 'row'}}>
+        <Text
+          style={{
+            color: Colors.darkBlueColor,
+            fontSize: 20,
+            fontWeight: '700',
+          }}>
+          Beneficiaries
+        </Text>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}>
+          <ActionsButtonContainer>
+            <Image
+              source={require('../../../assets/images/ProfilePage/BeneficiariesImages/groups.png')}></Image>
+            <Image
+              source={require('../../../assets/images/ProfilePage/BeneficiariesImages/list.png')}></Image>
+          </ActionsButtonContainer>
+          <ActionsButtonContainer fillFirst={true}>
+            <Image
+              source={require('../../../assets/images/ProfilePage/BeneficiariesImages/addIconV2.png')}></Image>
+            <Text style={{color: Colors.primaryGreenColor}}>Add</Text>
+          </ActionsButtonContainer>
+        </View>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          // backgroundColor: 'red',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Image
+          style={{marginBottom: 15}}
+          source={require('../../../assets/images/ProfilePage/BeneficiariesImages/noBeneficiaries.png')}></Image>
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: '500',
+            marginBottom: 5,
+            color: '#34343F',
+          }}>
+          No Beneficiaries
+        </Text>
+        <Text
+          style={{
+            textAlign: 'center',
+            width: 240,
+            fontWeight: '400',
+            marginBottom: 15,
+            color: '#464665',
+          }}>
+          You don’t have beneficiaries, add some so you can send money
+        </Text>
+        <ActionsButtonContainer
+          fillColor={Colors.primaryGreenColor}
+          fillFirst={true}>
+          <Image
+            source={require('../../../assets/images/ProfilePage/BeneficiariesImages/addIcon.png')}></Image>
+          <Text style={{color: Colors.primaryGreenColor, color: 'white'}}>
+            Add
+          </Text>
+        </ActionsButtonContainer>
+      </View>
     </View>
   );
 }
 
+function TransferScreen() {
+  const [selected, setSelected] = useState('');
+
+  const data = [
+    {key: '1', value: 'Mobiles', disabled: true},
+    {key: '2', value: 'Appliances'},
+    {key: '3', value: 'Cameras'},
+    {key: '4', value: 'Computers', disabled: true},
+    {key: '5', value: 'Vegetables'},
+    {key: '6', value: 'Diary Products'},
+    {key: '7', value: 'Drinks'},
+  ];
+
+  return (
+    <SelectList
+      search={false}
+      setSelected={val => setSelected(val)}
+      data={data}
+      save="value"
+    />
+  );
+}
 function SettingsScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -265,7 +340,6 @@ function SettingsScreen() {
     </View>
   );
 }
-
 const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
@@ -331,8 +405,8 @@ const TabsNavigator = () => {
         };
       }}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Transfer" component={SettingsScreen} />
-      <Tab.Screen name="Beneficiaries" component={SettingsScreen} />
+      <Tab.Screen name="Transfer" component={TransferScreen} />
+      <Tab.Screen name="Beneficiaries" component={BeneficiariesScreen} />
       <Tab.Screen name="ATMs" component={SettingsScreen} />
       <Tab.Screen name="Air Pay" component={SettingsScreen} />
     </Tab.Navigator>
