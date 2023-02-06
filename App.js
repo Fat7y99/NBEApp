@@ -3,7 +3,7 @@ import {StyleSheet, StatusBar, View} from 'react-native';
 
 import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import {Store} from './src/redux/Store';
 import {
   signUp,
@@ -22,7 +22,10 @@ import HomePage from './src/pages/ProfilePages/HomePage';
 import {ActionSheetProvider, SheetManager} from 'react-native-actions-sheet';
 import {SheetProvider} from 'react-native-actions-sheet';
 import './src/components/CommonComponents/sheets';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen'; //import SplashScreen
+import {useEffect} from 'react';
+import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -42,20 +45,35 @@ const App = () => {
   // login('fathy.nabil2022@gamail.com', 123698745);
   const Stack = createNativeStackNavigator();
   // addCarsData();
+  // let islogin;
+  // const isLogin = async () => {
+  //   const recoveredData = await AsyncStorage.getItem('userData');
+  //   console.log(recoveredData);
+  //   islogin = recoveredData !== null;
+  //   return recoveredData;
+  // };
+  // console.log(async () => await isLogin());
+  useEffect(() => {
+    SplashScreen.hide(); //hides the splash screen on app load.
+  }, []);
   return (
     <NavigationContainer>
       <SheetProvider>
         <View style={styles.entireContaier}>
           <StatusBar backgroundColor="transparent" translucent={true} />
           {/* <OTPPage></OTPPage> */}
-          <HomePage></HomePage>
-          {/* <Stack.Navigator
+          {/* <HomePage></HomePage> */}
+          <Stack.Navigator
             screenOptions={{
               headerShown: false,
               presentation: 'fullScreenModal',
               animation: 'slide_from_right',
             }}>
-            <Stack.Screen name="LoginPage" component={LoginPage} />
+            {true ? (
+              <Stack.Screen name="ProfilePage" component={ProfileDrawer} />
+            ) : (
+              <Stack.Screen name="LoginPage" component={LoginPage} />
+            )}
             <Stack.Screen
               name="MobileNumberPage"
               component={MobileNumberPage}
@@ -70,7 +88,7 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
-          </Stack.Navigator> */}
+          </Stack.Navigator>
         </View>
       </SheetProvider>
     </NavigationContainer>

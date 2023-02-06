@@ -12,7 +12,7 @@ import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
-import PasswordInput from '../components/CommonComponents/PrimaryInput';
+import PrimaryInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const styles = StyleSheet.create({
@@ -220,19 +220,19 @@ const SettingPasswordPage = ({navigation}) => {
           }}>
           Enter the mobile number registred in the bank
         </Text>
-        <PasswordInput
+        <PrimaryInput
           maxLength={17}
           placeHolder="Write your password here"
           label="Password"
           onChangeHandler={onChangeHandler}
-          prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
+          prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
-        <PasswordInput
+        <PrimaryInput
           maxLength={17}
           placeHolder="Re-Write your password here"
           onChangeHandler={onConfirmPasswordHandler}
           label="Confirm Password"
-          prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
+          prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
         {validationsList.map((validation, index) => (
           <ValidationEntry validation={validation}></ValidationEntry>

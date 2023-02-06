@@ -10,7 +10,7 @@ import {setPassword} from '../../redux/login';
 import {Colors} from '../../constants/Colors';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-const PasswordInput = ({
+const PrimaryInput = ({
   isSecured,
   prefixIcon,
   label,
@@ -18,7 +18,9 @@ const PasswordInput = ({
   maxLength,
   value,
   placeHolder,
+  width,
 }) => {
+  console.log(width);
   const [isVisisble, SetVisible] = useState(false);
   const togglePassword = () => {
     SetVisible(prev => !prev);
@@ -29,9 +31,10 @@ const PasswordInput = ({
       style={[
         styles.passwordStyle,
         {padding: 5, height: 65, flexDirection: 'row'},
+        {width: width ?? '100%'},
       ]}>
-      <Image style={{margin: 20}} source={prefixIcon} />
-      <View style={{width: '100%'}}>
+      <Image style={{margin: !prefixIcon ? 5 : 20}} source={prefixIcon} />
+      <View>
         <Text
           style={[
             styles.passwordLabelStyle,
@@ -90,4 +93,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
   },
 });
-export default PasswordInput;
+export default PrimaryInput;

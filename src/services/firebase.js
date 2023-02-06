@@ -13,6 +13,7 @@ import {
 } from 'firebase/firestore/lite';
 import {setUserData} from '../redux/user';
 import {useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -159,6 +160,12 @@ export const login = async (email, password) => {
       accounts: await getAccountsData(),
       history: await getHistoryData(),
     };
+    await AsyncStorage.setItem('userData', JSON.stringify(userData));
+    console.log('Loading Object');
+    const recoveredData = await AsyncStorage.getItem('userData');
+    const user = JSON.parse(recoveredData);
+    console.log('ikgvojgerjwrerjripwjrewpojweopj');
+    console.log(user.history);
     return userData;
     // dispatch(setUserData(userData));
   } catch (error) {

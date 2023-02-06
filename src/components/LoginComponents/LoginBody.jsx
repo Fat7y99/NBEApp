@@ -9,7 +9,7 @@ import {
 import {useRef} from 'react';
 import {SheetManager} from 'react-native-actions-sheet';
 import EmailInput from './EmailInput';
-import PasswordInput from '../CommonComponents/PrimaryInput';
+import PrimaryInput from '../CommonComponents/PrimaryInput';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
 import {useDispatch, useSelector} from 'react-redux';
@@ -33,10 +33,10 @@ const LoginBody = ({navigation}) => {
         </Text>
         <View style={{marginHorizontal: 20}}>
           <EmailInput></EmailInput>
-          <PasswordInput
+          <PrimaryInput
             onChangeHandler={text => dispatch(setPassword(text))}
             label="Password"
-            prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PasswordInput>
+            prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
         </View>
         <ForgotPassword></ForgotPassword>
         <View style={styles.loginStyle}>

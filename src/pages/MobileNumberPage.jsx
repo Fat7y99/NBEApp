@@ -4,7 +4,7 @@ import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
-import PasswordInput from '../components/CommonComponents/PrimaryInput';
+import PrimaryInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Footer from '../components/MobileNumberComponents/Footer';
 const styles = StyleSheet.create({
@@ -98,13 +98,13 @@ const MobileNumberPage = ({navigation}) => {
         <Text style={styles.secondaryLabel}>
           Enter the mobile number registred in the bank
         </Text>
-        <PasswordInput
+        <PrimaryInput
           maxLength={17}
           value={previousValue}
           onChangeHandler={onChangeHandler}
           label="Mobile number"
           isSecured={false}
-          prefixIcon={require('../../assets/images/OTPPage/phoneIcon.png')}></PasswordInput>
+          prefixIcon={require('../../assets/images/OTPPage/phoneIcon.png')}></PrimaryInput>
       </View>
       <Footer navigation={navigation}></Footer>
     </View>
