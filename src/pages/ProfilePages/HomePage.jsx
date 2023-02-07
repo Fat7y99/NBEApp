@@ -1,11 +1,6 @@
 import {View, FlatList, Text, Image, ImageBackground} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {Switch} from 'react-native-gesture-handler';
 import {Colors} from '../../constants/Colors';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import LogoHeader from '../../components/CommonComponents/LogoHeader';
-import {Images} from '../../constants/Images';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {SheetManager} from 'react-native-actions-sheet';

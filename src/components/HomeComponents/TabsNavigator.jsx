@@ -71,7 +71,7 @@ const TabsNavigator = () => {
         };
       }}>
       <Tab.Screen name="Home" component={HomePage} />
-      <Tab.Screen name="Transfer" component={NewBeneficiary} />
+      <Tab.Screen name="Transfer" component={TransferPage} />
       <Tab.Screen name="Beneficiaries" component={BeneficiariesPage} />
       <Tab.Screen name="ATMs" component={TransferPage} />
       <Tab.Screen name="Air Pay" component={TransferPage} />

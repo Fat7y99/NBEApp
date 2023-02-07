@@ -11,9 +11,18 @@ import {
   getDoc,
   getDocs,
 } from 'firebase/firestore/lite';
-import {setUserData} from '../redux/user';
-import {useDispatch} from 'react-redux';
+
+import {launchImageLibrary} from 'react-native-image-picker';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  getStorage,
+} from 'firebase/storage';
+import {useDispatch} from 'react-redux';
+import {setbeneficiaryData} from '../redux/beneficiary';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -28,6 +37,31 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
+
+export const uploadImage = async dispatch => {
+  const result = await launchImageLibrary();
+  const image = result.assets[0];
+  const response = await fetch(image.uri.replace('file:///', 'file:/'));
+  const blobImage = await response.blob();
+  const storageRef = ref(storage, `Sayed/${image.fileName}`);
+  const uploadTask = uploadBytesResumable(storageRef, blobImage);
+  await uploadTask.on(
+    'state_changed',
+    snapshot => {
+      console.log('uploading');
+    },
+    error => {
+      alert('something gone wrong');
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+        dispatch(setbeneficiaryData({first: 'imageUrl', last: downloadURL}));
+        console.log(downloadURL);
+      });
+    },
+  );
+};
 
 export const addAccountsData = async () => {
   const Accounts = [
@@ -72,6 +106,14 @@ export const addAccountsData = async () => {
   Accounts.map(account => addDoc(colRef, account));
 };
 
+export const addBeneficiary = async beneficiary => {
+  const docRef = doc(db, 'users', 'user1');
+
+  const colRef = collection(docRef, 'accounts');
+  // const docRef2 = doc(colRef, 'UIi9VQ24G5urkAaHxv5p');
+  // const colRef2 = collection(docRef2, 'sayed');
+  addDoc(colRef, beneficiary);
+};
 export const getAccountsData = async () => {
   const docRef = doc(db, 'users', 'user1');
   const colRef = collection(docRef, 'accounts');

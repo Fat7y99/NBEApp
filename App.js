@@ -26,6 +26,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen'; //import SplashScreen
 import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
+import NewBeneficiary from './src/pages/ProfilePages/NewBeneficiary';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -88,6 +89,9 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
+            <Stack.Screen
+              name="NewBeneficiary"
+              component={NewBeneficiary}></Stack.Screen>
           </Stack.Navigator>
         </View>
       </SheetProvider>

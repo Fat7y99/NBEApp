@@ -6,6 +6,7 @@ import TabsNavigator from './TabsNavigator';
 import {Colors} from '../../constants/Colors';
 import {Images} from '../../constants/Images';
 import {Switch} from 'react-native-gesture-handler';
+import NewBeneficiary from '../../pages/ProfilePages/NewBeneficiary';
 const ProfileDrawer = props => {
   const Drawer = createDrawerNavigator();
   const [activeDrawerItem, setActiveDrawerItem] = useState('Account Summary');

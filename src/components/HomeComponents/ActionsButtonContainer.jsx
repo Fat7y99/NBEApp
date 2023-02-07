@@ -1,6 +1,12 @@
 import {View, Pressable} from 'react-native';
+import {clockRunning} from 'react-native-reanimated';
 import {Colors} from '../../constants/Colors';
-const ActionsButtonContainer = ({children, fillFirst, fillColor}) => {
+const ActionsButtonContainer = ({
+  children,
+  fillFirst,
+  fillColor,
+  onPressHandler,
+}) => {
   return (
     <View
       style={{
@@ -16,18 +22,23 @@ const ActionsButtonContainer = ({children, fillFirst, fillColor}) => {
         justifyContent: fillFirst ? 'center' : 'space-around',
         borderRadius: 15,
       }}>
-      <View
-        style={{
-          backgroundColor: fillFirst ? 'transparent' : Colors.primaryGreenColor,
-          width: fillFirst ? 20 : 24,
-          height: fillFirst ? 20 : 24,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 12,
-        }}>
-        {children[0]}
-      </View>
-      <Pressable>
+      <Pressable onPress={onPressHandler}>
+        <View
+          style={{
+            backgroundColor: fillFirst
+              ? 'transparent'
+              : Colors.primaryGreenColor,
+            width: fillFirst ? 20 : 24,
+            height: fillFirst ? 20 : 24,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 12,
+          }}>
+          {children[0]}
+        </View>
+      </Pressable>
+
+      <Pressable onPress={onPressHandler}>
         <View
           style={{
             justifyContent: 'center',

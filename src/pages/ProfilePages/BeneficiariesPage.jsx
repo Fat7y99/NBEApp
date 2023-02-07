@@ -2,10 +2,14 @@ import {View, Text, FlatList, Image} from 'react-native';
 import ActionsButtonContainer from '../../components/HomeComponents/ActionsButtonContainer';
 import {Colors} from '../../constants/Colors';
 import {useSelector} from 'react-redux';
-const BeneficiariesPage = () => {
+const BeneficiariesPage = ({navigation}) => {
   const BenfeiciariesData = useSelector(state => state.user.accounts);
+  const onPressHandler = () => {
+    console.log('navigating..');
+    navigation.navigate('NewBeneficiary');
+  };
   return (
-    <View style={{flex: 1, marginHorizontal: 20}}>
+    <View style={{flex: 1, marginHorizontal: 20, backgroundColor: '#F0F2FA'}}>
       <View style={{flexDirection: 'row'}}>
         <Text
           style={{
@@ -93,6 +97,7 @@ const BeneficiariesPage = () => {
             You don’t have beneficiaries, add some so you can send money
           </Text>
           <ActionsButtonContainer
+            onPressHandler={onPressHandler}
             fillColor={Colors.primaryGreenColor}
             fillFirst={true}>
             <Image
