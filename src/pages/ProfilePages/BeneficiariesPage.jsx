@@ -4,6 +4,7 @@ import {Colors} from '../../constants/Colors';
 import {useSelector} from 'react-redux';
 const BeneficiariesPage = ({navigation}) => {
   const BenfeiciariesData = useSelector(state => state.user.accounts);
+
   const onPressHandler = () => {
     console.log('navigating..');
     navigation.navigate('NewBeneficiary');
@@ -43,15 +44,16 @@ const BeneficiariesPage = ({navigation}) => {
           numColumns={3}
           data={BenfeiciariesData}
           keyExtractor={item => item.name}
+          contentContainerStyle={{alignItems: 'flex-start'}}
           renderItem={item => {
             console.log('object');
             console.log(item.item);
             return (
               <View
                 style={{
-                  flex: 1,
-                  height: 76,
-                  width: 90,
+                  // flex: 1,
+                  height: 75,
+                  width: 110,
                   borderRadius: 18,
                   margin: 5,
                   justifyContent: 'center',
@@ -60,9 +62,12 @@ const BeneficiariesPage = ({navigation}) => {
                   elevation: 1,
                 }}>
                 <Image
-                  style={{height: 50, width: 90}}
-                  source={{uri: item.item.icon}}></Image>
-                <Text>{item.item.name}</Text>
+                  style={{
+                    height: item.item.imageUrl ? 50 : 50,
+                    width: item.item.imageUrl ? 30 : 90,
+                  }}
+                  source={{uri: item.item.icon ?? item.item.imageUrl}}></Image>
+                <Text>{item.item.name ?? item.item.firstName}</Text>
               </View>
             );
           }}></FlatList>

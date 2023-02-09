@@ -36,7 +36,7 @@ function HomePage({navigation}) {
 
   const HistoryData = useSelector(state => state.user.history);
   const Accounts = useSelector(state => state.user.accounts);
-  console.log(HistoryData);
+  // console.log(HistoryData);
   return (
     <FlatList
       ListHeaderComponent={() => (
@@ -146,7 +146,7 @@ function HomePage({navigation}) {
               horizontal={true}
               data={Accounts}
               style={{marginLeft: 15, marginBottom: 20}}
-              keyExtractor={item => item.name}
+              keyExtractor={item => item.name + Math.random().toString()}
               renderItem={item => (
                 <View
                   style={{
@@ -160,9 +160,14 @@ function HomePage({navigation}) {
                     marginHorizontal: 6,
                   }}>
                   <Image
-                    style={{height: 33.5, width: 110}}
-                    source={{uri: item.item.icon}}></Image>
-                  <Text>{item.item.name}</Text>
+                    style={{
+                      height: item.item.imageUrl ? 25 : 33.5,
+                      width: item.item.imageUrl ? 50 : 110,
+                    }}
+                    source={{
+                      uri: item.item.icon ?? item.item.imageUrl,
+                    }}></Image>
+                  <Text>{item.item.name ?? item.item.firstName}</Text>
                 </View>
               )}></FlatList>
           </View>

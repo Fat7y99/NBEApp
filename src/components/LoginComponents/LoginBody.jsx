@@ -49,7 +49,7 @@ const LoginBody = ({navigation}) => {
               login('fathy.nabil2022@gamail.com', 123698745).then(userData => {
                 dispatch(setUserData(userData));
 
-                navigation.navigate('HomePage');
+                navigation.navigate('ProfilePage');
               });
               // login(email, password);
             }}

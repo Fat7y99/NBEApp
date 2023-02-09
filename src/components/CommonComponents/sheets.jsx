@@ -1,5 +1,5 @@
-import ActionSheetExample from './ActionSheetExample';
+import FingerPrintSheet from './FingerPrintSheet';
 import {registerSheet} from 'react-native-actions-sheet';
-registerSheet('fingerPrint-sheet', ActionSheetExample);
+registerSheet('fingerPrint-sheet', FingerPrintSheet);
 
 export default {};

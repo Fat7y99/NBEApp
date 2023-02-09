@@ -1,34 +1,51 @@
+import React, {useRef} from 'react';
+import RadialGradient from 'react-native-radial-gradient';
+
 import {
-  Modal,
   TouchableWithoutFeedback,
-  Pressable,
-  Text,
-  View,
   Image,
+  Pressable,
+  View,
+  Text,
+  Keyboard,
 } from 'react-native';
 import {Colors} from '../../constants/Colors';
-import RadialGradient from 'react-native-radial-gradient';
-import {useDispatch, useSelector} from 'react-redux';
-import {toggleSheet} from '../../redux/fingerPrint';
+import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
 
-export default function FingerPrintSheet() {
-  const isOpened = useSelector(state => state.fingerPrint.isOpened);
-  const dispatch = useDispatch();
-  const toggleBottomSheet = () => {
-    dispatch(toggleSheet(!isOpened));
-  };
+const FingerPrintSheet = ({
+  children,
 
+  containerStyle,
+
+  indicatorStyle,
+
+  ref,
+
+  gestureEnabled = true,
+
+  ...reset
+}) => {
+  const actionSheetRef = useRef(null);
   return (
-    <Modal
-      animationType="fade"
-      animationDuration={1000}
-      transparent={true}
-      presentationStyle="overFullScreen"
-      statusBarTranslucent={true}
-      visible={isOpened}>
-      <Pressable
-        style={{flex: 1, backgroundColor: 'rgba(28, 36, 55, 0.77)'}}
-        onPress={toggleBottomSheet}>
+    <RNActionSheet
+      id="fingerPrint-sheet"
+      ref={ref ?? actionSheetRef}
+      keyboardHandlerEnabled={true}
+      gestureEnabled={gestureEnabled}
+      overdrawEnabled={false}
+      openAnimationConfig={{bounciness: 0}}
+      defaultOverlayOpacity={0.3}
+      indicatorStyle={{
+        backgroundColor: 'transparent',
+
+        // ...indicatorStyle,
+      }}
+      containerStyle={{
+        backgroundColor: 'white',
+      }}
+      // {...reset}
+      animated>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View
           style={{
             justifyContent: 'flex-end',
@@ -37,6 +54,7 @@ export default function FingerPrintSheet() {
           <TouchableWithoutFeedback>
             <View
               style={{
+                // flex: 1,
                 height: 290,
                 backgroundColor: 'white',
                 borderTopLeftRadius: 30,
@@ -91,7 +109,7 @@ export default function FingerPrintSheet() {
                 </Text>
               </View>
 
-              <Pressable onPress={toggleBottomSheet}>
+              <Pressable onPress={() => SheetManager.hide('fingerPrint-sheet')}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -111,7 +129,9 @@ export default function FingerPrintSheet() {
             </View>
           </TouchableWithoutFeedback>
         </View>
-      </Pressable>
-    </Modal>
+      </TouchableWithoutFeedback>
+    </RNActionSheet>
   );
-}
+};
+
+export default FingerPrintSheet;

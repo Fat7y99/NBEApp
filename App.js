@@ -14,12 +14,9 @@ import {
 import OTPPage from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {postData, fetchData} from './src/services/API';
 import MobileNumberPage from './src/pages/MobileNumberPage';
-import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import SettingPasswordPage from './src/pages/SettingPasswordPage';
 import HomePage from './src/pages/ProfilePages/HomePage';
-import {ActionSheetProvider, SheetManager} from 'react-native-actions-sheet';
 import {SheetProvider} from 'react-native-actions-sheet';
 import './src/components/CommonComponents/sheets';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -70,7 +67,7 @@ const App = () => {
               presentation: 'fullScreenModal',
               animation: 'slide_from_right',
             }}>
-            {true ? (
+            {false ? (
               <Stack.Screen name="ProfilePage" component={ProfileDrawer} />
             ) : (
               <Stack.Screen name="LoginPage" component={LoginPage} />
@@ -89,6 +86,8 @@ const App = () => {
               component={CongratulationPage}
             />
             <Stack.Screen name="HomePage" component={HomePage} />
+            <Stack.Screen name="ProfilePage" component={ProfileDrawer} />
+
             <Stack.Screen
               name="NewBeneficiary"
               component={NewBeneficiary}></Stack.Screen>
