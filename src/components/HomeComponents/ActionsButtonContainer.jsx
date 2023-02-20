@@ -6,6 +6,7 @@ const ActionsButtonContainer = ({
   fillFirst,
   fillColor,
   onPressHandler,
+  onPressHandler2,
 }) => {
   return (
     <View
@@ -38,7 +39,7 @@ const ActionsButtonContainer = ({
         </View>
       </Pressable>
 
-      <Pressable onPress={onPressHandler}>
+      <Pressable onPress={onPressHandler2}>
         <View
           style={{
             justifyContent: 'center',

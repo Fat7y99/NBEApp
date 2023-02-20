@@ -139,7 +139,11 @@ function HomePage({navigation}) {
                 </View>
               )}></FlatList>
           </View>
-          <SectionHeader title="Send money"></SectionHeader>
+          <SectionHeader
+            title="Send money"
+            onPressHandler={() =>
+              navigation.navigate('Beneficiaries')
+            }></SectionHeader>
           <View>
             <FlatList
               showsHorizontalScrollIndicator={false}

@@ -1,6 +1,7 @@
 import {View, Text} from 'react-native';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {Colors} from '../../constants/Colors';
-const SectionHeader = ({title}) => {
+const SectionHeader = ({title, onPressHandler}) => {
   return (
     <View
       style={{
@@ -16,7 +17,9 @@ const SectionHeader = ({title}) => {
         }}>
         {title}
       </Text>
-      <Text>View All</Text>
+      <Pressable onPress={onPressHandler}>
+        <Text>View All</Text>
+      </Pressable>
     </View>
   );
 };

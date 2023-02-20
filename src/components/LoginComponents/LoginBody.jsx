@@ -22,7 +22,8 @@ const LoginBody = ({navigation}) => {
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
   const onClickHandler = () => {
-    SheetManager.show('fingerPrint-sheet');
+    SheetManager.show('transfer-sheet');
+    console.log('sayed');
   };
   const dispatch = useDispatch();
   return (

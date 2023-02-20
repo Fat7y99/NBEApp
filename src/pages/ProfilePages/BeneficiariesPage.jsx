@@ -32,7 +32,10 @@ const BeneficiariesPage = ({navigation}) => {
             <Image
               source={require('../../../assets/images/ProfilePage/BeneficiariesImages/list.png')}></Image>
           </ActionsButtonContainer>
-          <ActionsButtonContainer fillFirst={true}>
+          <ActionsButtonContainer
+            fillFirst={true}
+            onPressHandler2={onPressHandler}
+            onPressHandler={onPressHandler}>
             <Image
               source={require('../../../assets/images/ProfilePage/BeneficiariesImages/addIconV2.png')}></Image>
             <Text style={{color: Colors.primaryGreenColor}}>Add</Text>
