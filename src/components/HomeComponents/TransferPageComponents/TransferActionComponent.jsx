@@ -1,5 +1,6 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import {Colors} from '../../../constants/Colors';
+import {SheetManager} from 'react-native-actions-sheet';
 const TransferActionComponent = ({name, description, icon}) => {
   return (
     <View

@@ -12,17 +12,7 @@ import {
 import {Colors} from '../../../constants/Colors';
 import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
 
-const TransferBottomSheet = ({
-  children,
-
-  containerStyle,
-
-  indicatorStyle,
-
-  ref,
-
-  gestureEnabled = true,
-}) => {
+const TransferBottomSheet = ({ref, gestureEnabled = true}) => {
   const actionSheetRef = useRef(null);
   return (
     <RNActionSheet

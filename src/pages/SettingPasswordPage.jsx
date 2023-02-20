@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';

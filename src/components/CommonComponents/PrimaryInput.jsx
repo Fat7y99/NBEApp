@@ -20,6 +20,7 @@ const PrimaryInput = ({
   placeHolder,
   width,
   elevation,
+  margin,
 }) => {
   const [isFocused, SetFocused] = useState(false);
 
@@ -29,7 +30,7 @@ const PrimaryInput = ({
       borderWidth: 1.5,
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 20,
+      marginBottom: margin ?? 20,
       borderColor: isFocused ? Colors.primaryGreenColor : 'transparent',
       borderRadius: 10,
       elevation: elevation ?? 0,
@@ -61,22 +62,27 @@ const PrimaryInput = ({
       ]}>
       <Image style={{margin: !prefixIcon ? 5 : 20}} source={prefixIcon} />
       <View style={{width: width ?? '100%'}}>
-        <Text
-          style={[
-            styles.passwordLabelStyle,
-            {
-              color: isFocused
-                ? Colors.primaryGreenColor
-                : Colors.darkBlueColor,
-            },
-          ]}>
-          {label}
-        </Text>
+        {label ? (
+          <Text
+            style={[
+              styles.passwordLabelStyle,
+              {
+                color: isFocused
+                  ? Colors.primaryGreenColor
+                  : Colors.darkBlueColor,
+              },
+            ]}>
+            {label}
+          </Text>
+        ) : (
+          ''
+        )}
         <View style={{flexDirection: 'row'}}>
           <TextInput
             onFocus={() => SetFocused(prev => !prev)}
             onEndEditing={() => SetFocused(prev => !prev)}
             placeholder={placeHolder}
+            placeholderTextColor={Colors.greyColor}
             maxLength={maxLength}
             value={value}
             onChangeText={onChangeHandler}

@@ -67,8 +67,8 @@ const App = () => {
               presentation: 'fullScreenModal',
               animation: 'slide_from_right',
             }}>
-            {false ? (
-              <Stack.Screen name="ProfilePage" component={ProfileDrawer} />
+            {true ? (
+              <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} />
             ) : (
               <Stack.Screen name="LoginPage" component={LoginPage} />
             )}
