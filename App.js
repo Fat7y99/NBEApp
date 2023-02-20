@@ -24,10 +24,11 @@ import SplashScreen from 'react-native-splash-screen'; //import SplashScreen
 import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 import NewBeneficiary from './src/pages/ProfilePages/NewBeneficiary';
+import Test from './src/test';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
-      <App></App>
+      <Test></Test>
     </Provider>
   );
 };
