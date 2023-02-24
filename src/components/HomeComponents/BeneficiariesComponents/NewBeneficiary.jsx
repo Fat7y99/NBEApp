@@ -2,17 +2,17 @@ import {View, ScrollView, Image} from 'react-native';
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {useDispatch, useSelector} from 'react-redux';
-import LogoHeader from '../../components/CommonComponents/LogoHeader';
-import PrimaryButton from '../../components/CommonComponents/PrimaryButton';
-import PrimaryInput from '../../components/CommonComponents/PrimaryInput';
-import {Colors} from '../../constants/Colors';
-import {Images} from '../../constants/Images';
+import LogoHeader from '../../CommonComponents/LogoHeader';
+import PrimaryButton from '../../CommonComponents/PrimaryButton';
+import PrimaryInput from '../../CommonComponents/PrimaryInput';
+import {Colors} from '../../../constants/Colors';
+import {Images} from '../../../constants/Images';
 import {
   addBeneficiary,
   getAccountsData,
   uploadImage,
-} from '../../services/firebase';
-import {setbeneficiaryData} from '../../redux/beneficiary';
+} from '../../../services/firebase';
+import {setbeneficiaryData} from '../../../redux/beneficiary';
 const NewBeneficiary = ({navigation}) => {
   const dispatch = useDispatch();
   const beneficiary = useSelector(state => state.beneficiary);
@@ -50,14 +50,14 @@ const NewBeneficiary = ({navigation}) => {
                   {
                     resizeMode: 'stretch',
                   },
-                  beneficiary.imageUrl !== ''
+                  beneficiary.imageUrl !== null
                     ? {width: 138, height: 138, borderRadius: 30}
                     : {},
                 ]}
                 source={
-                  beneficiary.imageUrl !== ''
+                  beneficiary.imageUrl !== null
                     ? {uri: beneficiary.imageUrl}
-                    : require('../../../assets/images/ProfilePage/BeneficiariesImages/uploadImage.png')
+                    : require('../../../../assets/images/ProfilePage/BeneficiariesImages/uploadImage.png')
                 }></Image>
             </View>
           }
@@ -130,9 +130,19 @@ const NewBeneficiary = ({navigation}) => {
           }}>
           <PrimaryButton
             callBackFunction={async () => {
-              await addBeneficiary(beneficiary);
-              await getAccountsData();
-              navigation.goBack();
+              if (
+                !!beneficiary.firstName &&
+                !!beneficiary.lastName &&
+                !!beneficiary.bankBranch &&
+                !!beneficiary.email &&
+                !!beneficiary.phoneNumber &&
+                // beneficiary.imageUrl &&
+                !!beneficiary.accountNumber
+              ) {
+                await addBeneficiary(beneficiary);
+                await getAccountsData(dispatch);
+                navigation.goBack();
+              } else alert('invalid account data');
             }}
             height={50}
             width={345}

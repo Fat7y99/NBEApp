@@ -2,17 +2,21 @@ import {createSlice} from '@reduxjs/toolkit';
 export const beneficiarySlice = createSlice({
   name: 'beneficiary',
   initialState: {
-    firstName: '',
-    lastName: '',
-    bankBranch: '',
-    accountNumber: '',
-    phoneNumber: '',
-    imageUrl: '',
-    email: '',
+    firstName: null,
+    lastName: null,
+    bankBranch: null,
+    accountNumber: null,
+    phoneNumber: null,
+    imageUrl: null,
+    email: null,
+    valid: false,
   },
   reducers: {
     setbeneficiaryData: (state, action) => {
-      return {...state, [action.payload.first]: action.payload.last};
+      return {
+        ...state,
+        [action.payload.first]: action.payload.last,
+      };
     },
   },
 });

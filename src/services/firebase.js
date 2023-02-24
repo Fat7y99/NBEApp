@@ -12,6 +12,7 @@ import {
   getDocs,
 } from 'firebase/firestore/lite';
 
+import {setUserAccounts} from '../redux/user';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -40,27 +41,32 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 export const uploadImage = async dispatch => {
-  const result = await launchImageLibrary();
-  const image = result.assets[0];
-  const response = await fetch(image.uri.replace('file:///', 'file:/'));
-  const blobImage = await response.blob();
-  const storageRef = ref(storage, `Sayed/${image.fileName}`);
-  const uploadTask = uploadBytesResumable(storageRef, blobImage);
-  await uploadTask.on(
-    'state_changed',
-    snapshot => {
-      console.log('uploading');
-    },
-    error => {
-      alert('something gone wrong');
-    },
-    () => {
-      getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-        dispatch(setbeneficiaryData({first: 'imageUrl', last: downloadURL}));
-        console.log(downloadURL);
-      });
-    },
-  );
+  let result;
+  try {
+    result = await launchImageLibrary();
+    const image = result.assets[0];
+    const response = await fetch(image.uri.replace('file:///', 'file:/'));
+    const blobImage = await response.blob();
+    const storageRef = ref(storage, `Sayed/${image.fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, blobImage);
+    await uploadTask.on(
+      'state_changed',
+      snapshot => {
+        console.log('uploading');
+      },
+      error => {
+        alert('something gone wrong');
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+          dispatch(setbeneficiaryData({first: 'imageUrl', last: downloadURL}));
+          console.log(downloadURL);
+        });
+      },
+    );
+  } catch (error) {
+    return;
+  }
 };
 
 export const addAccountsData = async () => {
@@ -114,12 +120,13 @@ export const addBeneficiary = async beneficiary => {
   // const colRef2 = collection(docRef2, 'sayed');
   addDoc(colRef, beneficiary);
 };
-export const getAccountsData = async () => {
+export const getAccountsData = async dispatch => {
   const docRef = doc(db, 'users', 'user1');
   const colRef = collection(docRef, 'accounts');
   const snapshot = await getDocs(colRef);
   const Accounts = [];
   snapshot.forEach(doc => Accounts.push(doc.data()));
+  dispatch(setUserAccounts(Accounts));
   // console.log(Accounts);
   return Accounts;
 };

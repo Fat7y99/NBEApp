@@ -23,12 +23,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen'; //import SplashScreen
 import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
-import NewBeneficiary from './src/pages/ProfilePages/NewBeneficiary';
+import NewBeneficiary from './src/components/HomeComponents/BeneficiariesComponents/NewBeneficiary';
 import Test from './src/test';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
-      <Test></Test>
+      <App></App>
     </Provider>
   );
 };
@@ -52,6 +52,8 @@ const App = () => {
   //   return recoveredData;
   // };
   // console.log(async () => await isLogin());
+  SplashScreen.hide(); //hides the splash screen on app load.
+
   useEffect(() => {
     SplashScreen.hide(); //hides the splash screen on app load.
   }, []);

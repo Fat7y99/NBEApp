@@ -12,9 +12,12 @@ export const userSlice = createSlice({
     setUserData: (state, action) => {
       return {...action.payload};
     },
+    setUserAccounts: (state, action) => {
+      return {...state, accounts: action.payload};
+    },
   },
 });
 
-export const {setUserData} = userSlice.actions;
+export const {setUserData, setUserAccounts} = userSlice.actions;
 
 export default userSlice.reducer;

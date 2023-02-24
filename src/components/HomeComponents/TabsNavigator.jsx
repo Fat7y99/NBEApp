@@ -1,10 +1,11 @@
 import HomePage from '../../pages/ProfilePages/HomePage';
 import TransferPage from '../../pages/ProfilePages/TransferPage';
 import BeneficiariesPage from '../../pages/ProfilePages/BeneficiariesPage';
+import AirPayPage from '../../pages/ProfilePages/AirPayPage';
 import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Colors} from '../../constants/Colors';
-import NewBeneficiary from '../../pages/ProfilePages/NewBeneficiary';
+import NewBeneficiary from './BeneficiariesComponents/NewBeneficiary';
 const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
@@ -74,7 +75,7 @@ const TabsNavigator = () => {
       <Tab.Screen name="Transfer" component={TransferPage} />
       <Tab.Screen name="Beneficiaries" component={BeneficiariesPage} />
       <Tab.Screen name="ATMs" component={TransferPage} />
-      <Tab.Screen name="Air Pay" component={TransferPage} />
+      <Tab.Screen name="Air Pay" component={AirPayPage} />
     </Tab.Navigator>
   );
 };
