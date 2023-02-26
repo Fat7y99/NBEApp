@@ -1,7 +1,6 @@
 import {iteratorSymbol} from 'immer/dist/internal';
 import {
   View,
-  Image,
   PanResponder,
   Text,
   Dimensions,
@@ -74,8 +73,6 @@ const AirPayPage = ({navigation}) => {
     <View
       style={{
         flex: 1,
-
-        // backgroundColor: 'red',
       }}>
       <FlatList
         horizontal={true}
@@ -89,22 +86,7 @@ const AirPayPage = ({navigation}) => {
             panResponder={panResponders[item.index]}
             card={item.item}></DraggableCreditCard>
         )}></FlatList>
-      <View
-        style={{
-          zIndex: -1,
-          position: 'absolute',
-          top: '45%',
-          left: '6%',
-          height: 216,
-          width: 346,
-          borderRadius: 20,
-          borderWidth: 2,
-          borderStyle: 'dashed',
-          borderColor: Colors.primaryGreenColor,
-          justifyContent: 'center',
-          alignItems: 'center',
-          elevation: -1,
-        }}>
+      <View style={styles.floatingDropBox}>
         <Text
           style={{
             textAlign: 'center',
@@ -146,6 +128,21 @@ const styles = StyleSheet.create({
     width: 150,
     backgroundColor: 'blue',
     borderRadius: 5,
+  },
+  floatingDropBox: {
+    zIndex: -1,
+    position: 'absolute',
+    top: '45%',
+    left: '6%',
+    height: 216,
+    width: 346,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderStyle: 'dashed',
+    borderColor: Colors.primaryGreenColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: -1,
   },
 });
 export default AirPayPage;
