@@ -18,8 +18,8 @@ let ref = null;
 
 const AirPayPage = ({navigation}) => {
   ref = useRef();
-  const WINDOW_WIDTH = Dimensions.get('screen').width;
-  const WINDOW_HEIGHT = Dimensions.get('screen').height;
+  const windowWidth = Dimensions.get('screen').width;
+  const windowHeight = Dimensions.get('screen').height;
   const pans = useRef([]).current;
   const panResponders = useRef([]).current;
   const createResponder = index => {
@@ -35,11 +35,11 @@ const AirPayPage = ({navigation}) => {
         },
         onPanResponderRelease: () => {
           pan.flattenOffset();
-          if (pan.y._value >= WINDOW_HEIGHT * 0.2) {
+          if (pan.y._value >= windowHeight * 0.2) {
             Animated.spring(pan, {
               toValue: {
-                x: 0.06 * WINDOW_WIDTH,
-                y: 0.33 * WINDOW_HEIGHT,
+                x: 0.06 * windowWidth,
+                y: 0.33 * windowHeight,
               },
               duration: 100,
               useNativeDriver: true,
@@ -80,6 +80,7 @@ const AirPayPage = ({navigation}) => {
       <FlatList
         horizontal={true}
         data={Cards}
+        showsHorizontalScrollIndicator={false}
         style={{elevation: 3}}
         contentContainerStyle={{elevation: 3}}
         renderItem={item => (
