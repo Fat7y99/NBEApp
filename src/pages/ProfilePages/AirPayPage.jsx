@@ -4,80 +4,72 @@ import {
   Image,
   PanResponder,
   Text,
+  Dimensions,
   Animated,
   StyleSheet,
 } from 'react-native';
 import {useRef} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
+import DraggableCreditCard from '../../components/HomeComponents/AirPayComponents/DraggableCreditCard';
+import {Colors} from '../../constants/Colors';
+import PrimaryButton from '../../components/CommonComponents/PrimaryButton';
+import {SheetManager} from 'react-native-actions-sheet';
 let ref = null;
 
-// const test = () => {
-//     SplashScreen.hide(); //hides the splash screen on app load.
-
-//     //   setTimeout(
-//     //     TransferDropdown.measure((fx, fy, width, height, px, py) => {
-//     //       console.log('Component width is: ' + width);
-//     //       console.log('Component height is: ' + height);
-//     //       console.log('X offset to frame: ' + fx);
-//     //       console.log('Y offset to frame: ' + fy);
-//     //       console.log('X offset to page: ' + px);
-//     //       console.log('Y offset to page: ' + py);
-//     //     }),
-//     //     0,
-//     //   );
-
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.titleText}>Drag & Release this box!</Text>
-
-//       </View>
-//     );
-//   };
 const AirPayPage = ({navigation}) => {
   ref = useRef();
-  const pan = useRef(new Animated.ValueXY()).current;
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: (_, gesture) => {
-        pan.x.setValue(gesture.dx);
-        pan.y.setValue(gesture.dy);
+  const WINDOW_WIDTH = Dimensions.get('screen').width;
+  const WINDOW_HEIGHT = Dimensions.get('screen').height;
+  const pans = useRef([]).current;
+  const panResponders = useRef([]).current;
+  const createResponder = index => {
+    const pan = new Animated.ValueXY({x: 0, y: 0});
+    return [
+      PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderGrant: () => {
+          pan.setOffset({x: pan.x._value, y: pan.y._value});
+        },
+        onPanResponderMove: (_, gesture) => {
+          pan.setValue({x: gesture.dx, y: gesture.dy});
+        },
+        onPanResponderRelease: () => {
+          pan.flattenOffset();
+          if (pan.y._value >= WINDOW_HEIGHT * 0.2) {
+            Animated.spring(pan, {
+              toValue: {
+                x: 0.06 * WINDOW_WIDTH,
+                y: 0.33 * WINDOW_HEIGHT,
+              },
+              duration: 100,
+              useNativeDriver: true,
+            }).start();
+          } else {
+            Animated.spring(pan, {
+              toValue: {x: 0, y: 0},
+              duration: 100,
+              useNativeDriver: true,
+            }).start();
+          }
+        },
+      }),
+      pan,
+    ];
+  };
 
-        Animated.event([null, {dx: pan.x, dy: pan.y}], {
-          useNativeDriver: false,
-        });
-        console.log('our value: ', pan.x._value);
-      },
-      onPanResponderGrant: () => {
-        pan.setOffset({
-          x: pan.x._value,
-          y: pan.y._value,
-        });
-      },
-      onPanResponderRelease: () => {
-        console.log(pan.x._value);
-        if (pan.x._value > 100) {
-          Animated.spring(pan, {
-            toValue: {x: 0, y: 0},
-            useNativeDriver: true,
-          }).start();
-        }
-        // ref.current.measureInWindow((fx, fy, width, height, px, py) => {
-        //   console.log('Component width is: ' + width);
-        //   console.log('Component height is: ' + height);
-        //   console.log('X offset to frame: ' + fx);
-        //   console.log('Y offset to frame: ' + fy);
-        //   console.log('X offset to page: ' + px);
-        //   console.log('Y offset to page: ' + py);
-        // });
-      },
-    }),
-  ).current;
   const Cards = [
     require('../../../assets/images/ProfilePage/AirPay/Blue.png'),
     require('../../../assets/images/ProfilePage/AirPay/Red.png'),
     require('../../../assets/images/ProfilePage/AirPay/Green.png'),
   ];
+
+  Cards.forEach((_, index, __) => {
+    console.log('index: ', index);
+    const [responder, pan] = createResponder(index);
+    pans.push(pan);
+    panResponders.push(responder);
+  });
+
   return (
     <View
       style={{
@@ -88,18 +80,52 @@ const AirPayPage = ({navigation}) => {
       <FlatList
         horizontal={true}
         data={Cards}
+        style={{elevation: 3}}
+        contentContainerStyle={{elevation: 3}}
         renderItem={item => (
-          <Animated.View
-            style={{
-              transform: [{translateX: pan.x}, {translateY: pan.y}],
-            }}
-            {...panResponder.panHandlers}>
-            <View style={styles.box} />
-          </Animated.View>
-          //   <Image
-          //     style={{marginHorizontal: 10, elevation: 23}}
-          //     source={item.item}></Image>
+          <DraggableCreditCard
+            pan={pans[item.index]}
+            panResponder={panResponders[item.index]}
+            card={item.item}></DraggableCreditCard>
         )}></FlatList>
+      <View
+        style={{
+          zIndex: -1,
+          position: 'absolute',
+          top: '45%',
+          left: '6%',
+          height: 216,
+          width: 346,
+          borderRadius: 20,
+          borderWidth: 2,
+          borderStyle: 'dashed',
+          borderColor: Colors.primaryGreenColor,
+          justifyContent: 'center',
+          alignItems: 'center',
+          elevation: -1,
+        }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            marginHorizontal: 30,
+            fontWeight: '500',
+            color: Colors.primaryGreenColor,
+            fontSize: 20,
+          }}>
+          Touch & hold a card then drag it to this box
+        </Text>
+      </View>
+      <View style={{alignSelf: 'center', marginBottom: 25}}>
+        <PrimaryButton
+          callBackFunction={() => {
+            SheetManager.show('fingerPrint-sheet');
+          }}
+          height={50}
+          width={345}
+          backgroundColor={Colors.primaryGreenColor}
+          title="Pay Now"
+          textColor="white"></PrimaryButton>
+      </View>
     </View>
   );
 };
