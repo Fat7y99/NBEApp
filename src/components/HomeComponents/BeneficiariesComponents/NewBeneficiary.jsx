@@ -13,6 +13,7 @@ import {
   uploadImage,
 } from '../../../services/firebase';
 import {setbeneficiaryData} from '../../../redux/beneficiary';
+import {setAppState} from '../../../redux/appState';
 const NewBeneficiary = ({navigation}) => {
   const dispatch = useDispatch();
   const beneficiary = useSelector(state => state.beneficiary);
@@ -139,8 +140,11 @@ const NewBeneficiary = ({navigation}) => {
                 // beneficiary.imageUrl &&
                 !!beneficiary.accountNumber
               ) {
+                dispatch(setAppState(true));
                 await addBeneficiary(beneficiary);
                 await getAccountsData(dispatch);
+                dispatch(setAppState(false));
+
                 navigation.goBack();
               } else alert('invalid account data');
             }}

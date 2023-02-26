@@ -85,7 +85,8 @@ const FingerPrintSheet = ({
                   flexDirection: 'column',
                   alignItems: 'center',
                 }}>
-                <Pressable onPress={() => payload.callBackFunction()}>
+                <Pressable
+                  onPress={() => (payload ? payload.callBackFunction() : '')}>
                   <RadialGradient
                     colors={['white', '#00C974']}
                     stops={[0.38, 1]}

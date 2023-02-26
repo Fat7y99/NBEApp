@@ -16,6 +16,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
 import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
+import Spinner from 'react-native-loading-spinner-overlay';
+import {setAppState} from '../../redux/appState';
+
 const LoginBody = ({navigation}) => {
   const logoutModalRef = useRef(null);
 
@@ -32,9 +35,12 @@ const LoginBody = ({navigation}) => {
   };
   const loginHandler = () => {
     console.log(email, password);
+    dispatch(setAppState(true));
     login('fathy.nabil2022@gamail.com', 123698745, dispatch).then(userData => {
       dispatch(setUserData(userData));
       callBackHandler();
+      dispatch(setAppState(false));
+
       navigation.navigate('ProfilePage');
     });
     // login(email, password);

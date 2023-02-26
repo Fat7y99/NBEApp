@@ -11,6 +11,8 @@ import {
   addHistoryData,
   getHistoryData,
 } from './src/services/firebase';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 import OTPPage from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -35,6 +37,7 @@ const appWrapper = () => {
 };
 const App = () => {
   console.log('Starting...');
+  const loading = useSelector(state => state.appState.loading);
   // addHistoryData();
   // addHistoryData();
   // getHistoryData().then(historyData => {
@@ -63,6 +66,11 @@ const App = () => {
       <SheetProvider>
         <View style={styles.entireContaier}>
           <StatusBar backgroundColor="transparent" translucent={true} />
+          <Spinner
+            visible={loading}
+            // textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           {/* <OTPPage></OTPPage> */}
           {/* <HomePage></HomePage> */}
           <Stack.Navigator
