@@ -20,11 +20,11 @@ const FingerPrintSheet = ({
   indicatorStyle,
 
   ref,
-
+  payload,
   gestureEnabled = true,
-
   ...reset
 }) => {
+  console.log(payload);
   const actionSheetRef = useRef(null);
   return (
     <RNActionSheet
@@ -85,25 +85,26 @@ const FingerPrintSheet = ({
                   flexDirection: 'column',
                   alignItems: 'center',
                 }}>
-                <RadialGradient
-                  colors={['white', '#00C974']}
-                  stops={[0.38, 1]}
-                  center={[44, 44]}
-                  radius={50}
-                  style={{
-                    width: 88,
-                    overflow: 'hidden',
-                    height: 88,
-                    marginVertical: 12.5,
-                    borderRadius: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    shadowColor: '#00C974',
-                  }}>
-                  <Image
-                    source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
-                </RadialGradient>
-
+                <Pressable onPress={() => payload.callBackFunction()}>
+                  <RadialGradient
+                    colors={['white', '#00C974']}
+                    stops={[0.38, 1]}
+                    center={[44, 44]}
+                    radius={50}
+                    style={{
+                      width: 88,
+                      overflow: 'hidden',
+                      height: 88,
+                      marginVertical: 12.5,
+                      borderRadius: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      shadowColor: '#00C974',
+                    }}>
+                    <Image
+                      source={require('../../../assets/images/LoginImages/clickFingerPrint.png')}></Image>
+                  </RadialGradient>
+                </Pressable>
                 <Text style={{color: Colors.greyColor, marginVertical: 12.5}}>
                   Touch the fingerprint sensor
                 </Text>

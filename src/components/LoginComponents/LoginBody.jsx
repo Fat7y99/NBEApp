@@ -21,9 +21,23 @@ const LoginBody = ({navigation}) => {
 
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
+  const callBackHandler = () => {
+    SheetManager.hide('fingerPrint-sheet');
+  };
   const onClickHandler = () => {
-    SheetManager.show('transfer-sheet');
+    SheetManager.show('fingerPrint-sheet', {
+      payload: {callBackFunction: loginHandler},
+    });
     console.log('sayed');
+  };
+  const loginHandler = () => {
+    console.log(email, password);
+    login('fathy.nabil2022@gamail.com', 123698745, dispatch).then(userData => {
+      dispatch(setUserData(userData));
+      callBackHandler();
+      navigation.navigate('ProfilePage');
+    });
+    // login(email, password);
   };
   const dispatch = useDispatch();
   return (
@@ -45,15 +59,7 @@ const LoginBody = ({navigation}) => {
             height={50}
             width={275}
             title="Log In"
-            callBackFunction={() => {
-              console.log(email, password);
-              login('fathy.nabil2022@gamail.com', 123698745).then(userData => {
-                dispatch(setUserData(userData));
-
-                navigation.navigate('ProfilePage');
-              });
-              // login(email, password);
-            }}
+            callBackFunction={loginHandler}
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>
           <Pressable onPress={onClickHandler}>

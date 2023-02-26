@@ -192,29 +192,28 @@ export const signUp = async (email, password) => {
     });
 };
 
-export const login = async (email, password) => {
+export const login = async (email, password, dispatch) => {
   try {
     // const dispatch = useDispatch();
 
     const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
-    // console.log(response.user.displayName);
-    // console.log('Signed', await response.user?.getIdToken());
+    console.log(response.user.displayName);
+    console.log('Signed', await response.user?.getIdToken());
 
     const userData = {
       userName: response.user.displayName,
       uid: response.user.uid,
       token: await response.user.getIdToken(),
-      accounts: await getAccountsData(),
+      accounts: await getAccountsData(dispatch),
       history: await getHistoryData(),
     };
     await AsyncStorage.setItem('userData', JSON.stringify(userData));
     console.log('Loading Object');
     const recoveredData = await AsyncStorage.getItem('userData');
     const user = JSON.parse(recoveredData);
-    console.log('ikgvojgerjwrerjripwjrewpojweopj');
-    console.log(user.history);
+    // console.log(user.history);
     return userData;
     // dispatch(setUserData(userData));
   } catch (error) {

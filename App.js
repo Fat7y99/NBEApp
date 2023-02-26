@@ -25,6 +25,7 @@ import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 import NewBeneficiary from './src/components/HomeComponents/BeneficiariesComponents/NewBeneficiary';
 import Test from './src/test';
+import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -70,7 +71,7 @@ const App = () => {
               presentation: 'fullScreenModal',
               animation: 'slide_from_right',
             }}>
-            {true ? (
+            {false ? (
               <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} />
             ) : (
               <Stack.Screen name="LoginPage" component={LoginPage} />
@@ -84,6 +85,8 @@ const App = () => {
               name="SettingPasswordPage"
               component={SettingPasswordPage}
             />
+            <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} />
+
             <Stack.Screen
               name="CongratulationPage"
               component={CongratulationPage}

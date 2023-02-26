@@ -68,7 +68,10 @@ const AirPayPage = ({navigation}) => {
     pans.push(pan);
     panResponders.push(responder);
   });
-
+  const callBackHandler = () => {
+    navigation.navigate('Home');
+    SheetManager.hide('fingerPrint-sheet');
+  };
   return (
     <View
       style={{
@@ -101,7 +104,11 @@ const AirPayPage = ({navigation}) => {
       <View style={{alignSelf: 'center', marginBottom: 25}}>
         <PrimaryButton
           callBackFunction={() => {
-            SheetManager.show('fingerPrint-sheet');
+            SheetManager.show('fingerPrint-sheet', {
+              payload: {
+                callBackFunction: callBackHandler,
+              },
+            });
           }}
           height={50}
           width={345}

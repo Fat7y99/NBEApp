@@ -2,12 +2,32 @@ import {View, Text, FlatList, Image} from 'react-native';
 import ActionsButtonContainer from '../../components/HomeComponents/ActionsButtonContainer';
 import {Colors} from '../../constants/Colors';
 import {useSelector} from 'react-redux';
+import BeneficiaryCard from '../../components/HomeComponents/BeneficiariesComponents/BeneficiaryCard';
+import HistoryPage from './HistoryPage';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const BeneficiariesPage = ({navigation}) => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        presentation: 'fullScreenModal',
+        animation: 'slide_from_right',
+      }}>
+      <Stack.Screen
+        name="SubBeneficiaryPage"
+        component={SubBeneficiariesPage}></Stack.Screen>
+      <Stack.Screen name="HistoryPage" component={HistoryPage}></Stack.Screen>
+    </Stack.Navigator>
+  );
+};
+
+const SubBeneficiariesPage = ({navigation}) => {
   const BenfeiciariesData = useSelector(state => state.user.accounts);
 
   const onPressHandler = () => {
     console.log('navigating..');
-    navigation.navigate('NewBeneficiary');
+    navigation.navigate('HistoryPage');
   };
   return (
     <View style={{flex: 1, marginHorizontal: 20, backgroundColor: '#F0F2FA'}}>
@@ -42,6 +62,7 @@ const BeneficiariesPage = ({navigation}) => {
           </ActionsButtonContainer>
         </View>
       </View>
+
       {BenfeiciariesData.length ? (
         <FlatList
           numColumns={3}
@@ -52,26 +73,9 @@ const BeneficiariesPage = ({navigation}) => {
             console.log('object');
             console.log(item.item);
             return (
-              <View
-                style={{
-                  // flex: 1,
-                  height: 75,
-                  width: 110,
-                  borderRadius: 18,
-                  margin: 5,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: 'white',
-                  elevation: 1,
-                }}>
-                <Image
-                  style={{
-                    height: item.item.imageUrl ? 50 : 50,
-                    width: item.item.imageUrl ? 30 : 90,
-                  }}
-                  source={{uri: item.item.icon ?? item.item.imageUrl}}></Image>
-                <Text>{item.item.name ?? item.item.firstName}</Text>
-              </View>
+              <BeneficiaryCard
+                navigation={navigation}
+                item={item.item}></BeneficiaryCard>
             );
           }}></FlatList>
       ) : (
