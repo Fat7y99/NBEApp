@@ -3,8 +3,8 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 const BeneficiaryCard = ({item, navigation}) => (
   <Pressable
     onPress={() => {
-      console.log(item.firstName, item.firstName == 'Ahmed');
-      item.firstName ? navigation.navigate('HistoryPage') : '';
+      // console.log(item.firstName, item.firstName);
+      navigation.navigate('HistoryPage', {card: item});
     }}>
     <View
       style={{

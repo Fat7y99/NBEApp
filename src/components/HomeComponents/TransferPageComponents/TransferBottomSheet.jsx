@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import {Colors} from '../../../constants/Colors';
 import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
+import AccountCard from '../BeneficiariesComponents/AccountCard';
 
-const TransferBottomSheet = ({ref, gestureEnabled = true}) => {
+const TransferBottomSheet = ({ref, payload, gestureEnabled = true}) => {
   const actionSheetRef = useRef(null);
+  console.log(payload);
   return (
     <RNActionSheet
       id="transfer-sheet"
@@ -43,30 +45,43 @@ const TransferBottomSheet = ({ref, gestureEnabled = true}) => {
             <View
               style={{
                 // flex: 1,
-                height: 350,
+                height: 320,
                 backgroundColor: 'white',
                 borderTopLeftRadius: 20,
                 borderTopRightRadius: 20,
                 paddingHorizontal: 10,
                 // paddingTop: 18,
               }}>
-              <Image
-                source={require('../../../../assets/images/ProfilePage/TransferImages/userInfo.png')}></Image>
-              <TransferActionComponent
-                name="Transfer"
-                description="Transfer money to Ahmad"
-                icon={require('../../../../assets/images/ProfilePage/TransferImages/transfer.png')}
-              />
-              <TransferActionComponent
-                name="Edit"
-                description="Edit Ahmad data"
-                icon={require('../../../../assets/images/ProfilePage/TransferImages/edit.png')}
-              />
-              <TransferActionComponent
-                name="Delete Ahmad"
-                description="Delete Ahmad & his transactions history"
-                icon={require('../../../../assets/images/ProfilePage/TransferImages/delete.png')}
-              />
+              <View style={{marginVertical: 25}}>
+                <AccountCard
+                  account={payload.account}
+                  elevation={0}
+                  width={236}
+                  height={59}></AccountCard>
+              </View>
+              <View>
+                <TransferActionComponent
+                  name="Transfer"
+                  description={`Transfer money to ${
+                    payload.account.firstName ?? payload.account.name
+                  }`}
+                  icon={require('../../../../assets/images/ProfilePage/TransferImages/transfer.png')}
+                />
+                <TransferActionComponent
+                  name="Edit"
+                  description={`Edit ${
+                    payload.account.firstName ?? payload.account.name
+                  } data`}
+                  icon={require('../../../../assets/images/ProfilePage/TransferImages/edit.png')}
+                />
+                <TransferActionComponent
+                  name={`Delete ${
+                    payload.account.firstName ?? payload.account.name
+                  }`}
+                  description="Delete Ahmad & their transactions history"
+                  icon={require('../../../../assets/images/ProfilePage/TransferImages/delete.png')}
+                />
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>

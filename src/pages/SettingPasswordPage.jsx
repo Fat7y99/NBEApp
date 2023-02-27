@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const ValidationEntry = ({validation}) => {
+const ValidationEntry = ({Validations, validation, index}) => {
+  const validColor = Colors.primaryGreenColor;
+  const nonValidColor = Colors.greyColor;
   return (
     <View
       key={index}
@@ -103,8 +105,6 @@ const ValidationEntry = ({validation}) => {
 };
 
 const SettingPasswordPage = ({navigation}) => {
-  const validColor = Colors.primaryGreenColor;
-  const nonValidColor = Colors.greyColor;
   const initialValidations = {
     Lower: false,
     Upper: false,
@@ -227,8 +227,12 @@ const SettingPasswordPage = ({navigation}) => {
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
         {validationsList.map((validation, index) => (
-          <ValidationEntry validation={validation}></ValidationEntry>
+          <ValidationEntry
+            validation={validation}
+            Validations={Validations}
+            index={index}></ValidationEntry>
         ))}
+
         <View
           style={{
             flex: 1,
@@ -237,15 +241,7 @@ const SettingPasswordPage = ({navigation}) => {
             marginBottom: 20,
             flexDirection: 'column',
             justifyContent: 'flex-end',
-          }}>
-          <PrimaryButton
-            callBackFunction={() => {
-              onSubmitHandler();
-            }}
-            title="Submit"
-            backgroundColor="#007236"
-            textColor="white"></PrimaryButton>
-        </View>
+          }}></View>
       </View>
     </View>
   );

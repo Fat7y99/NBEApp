@@ -27,7 +27,7 @@ const SubBeneficiariesPage = ({navigation}) => {
 
   const onPressHandler = () => {
     console.log('navigating..');
-    navigation.navigate('HistoryPage');
+    navigation.navigate('NewBeneficiary');
   };
   return (
     <View style={{flex: 1, marginHorizontal: 20, backgroundColor: '#F0F2FA'}}>

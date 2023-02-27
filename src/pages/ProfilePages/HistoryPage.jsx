@@ -4,7 +4,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {Colors} from '../../constants/Colors';
 import {useSelector} from 'react-redux';
-const HistoryPage = ({navigation}) => {
+import AccountCard from '../../components/HomeComponents/BeneficiariesComponents/AccountCard';
+const HistoryPage = ({navigation, route}) => {
   const HistoryData = useSelector(state => state.user.history);
 
   return (
@@ -20,17 +21,7 @@ const HistoryPage = ({navigation}) => {
           style={{marginHorizontal: 20}}
           ListHeaderComponent={() => (
             <View>
-              <View
-                style={{
-                  elevation: 3,
-                  backgroundColor: 'white',
-                  borderRadius: 18,
-                  //   marginHorizontal: 25,
-                  justifyContent: 'flex-start',
-                  width: 346,
-                  height: 86,
-                }}>
-                <ImageBackground
+              {/* <ImageBackground
                   imageStyle={{height: 86, width: 250}}
                   source={require('../../../assets/images/ProfilePage/TransferImages/userInfo.png')}>
                   <Pressable
@@ -46,8 +37,9 @@ const HistoryPage = ({navigation}) => {
                         source={require('../../../assets/images/ProfilePage/TransferImages/dots.png')}></Image>
                     </View>
                   </Pressable>
-                </ImageBackground>
-              </View>
+                </ImageBackground> */}
+              <AccountCard account={route.params.card}></AccountCard>
+
               <Text
                 style={{
                   color: Colors.darkBlueColor,
