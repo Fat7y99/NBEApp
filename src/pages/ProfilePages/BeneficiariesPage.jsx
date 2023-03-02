@@ -1,6 +1,10 @@
 import {View, Text, FlatList, Image} from 'react-native';
 import ActionsButtonContainer from '../../components/HomeComponents/ActionsButtonContainer';
-import {Colors} from '../../constants/Colors';
+import {
+  Colors,
+  windowHeightFactor,
+  windowWidthFactor,
+} from '../../constants/Colors';
 import {useSelector} from 'react-redux';
 import BeneficiaryCard from '../../components/HomeComponents/BeneficiariesComponents/BeneficiaryCard';
 import HistoryPage from './HistoryPage';
@@ -24,14 +28,25 @@ const BeneficiariesPage = ({navigation}) => {
 
 const SubBeneficiariesPage = ({navigation}) => {
   const BenfeiciariesData = useSelector(state => state.user.accounts);
+  console.log('sayed', windowWidthFactor);
 
   const onPressHandler = () => {
     console.log('navigating..');
     navigation.navigate('NewBeneficiary');
   };
   return (
-    <View style={{flex: 1, marginHorizontal: 20, backgroundColor: '#F0F2FA'}}>
-      <View style={{flexDirection: 'row'}}>
+    <View
+      style={{
+        flex: 1,
+        // justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F0F2FA',
+      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginHorizontal: 15,
+        }}>
         <Text
           style={{
             color: Colors.darkBlueColor,
