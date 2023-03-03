@@ -29,17 +29,19 @@ const TransferPage = () => {
       style={{
         flex: 1,
         backgroundColor: '#F0F2FA',
-        marginHorizontal: 23,
         marginBottom: 30,
       }}
       behavior="padding">
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1, flex: 1}}
+        style={{marginHorizontal: 15}}>
         <Text
           style={{
             fontSize: 20,
             fontWeight: '700',
             color: Colors.darkBlueColor,
             marginBottom: 20,
+            // backgroundColor: 'red',
           }}>
           Transfer
         </Text>
@@ -70,7 +72,6 @@ const TransferPage = () => {
         <View
           style={{
             flexGrow: 1,
-
             justifyContent: 'flex-end',
           }}>
           <PrimaryButton
@@ -78,7 +79,7 @@ const TransferPage = () => {
               console.log('transfered ');
             }}
             height={50}
-            width={345}
+            width="100%"
             backgroundColor={Colors.primaryGreenColor}
             title="Transfer"
             textColor="white"></PrimaryButton>
@@ -99,8 +100,9 @@ const TransferDropdown = ({title, values}) => {
   return (
     <View
       style={{
-        height: 65,
-        width: 346,
+        // height: 65,
+        // width: 346,
+        flex: 1,
         marginBottom: 10,
         borderRadius: 10,
         backgroundColor: 'white',
@@ -140,6 +142,7 @@ const TransferDropdown = ({title, values}) => {
             style={{
               flex: 1,
               // backgroundColor: 'red',
+
               alignItems: 'flex-end',
               justifyContent: 'center',
             }}>

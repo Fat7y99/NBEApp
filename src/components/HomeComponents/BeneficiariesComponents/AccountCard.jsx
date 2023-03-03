@@ -10,7 +10,7 @@ const AccountCard = ({account, elevation, width, height}) => {
         borderRadius: 18,
         //   marginHorizontal: 25,
         justifyContent: 'flex-start',
-        width: width ?? 346,
+        width: '100%',
         height: height ?? 86,
       }}>
       <View

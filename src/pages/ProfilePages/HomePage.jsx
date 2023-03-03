@@ -115,14 +115,20 @@ function HomePage({navigation}) {
                 marginVertical: 30,
               }}
               renderItem={item => (
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginHorizontal: 10,
+                  }}>
                   <View
                     style={{
                       backgroundColor: item.item.backgroundColor,
                       justifyContent: 'center',
                       alignItems: 'center',
                       height: 59,
-                      width: 59,
+
+                      width: '100%',
                       borderRadius: 13,
                       marginHorizontal: 18,
                     }}>

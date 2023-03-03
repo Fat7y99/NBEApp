@@ -39,7 +39,7 @@ const SubBeneficiariesPage = ({navigation}) => {
       style={{
         flex: 1,
         // justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: '#F0F2FA',
       }}>
       <View
@@ -83,7 +83,14 @@ const SubBeneficiariesPage = ({navigation}) => {
           numColumns={3}
           data={BenfeiciariesData}
           keyExtractor={item => item.name}
-          contentContainerStyle={{alignItems: 'flex-start'}}
+          contentContainerStyle={{
+            // backgroundColor: 'red',
+            flexGrow: 1,
+            marginLeft: 8,
+            // flex: 1,
+            // alignItems: 'center',
+            // marginHorizontal: 25,
+          }}
           renderItem={item => {
             console.log('object');
             console.log(item.item);

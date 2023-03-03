@@ -92,7 +92,7 @@ const ProfileDrawer = props => {
                       flexDirection: 'row',
                       borderRadius: 13,
                       alignItems: 'center',
-                      width: 300,
+                      // width: 100%,
                       height: 40,
 
                       backgroundColor: 'transparent',
