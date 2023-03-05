@@ -26,7 +26,6 @@ import SplashScreen from 'react-native-splash-screen'; //import SplashScreen
 import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 import NewBeneficiary from './src/components/HomeComponents/BeneficiariesComponents/NewBeneficiary';
-import Test from './src/test';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 const appWrapper = () => {
   return (
