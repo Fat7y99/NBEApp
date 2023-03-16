@@ -38,7 +38,9 @@ const HistoryPage = ({navigation, route}) => {
                     </View>
                   </Pressable>
                 </ImageBackground> */}
-              <AccountCard account={route.params.card}></AccountCard>
+              <AccountCard
+                navigation={navigation}
+                account={route.params.card}></AccountCard>
 
               <Text
                 style={{

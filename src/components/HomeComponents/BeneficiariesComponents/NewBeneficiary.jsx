@@ -144,7 +144,7 @@ const NewBeneficiary = ({navigation}) => {
                 await addBeneficiary(beneficiary);
                 await getAccountsData(dispatch);
                 dispatch(setAppState(false));
-
+                console.log('Coming from new beneficiary');
                 navigation.goBack();
               } else alert('invalid account data');
             }}

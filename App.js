@@ -27,6 +27,7 @@ import {useEffect} from 'react';
 import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 import NewBeneficiary from './src/components/HomeComponents/BeneficiariesComponents/NewBeneficiary';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
+import {deleteBeneficiary} from './src/services/firebase';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -55,8 +56,6 @@ const App = () => {
   //   return recoveredData;
   // };
   // console.log(async () => await isLogin());
-  SplashScreen.hide(); //hides the splash screen on app load.
-
   useEffect(() => {
     SplashScreen.hide(); //hides the splash screen on app load.
   }, []);
@@ -78,11 +77,11 @@ const App = () => {
               presentation: 'fullScreenModal',
               animation: 'slide_from_right',
             }}>
-            {false ? (
+            {/* {false ? (
               <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} />
-            ) : (
-              <Stack.Screen name="LoginPage" component={LoginPage} />
-            )}
+            ) : ( */}
+            <Stack.Screen name="LoginPage" component={LoginPage} />
+
             <Stack.Screen
               name="MobileNumberPage"
               component={MobileNumberPage}
@@ -93,7 +92,7 @@ const App = () => {
               component={SettingPasswordPage}
             />
             <Stack.Screen name="ProfileDrawer" component={ProfileDrawer} />
-
+            {/* <Stack.Screen name="LoginPage" component={LoginPage} /> */}
             <Stack.Screen
               name="CongratulationPage"
               component={CongratulationPage}

@@ -1,7 +1,12 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import {Colors} from '../../../constants/Colors';
 import {SheetManager} from 'react-native-actions-sheet';
-const AccountCard = ({account, elevation, width, height}) => {
+import {deleteBeneficiary} from '../../../services/firebase';
+import {getAccountsData} from '../../../services/firebase';
+import {useDispatch} from 'react-redux';
+import {setAppState} from '../../../redux/appState';
+const AccountCard = ({account, elevation, width, height, navigation}) => {
+  const dispatch = useDispatch();
   return (
     <View
       style={{
@@ -21,7 +26,7 @@ const AccountCard = ({account, elevation, width, height}) => {
           alignItems: 'center',
         }}>
         <Image
-          style={{height: 150, width: 50}}
+          style={{height: account.imageUrl ? 50 : 150, width: 50}}
           source={{uri: account.imageUrl ?? account.icon}}></Image>
         <View style={{marginLeft: 10, flex: 1}}>
           <View style={{flexDirection: 'row'}}>
@@ -47,7 +52,19 @@ const AccountCard = ({account, elevation, width, height}) => {
                   onPress={() => {
                     console.log('pressed');
                     SheetManager.show('transfer-sheet', {
-                      payload: {account: account},
+                      payload: {
+                        account: account,
+                        callbackFunction: async () => {
+                          // console.log(account.id);
+                          dispatch(setAppState(true));
+
+                          await deleteBeneficiary(account.id);
+                          await getAccountsData(dispatch);
+                          dispatch(setAppState(false));
+                          SheetManager.hideAll();
+                          navigation.goBack();
+                        },
+                      },
                     });
                   }}>
                   <Image

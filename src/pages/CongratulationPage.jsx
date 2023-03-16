@@ -49,7 +49,10 @@ const CongratulationPage = ({navigation}) => {
             <PrimaryButton
               backgroundColor="white"
               title="Finish"
-              textColor="#007236"></PrimaryButton>
+              textColor="#007236"
+              callBackFunction={() =>
+                navigation.navigate('LoginPage')
+              }></PrimaryButton>
           </View>
         }
       </ImageBackground>
