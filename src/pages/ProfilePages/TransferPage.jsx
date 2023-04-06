@@ -32,40 +32,41 @@ const TransferPage = () => {
         marginBottom: 30,
       }}
       behavior="padding">
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1, flex: 1}}
-        style={{marginHorizontal: 15}}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '700',
-            color: Colors.darkBlueColor,
-            marginBottom: 20,
-            // backgroundColor: 'red',
-          }}>
-          Transfer
-        </Text>
-        <TransferDropdown
-          values={transferTypes}
-          title="Type of transfer"
-          selectedValue="Between your accounts"></TransferDropdown>
-        <TransferDropdown
-          values={transferFromAccounts}
-          title="Transfer from"
-          selectedValue="042-653214521245   -   $2,145,5874.25"></TransferDropdown>
-        <TransferDropdown
-          values={transferToAccounts}
-          title="Transfer to"
-          selectedValue="056-32154875423   -   $1,523.48"></TransferDropdown>
+      <ScrollView contentContainerStyle={{flexGrow: 1, flex: 1}}>
+        <View style={{marginHorizontal: 15}}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: '700',
+              color: Colors.darkBlueColor,
+              marginBottom: 20,
+              // backgroundColor: 'red',
+            }}>
+            Transfer
+          </Text>
+          <TransferDropdown
+            values={transferTypes}
+            title="Type of transfer"
+            selectedValue="Between your accounts"></TransferDropdown>
+          <TransferDropdown
+            values={transferFromAccounts}
+            title="Transfer from"
+            selectedValue="042-653214521245   -   $2,145,5874.25"></TransferDropdown>
+          <TransferDropdown
+            values={transferToAccounts}
+            title="Transfer to"
+            selectedValue="056-32154875423   -   $1,523.48"></TransferDropdown>
+        </View>
         <PrimaryInput
           label="Amount to transfer"
           onChangeHandler={text => console.log(text)}
           isSecured={false}
-          elevation={3}
-          margin={10}></PrimaryInput>
+          language={'english'}
+          elevation={3}></PrimaryInput>
         <PrimaryInput
           onChangeHandler={text => console.log(text)}
           placeHolder="Reason of transfer"
+          language={'english'}
           isSecured={false}
           elevation={3}></PrimaryInput>
 
@@ -73,6 +74,7 @@ const TransferPage = () => {
           style={{
             flexGrow: 1,
             justifyContent: 'flex-end',
+            marginHorizontal: 15,
           }}>
           <PrimaryButton
             callBackFunction={() => {
@@ -102,7 +104,6 @@ const TransferDropdown = ({title, values}) => {
       style={{
         // height: 65,
         // width: 346,
-        flex: 1,
         marginBottom: 10,
         borderRadius: 10,
         backgroundColor: 'white',

@@ -6,15 +6,11 @@ export const appStateSlice = createSlice({
     language: 'english',
   },
   reducers: {
-    setAppState: (_, action) => {
-      return {
-        loading: action.payload,
-      };
+    setAppState: (state, action) => {
+      return {...state, loading: action.payload};
     },
-    setLanguage: (_, action) => {
-      return {
-        language: action.payload,
-      };
+    setLanguage: (state, action) => {
+      return {...state, language: action.payload};
     },
   },
 });

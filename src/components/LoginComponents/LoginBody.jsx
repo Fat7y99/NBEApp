@@ -17,13 +17,12 @@ import {login} from '../../services/firebase';
 import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
 import {setAppState} from '../../redux/appState';
-
 import t from '../../../assets/Translations.json';
 const LoginBody = ({navigation, language}) => {
-  // console.log(t[language]);
   const text = t[language];
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
+
   const callBackHandler = () => {
     SheetManager.hide('fingerPrint-sheet');
   };
@@ -50,14 +49,16 @@ const LoginBody = ({navigation, language}) => {
     <KeyboardAvoidingView style={styles.loginBodyContainer} behavior="padding">
       <View style={styles.loginBodyContainer}>
         <Text style={styles.loginBodyStyle}>{text['main-text']} </Text>
-        <View style={{marginHorizontal: 20}}>
+        <View style={{marginHorizontal: 10}}>
           <EmailInput language={language}></EmailInput>
-          <PrimaryInput
-            language={language}
-            onChangeHandler={text => dispatch(setPassword(text))}
-            label="Password"
-            prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
         </View>
+
+        <PrimaryInput
+          flex={0}
+          language={language}
+          onChangeHandler={text => dispatch(setPassword(text))}
+          label={text['password']}
+          prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
         <ForgotPassword language={language}></ForgotPassword>
         <View
           style={[

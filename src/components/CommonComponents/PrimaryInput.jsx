@@ -19,7 +19,7 @@ const PrimaryInput = ({
   maxLength,
   value,
   placeHolder,
-  width,
+  flex,
   elevation,
   margin,
   language,
@@ -29,6 +29,7 @@ const PrimaryInput = ({
 
   const styles = StyleSheet.create({
     passwordStyle: {
+      marginHorizontal: 15,
       backgroundColor: 'white',
       borderWidth: 1.5,
       flexDirection: language === 'english' ? 'row' : 'row-reverse',
@@ -37,6 +38,7 @@ const PrimaryInput = ({
       borderColor: isFocused ? Colors.primaryGreenColor : 'transparent',
       borderRadius: 10,
       elevation: elevation ?? 0,
+      flex: flex ?? 1,
     },
     passwordLabelStyle: {
       fontSize: 14,
@@ -48,7 +50,7 @@ const PrimaryInput = ({
       color: 'white',
       fontSize: 16,
       padding: 0,
-      flex: 0.78,
+      flex: 1,
       fontFamily: 'Roboto',
     },
   });
@@ -59,20 +61,19 @@ const PrimaryInput = ({
   return (
     <View style={[styles.passwordStyle, {padding: 5, height: 65}]}>
       <Image style={{margin: !prefixIcon ? 5 : 20}} source={prefixIcon} />
-      <View style={{width: width ?? '100%'}}>
+      <View style={{flex: 1}}>
         {label ? (
           <Text
             style={[
               styles.passwordLabelStyle,
               {
-                alignSelf: language === 'english' ? 'flex-start' : 'flex-end',
-
+                // alignSelf: language === 'english' ? 'flex-start' : 'flex-end',
                 color: isFocused
                   ? Colors.primaryGreenColor
                   : Colors.darkBlueColor,
               },
             ]}>
-            {text['password']}
+            {label}
           </Text>
         ) : (
           ''
@@ -92,10 +93,10 @@ const PrimaryInput = ({
             secureTextEntry={isSecured ?? !isVisisble}
             style={[
               styles.textInputStyle,
-              {color: 'black'},
-              language === 'english'
-                ? {textAlign: 'left'}
-                : {textAlign: 'right'},
+              {
+                color: 'black',
+                textAlign: language === 'english' ? 'left' : 'right',
+              },
             ]}
             selectionColor={'black'}></TextInput>
           {isSecured ?? (

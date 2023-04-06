@@ -67,7 +67,7 @@ const NewBeneficiary = ({navigation}) => {
           justifyContent: 'space-evenly',
         }}>
         <PrimaryInput
-          width="41%"
+          language={'english'}
           label="First name"
           onChangeHandler={text =>
             dispatch(setbeneficiaryData({first: 'firstName', last: text}))
@@ -76,7 +76,7 @@ const NewBeneficiary = ({navigation}) => {
           elevation={3}></PrimaryInput>
 
         <PrimaryInput
-          width="41%"
+          language={'english'}
           label="Last name"
           onChangeHandler={text =>
             dispatch(setbeneficiaryData({first: 'lastName', last: text}))
@@ -86,7 +86,8 @@ const NewBeneficiary = ({navigation}) => {
       </View>
       <View style={{alignItems: 'center'}}>
         <PrimaryInput
-          width="90%"
+          language={'english'}
+          // width="90%"
           label="Bank branch"
           onChangeHandler={text =>
             dispatch(setbeneficiaryData({first: 'bankBranch', last: text}))
@@ -94,7 +95,7 @@ const NewBeneficiary = ({navigation}) => {
           isSecured={false}
           elevation={3}></PrimaryInput>
         <PrimaryInput
-          width="90%"
+          language={'english'}
           label="Account number"
           onChangeHandler={text =>
             dispatch(setbeneficiaryData({first: 'accountNumber', last: text}))
@@ -102,7 +103,7 @@ const NewBeneficiary = ({navigation}) => {
           isSecured={false}
           elevation={3}></PrimaryInput>
         <PrimaryInput
-          width="90%"
+          language={'english'}
           label="Phone number"
           onChangeHandler={text =>
             dispatch(setbeneficiaryData({first: 'phoneNumber', last: text}))
@@ -110,7 +111,7 @@ const NewBeneficiary = ({navigation}) => {
           isSecured={false}
           elevation={3}></PrimaryInput>
         <PrimaryInput
-          width="90%"
+          language={'english'}
           label="Email"
           onChangeHandler={text => {
             dispatch(setbeneficiaryData({first: 'email', last: text}));
