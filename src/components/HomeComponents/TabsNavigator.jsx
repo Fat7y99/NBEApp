@@ -6,6 +6,7 @@ import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Colors} from '../../constants/Colors';
 import NewBeneficiary from './BeneficiariesComponents/NewBeneficiary';
+import MapPage from '../../pages/ProfilePages/MapPage';
 const TabsNavigator = () => {
   const Tab = createBottomTabNavigator();
 
@@ -74,7 +75,7 @@ const TabsNavigator = () => {
       <Tab.Screen name="Home" component={HomePage} />
       <Tab.Screen name="Transfer" component={TransferPage} />
       <Tab.Screen name="Beneficiaries" component={BeneficiariesPage} />
-      <Tab.Screen name="ATMs" component={TransferPage} />
+      <Tab.Screen name="ATMs" component={MapPage} />
       <Tab.Screen name="Air Pay" component={AirPayPage} />
     </Tab.Navigator>
   );
