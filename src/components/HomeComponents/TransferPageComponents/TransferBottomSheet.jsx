@@ -12,6 +12,7 @@ import {
 import {Colors} from '../../../constants/Colors';
 import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import AccountCard from '../BeneficiariesComponents/AccountCard';
+import {deleteBeneficiary} from '../../../services/firebase';
 
 const TransferBottomSheet = ({ref, payload, gestureEnabled = true}) => {
   const actionSheetRef = useRef(null);
@@ -75,6 +76,7 @@ const TransferBottomSheet = ({ref, payload, gestureEnabled = true}) => {
                   icon={require('../../../../assets/images/ProfilePage/TransferImages/edit.png')}
                 />
                 <TransferActionComponent
+                  callbackFunction={payload.callbackFunction}
                   name={`Delete ${
                     payload.account.firstName ?? payload.account.name
                   }`}

@@ -1,13 +1,16 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import {Colors} from '../../../constants/Colors';
 import {SheetManager} from 'react-native-actions-sheet';
-const TransferActionComponent = ({name, description, icon}) => {
+const TransferActionComponent = ({
+  name,
+  description,
+  icon,
+  callbackFunction,
+}) => {
   return (
     <View
       style={{flexDirection: 'row', marginBottom: 20, marginHorizontal: 12}}>
-      <Pressable
-        style={{flexDirection: 'row'}}
-        onPress={() => console.log(name)}>
+      <Pressable style={{flexDirection: 'row'}} onPress={callbackFunction}>
         <Image source={icon} />
         <View>
           <Text

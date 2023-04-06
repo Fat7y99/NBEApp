@@ -228,6 +228,7 @@ const SettingPasswordPage = ({navigation}) => {
 
         {validationsList.map((validation, index) => (
           <ValidationEntry
+            key={index}
             validation={validation}
             Validations={Validations}
             index={index}></ValidationEntry>
@@ -241,7 +242,17 @@ const SettingPasswordPage = ({navigation}) => {
             marginBottom: 20,
             flexDirection: 'column',
             justifyContent: 'flex-end',
-          }}></View>
+          }}>
+          <PrimaryButton
+            callBackFunction={() => {
+              navigation.navigate('CongratulationPage');
+            }}
+            height={50}
+            width={345}
+            backgroundColor={Colors.primaryGreenColor}
+            title="Submit"
+            textColor="white"></PrimaryButton>
+        </View>
       </View>
     </View>
   );

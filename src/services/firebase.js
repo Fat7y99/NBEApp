@@ -10,6 +10,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  deleteDoc,
 } from 'firebase/firestore/lite';
 
 import {setUserAccounts} from '../redux/user';
@@ -120,14 +121,28 @@ export const addBeneficiary = async beneficiary => {
   // const colRef2 = collection(docRef2, 'sayed');
   addDoc(colRef, beneficiary);
 };
+export const deleteBeneficiary = async docID => {
+  const docRef = doc(db, 'users', 'user1');
+
+  const colRef = collection(docRef, 'accounts');
+  // const docRef2 = doc(colRef, 'UIi9VQ24G5urkAaHxv5p');
+  // const colRef2 = collection(docRef2, 'sayed');
+  await deleteDoc(doc(colRef, docID));
+
+  // addDoc(colRef, beneficiary);
+};
+
 export const getAccountsData = async dispatch => {
   const docRef = doc(db, 'users', 'user1');
   const colRef = collection(docRef, 'accounts');
   const snapshot = await getDocs(colRef);
   const Accounts = [];
-  snapshot.forEach(doc => Accounts.push(doc.data()));
+
+  snapshot.forEach(doc => {
+    Accounts.push({id: doc.id, ...doc.data()});
+  });
   dispatch(setUserAccounts(Accounts));
-  // console.log(Accounts);
+  console.log('Added Successfully');
   return Accounts;
 };
 
