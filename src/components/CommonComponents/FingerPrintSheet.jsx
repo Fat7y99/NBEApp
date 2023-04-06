@@ -15,11 +15,8 @@ import t from '../../../assets/Translations.json';
 import {useSelector} from 'react-redux';
 const FingerPrintSheet = ({
   children,
-
   containerStyle,
-
   indicatorStyle,
-
   ref,
   payload,
   gestureEnabled = true,
