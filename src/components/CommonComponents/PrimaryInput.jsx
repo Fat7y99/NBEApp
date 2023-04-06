@@ -9,7 +9,8 @@ import {
 import {setPassword} from '../../redux/login';
 import {Colors} from '../../constants/Colors';
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import t from '../../../assets/Translations.json';
+
 const PrimaryInput = ({
   isSecured,
   prefixIcon,
@@ -21,14 +22,16 @@ const PrimaryInput = ({
   width,
   elevation,
   margin,
+  language,
 }) => {
   const [isFocused, SetFocused] = useState(false);
+  const text = t[language];
 
   const styles = StyleSheet.create({
     passwordStyle: {
       backgroundColor: 'white',
       borderWidth: 1.5,
-      flexDirection: 'row',
+      flexDirection: language === 'english' ? 'row' : 'row-reverse',
       alignItems: 'center',
       marginBottom: margin ?? 20,
       borderColor: isFocused ? Colors.primaryGreenColor : 'transparent',
@@ -54,12 +57,7 @@ const PrimaryInput = ({
     SetVisible(prev => !prev);
   };
   return (
-    <View
-      style={[
-        styles.passwordStyle,
-        {padding: 5, height: 65, flexDirection: 'row'},
-        ,
-      ]}>
+    <View style={[styles.passwordStyle, {padding: 5, height: 65}]}>
       <Image style={{margin: !prefixIcon ? 5 : 20}} source={prefixIcon} />
       <View style={{width: width ?? '100%'}}>
         {label ? (
@@ -67,17 +65,22 @@ const PrimaryInput = ({
             style={[
               styles.passwordLabelStyle,
               {
+                alignSelf: language === 'english' ? 'flex-start' : 'flex-end',
+
                 color: isFocused
                   ? Colors.primaryGreenColor
                   : Colors.darkBlueColor,
               },
             ]}>
-            {label}
+            {text['password']}
           </Text>
         ) : (
           ''
         )}
-        <View style={{flexDirection: 'row'}}>
+        <View
+          style={{
+            flexDirection: language === 'english' ? 'row' : 'row-reverse',
+          }}>
           <TextInput
             onFocus={() => SetFocused(prev => !prev)}
             onEndEditing={() => SetFocused(prev => !prev)}
@@ -87,12 +90,22 @@ const PrimaryInput = ({
             value={value}
             onChangeText={onChangeHandler}
             secureTextEntry={isSecured ?? !isVisisble}
-            style={[styles.textInputStyle, {color: 'black'}]}
+            style={[
+              styles.textInputStyle,
+              {color: 'black'},
+              language === 'english'
+                ? {textAlign: 'left'}
+                : {textAlign: 'right'},
+            ]}
             selectionColor={'black'}></TextInput>
           {isSecured ?? (
             <Pressable onPress={togglePassword}>
               <Image
-                style={{marginLeft: 20, height: 16, width: 20}}
+                style={{
+                  marginLeft: language === 'english' ? 20 : 0,
+                  height: 16,
+                  width: 20,
+                }}
                 source={
                   isVisisble
                     ? require('../../../assets/images/LoginImages/view.png')

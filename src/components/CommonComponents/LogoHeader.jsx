@@ -39,7 +39,9 @@ const LogoHeader = props => {
             {props.image ? (
               <Image source={props.image}></Image>
             ) : (
-              <Text style={styles.languageText}>AR</Text>
+              <Text style={styles.languageText}>
+                {props.language === 'arabic' ? 'EN' : 'AR'}
+              </Text>
             )}
           </View>
         </Pressable>

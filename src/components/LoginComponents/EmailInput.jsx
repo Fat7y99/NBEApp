@@ -1,8 +1,11 @@
 import {StyleSheet, View, Text, Image, TextInput} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setUserName} from '../../redux/login';
-const EmailInput = () => {
+// import file translations from assets
+import t from '../../../assets/Translations.json';
+const EmailInput = ({language}) => {
   const dispatch = useDispatch();
+  const text = t[language];
   const onSubmitEmail = text => {
     console.log(text);
     dispatch(setUserName(text));
@@ -11,18 +14,37 @@ const EmailInput = () => {
     <View
       style={[
         styles.emailStyle,
-        {padding: 5, height: 65, flexDirection: 'row'},
+        {
+          padding: 5,
+          height: 65,
+          flexDirection: language === 'english' ? 'row' : 'row-reverse',
+        },
       ]}>
       <Image
         style={{margin: 20}}
         source={require('../../../assets/images/LoginImages/userNameIcon.png')}
       />
-      <View style={{width: '100%'}}>
-        <Text style={[styles.labelStyle]}>Username</Text>
+      <View style={{flex: 1}}>
+        <Text
+          style={[
+            styles.labelStyle,
+            {
+              alignSelf: language === 'english' ? 'flex-start' : 'flex-end',
+            },
+          ]}>
+          {text['username']}
+        </Text>
         <View style={{flexDirection: 'row'}}>
           <TextInput
             onChangeText={onSubmitEmail}
-            style={styles.textInputStyle}
+            style={[
+              styles.textInputStyle,
+
+              language === 'english'
+                ? {textAlign: 'left'}
+                : {textAlign: 'right'},
+              {flex: 1},
+            ]}
             selectionColor={'white'}></TextInput>
         </View>
       </View>
@@ -51,7 +73,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     padding: 0,
-    flex: 0.78,
+    // flex: 0.78,
     fontFamily: 'Roboto',
   },
 });

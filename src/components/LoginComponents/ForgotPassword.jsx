@@ -2,18 +2,24 @@ import {StyleSheet, View, Text} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {Colors} from '../../constants/Colors';
 import {useState} from 'react';
-const ForgotPassword = () => {
+import t from '../../../assets/Translations.json';
+const ForgotPassword = ({language}) => {
+  const text = t[language];
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   return (
     <View
       style={{
-        flexDirection: 'row',
+        flexDirection: language === 'english' ? 'row' : 'row-reverse',
         justifyContent: 'space-between',
         alignItems: 'center',
         marginHorizontal: 10,
       }}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View
+        style={{
+          flexDirection: language === 'english' ? 'row' : 'row-reverse',
+          alignItems: 'center',
+        }}>
         <CheckBox
           disabled={false}
           value={toggleCheckBox}
@@ -21,11 +27,11 @@ const ForgotPassword = () => {
           onValueChange={newValue => setToggleCheckBox(newValue)}
         />
         <Text style={[styles.labelStyle, {fontWeight: '400'}]}>
-          Remember me
+          {text['remember-me']}
         </Text>
       </View>
       <Text style={[styles.labelStyle, {fontWeight: '400', color: '#E4E4E4'}]}>
-        Forgot password?
+        {text['forgot-password']}
       </Text>
     </View>
   );

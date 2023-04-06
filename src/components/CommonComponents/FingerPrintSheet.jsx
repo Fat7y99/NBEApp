@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import {Colors} from '../../constants/Colors';
 import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
-
+import t from '../../../assets/Translations.json';
+import {useSelector} from 'react-redux';
 const FingerPrintSheet = ({
   children,
 
@@ -24,6 +25,8 @@ const FingerPrintSheet = ({
   gestureEnabled = true,
   ...reset
 }) => {
+  const language = useSelector(state => state.appState.language);
+  const text = t[language];
   console.log(payload);
   const actionSheetRef = useRef(null);
   return (
@@ -68,7 +71,7 @@ const FingerPrintSheet = ({
                   fontSize: 20,
                   fontWeight: '700',
                 }}>
-                Fingerprint for NBE Mobile
+                {text['fingerprint-title']}
               </Text>
 
               <Text
@@ -78,7 +81,7 @@ const FingerPrintSheet = ({
                   fontSize: 16,
                   fontWeight: '400',
                 }}>
-                Log in with your fingerprint
+                {text['fingerprint-subtitle']}
               </Text>
               <View
                 style={{
@@ -107,24 +110,24 @@ const FingerPrintSheet = ({
                   </RadialGradient>
                 </Pressable>
                 <Text style={{color: Colors.greyColor, marginVertical: 12.5}}>
-                  Touch the fingerprint sensor
+                  {text['touch-fingerprint']}
                 </Text>
               </View>
 
               <Pressable onPress={() => SheetManager.hide('fingerPrint-sheet')}>
                 <View
                   style={{
-                    flexDirection: 'row',
+                    flexDirection:
+                      language === 'english' ? 'row' : 'row-reverse',
                     justifyContent: 'flex-end',
                   }}>
                   <Text
                     style={{
                       color: Colors.primaryGreenColor,
                       fontSize: 16,
-
                       fontWeight: '700',
                     }}>
-                    Cancel
+                    {text['cancle']}
                   </Text>
                 </View>
               </Pressable>

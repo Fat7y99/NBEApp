@@ -1,14 +1,19 @@
 import {View, Text, Pressable, FlatList, StyleSheet} from 'react-native';
-
-const Footer = () => {
-  const footerData = [{key: 'Contact Us'}, {key: 'FAQs'}, {key: 'Help'}];
+import t from '../../../assets/Translations.json';
+const Footer = ({language}) => {
+  const text = t[language];
+  const footerData = [
+    {key: text['contact-us']},
+    {key: text['FAQs']},
+    {key: text['help']},
+  ];
 
   return (
     <View style={styles.footerStyle}>
       <FlatList
         horizontal
         contentContainerStyle={styles.flatListStyle}
-        data={footerData}
+        data={footerData.reverse()}
         renderItem={({item}) => (
           <Pressable>
             <Text style={styles.linkStyle}>{item.key}</Text>
@@ -20,9 +25,7 @@ const Footer = () => {
         )}
       />
 
-      <Text style={styles.creditsStyle}>
-        Copyright © NBE 2021 All Rights Reserved - National Bank of Egypt
-      </Text>
+      <Text style={styles.creditsStyle}>{text['copyright']} </Text>
     </View>
   );
 };

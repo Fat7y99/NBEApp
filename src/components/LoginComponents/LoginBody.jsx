@@ -16,12 +16,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../services/firebase';
 import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
-import Spinner from 'react-native-loading-spinner-overlay';
 import {setAppState} from '../../redux/appState';
 
-const LoginBody = ({navigation}) => {
-  const logoutModalRef = useRef(null);
-
+import t from '../../../assets/Translations.json';
+const LoginBody = ({navigation, language}) => {
+  // console.log(t[language]);
+  const text = t[language];
   const email = useSelector(state => state.login.userName);
   const password = useSelector(state => state.login.password);
   const callBackHandler = () => {
@@ -49,22 +49,25 @@ const LoginBody = ({navigation}) => {
   return (
     <KeyboardAvoidingView style={styles.loginBodyContainer} behavior="padding">
       <View style={styles.loginBodyContainer}>
-        <Text style={styles.loginBodyStyle}>
-          Welcome to {`\n`}The National Bank of Egypt
-        </Text>
+        <Text style={styles.loginBodyStyle}>{text['main-text']} </Text>
         <View style={{marginHorizontal: 20}}>
-          <EmailInput></EmailInput>
+          <EmailInput language={language}></EmailInput>
           <PrimaryInput
+            language={language}
             onChangeHandler={text => dispatch(setPassword(text))}
             label="Password"
             prefixIcon={require('../../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
         </View>
-        <ForgotPassword></ForgotPassword>
-        <View style={styles.loginStyle}>
+        <ForgotPassword language={language}></ForgotPassword>
+        <View
+          style={[
+            styles.loginStyle,
+            {flexDirection: language === 'english' ? 'row' : 'row-reverse'},
+          ]}>
           <PrimaryButton
             height={50}
             width={275}
-            title="Log In"
+            title={text['login']}
             callBackFunction={loginHandler}
             backgroundColor="#007236"
             textColor="white"></PrimaryButton>
@@ -78,10 +81,10 @@ const LoginBody = ({navigation}) => {
           style={{
             marginTop: 10,
             justifyContent: 'center',
-            flexDirection: 'row',
+            flexDirection: language === 'english' ? 'row' : 'row-reverse',
             marginVertical: 30,
           }}>
-          <Text style={{color: 'white'}}>Don’t have an account?</Text>
+          <Text style={{color: 'white'}}>{text['dont-have-account']}</Text>
           <Text
             onPress={() => {
               navigation.navigate('MobileNumberPage');
@@ -96,7 +99,7 @@ const LoginBody = ({navigation}) => {
               fontWeight: '700',
               fontFamily: 'Roboto',
             }}>
-            Sign up
+            {text['signup']}
           </Text>
         </View>
       </View>
