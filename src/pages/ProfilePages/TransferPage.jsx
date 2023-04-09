@@ -17,7 +17,7 @@ import {useSelector} from 'react-redux';
 import {transactToAccount} from '../../services/API';
 const TransferPage = ({navigation}) => {
   const userID = useSelector(state => state.user.id);
-
+  const [transferredamount, setTransferredAmount] = useState(0);
   const userAmount = useSelector(state => state.user.amount);
   const transferToAccounts = useSelector(state => state.user.accounts).map(
     (item, index) => {
@@ -71,9 +71,12 @@ const TransferPage = ({navigation}) => {
             setToAccount={setAccountNum}
             selectedValue={transferToAccounts[0]}></TransferDropdown>
         </View>
+
         <PrimaryInput
           label="Amount to transfer"
-          onChangeHandler={text => console.log(text)}
+          onChangeHandler={text => {
+            setTransferredAmount(+text);
+          }}
           isSecured={false}
           language={'english'}
           elevation={3}></PrimaryInput>
@@ -92,7 +95,12 @@ const TransferPage = ({navigation}) => {
           }}>
           <PrimaryButton
             callBackFunction={() => {
-              transactToAccount(userID, userAmount, toAccountNumber, 100);
+              transactToAccount(
+                userID,
+                userAmount,
+                toAccountNumber,
+                transferredamount,
+              );
               navigation.navigate('Home');
 
               console.log('transfered ');
