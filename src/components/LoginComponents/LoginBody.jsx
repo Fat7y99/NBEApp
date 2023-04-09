@@ -48,7 +48,7 @@ const LoginBody = ({navigation, language}) => {
     <KeyboardAvoidingView style={styles.loginBodyContainer} behavior="padding">
       <View style={styles.loginBodyContainer}>
         <Text style={styles.loginBodyStyle}>{text['main-text']} </Text>
-        <View style={{marginHorizontal: 10}}>
+        <View style={{marginHorizontal: 15}}>
           <EmailInput language={language}></EmailInput>
         </View>
 

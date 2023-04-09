@@ -86,7 +86,6 @@ const TransferPage = ({navigation}) => {
           language={'english'}
           isSecured={false}
           elevation={3}></PrimaryInput>
-
         <View
           style={{
             flexGrow: 1,
@@ -101,8 +100,11 @@ const TransferPage = ({navigation}) => {
                 toAccountNumber,
                 transferredamount,
               );
-              navigation.navigate('Home');
-
+              navigation.navigate('OTPPage', {
+                callBackFunction: () => {
+                  navigation.navigate('Home');
+                },
+              });
               console.log('transfered ');
             }}
             height={50}

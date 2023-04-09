@@ -22,6 +22,7 @@ const PrimaryInput = ({
   flex,
   elevation,
   margin,
+  marginHorizontal,
   language,
 }) => {
   const [isFocused, SetFocused] = useState(false);
@@ -29,7 +30,7 @@ const PrimaryInput = ({
 
   const styles = StyleSheet.create({
     passwordStyle: {
-      marginHorizontal: 15,
+      marginHorizontal: marginHorizontal ?? 15,
       backgroundColor: 'white',
       borderWidth: 1.5,
       flexDirection: language === 'english' ? 'row' : 'row-reverse',

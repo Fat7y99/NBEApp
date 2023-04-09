@@ -104,6 +104,9 @@ const MobileNumberPage = ({navigation}) => {
           onChangeHandler={onChangeHandler}
           label="Mobile number"
           isSecured={false}
+          language={'english'}
+          marginHorizontal={0}
+          flex={0}
           prefixIcon={require('../../assets/images/OTPPage/phoneIcon.png')}></PrimaryInput>
       </View>
       <Footer navigation={navigation}></Footer>

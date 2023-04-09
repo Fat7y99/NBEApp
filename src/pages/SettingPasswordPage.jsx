@@ -216,6 +216,9 @@ const SettingPasswordPage = ({navigation}) => {
           maxLength={17}
           placeHolder="Write your password here"
           label="Password"
+          language={'english'}
+          flex={0}
+          marginHorizontal={0}
           onChangeHandler={onChangeHandler}
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
@@ -224,6 +227,9 @@ const SettingPasswordPage = ({navigation}) => {
           placeHolder="Re-Write your password here"
           onChangeHandler={onConfirmPasswordHandler}
           label="Confirm Password"
+          language={'english'}
+          marginHorizontal={0}
+          flex={0}
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
         {validationsList.map((validation, index) => (

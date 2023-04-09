@@ -5,7 +5,11 @@ const Footer = ({navigation}) => {
   return (
     <View style={styles.root}>
       <PrimaryButton
-        callBackFunction={() => navigation.navigate('OTPPage')}
+        callBackFunction={() =>
+          navigation.navigate('OTPPage', {
+            callBackFunction: () => navigation.navigate('SettingPasswordPage'),
+          })
+        }
         title="Submit"
         backgroundColor="#007236"
         textColor="white"></PrimaryButton>

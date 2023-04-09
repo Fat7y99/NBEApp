@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const OTPPage = ({navigation}) => {
+const OTPPage = ({navigation, route}) => {
   const otpCount = 5;
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: otpCount});
@@ -113,9 +113,7 @@ const OTPPage = ({navigation}) => {
               justifyContent: 'flex-end',
             }}>
             <PrimaryButton
-              callBackFunction={() =>
-                navigation.navigate('SettingPasswordPage')
-              }
+              callBackFunction={route.params.callBackFunction}
               title="Submit"
               backgroundColor="#007236"
               textColor="white"></PrimaryButton>
