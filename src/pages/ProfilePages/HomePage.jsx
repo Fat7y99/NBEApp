@@ -7,6 +7,7 @@ import {SheetManager} from 'react-native-actions-sheet';
 import SectionHeader from '../../components/HomeComponents/SectionHeader';
 
 function HomePage({navigation}) {
+  const userMoney = useSelector(state => state.user.amount);
   const [isBalanceVisible, SetBalanceVisibility] = useState(false);
   const showBalanceHandler = () => {
     SetBalanceVisibility(prevState => !prevState);
@@ -93,8 +94,8 @@ function HomePage({navigation}) {
                       fontWeight: '700',
                     }}>
                     {isBalanceVisible
-                      ? '$2,374,654.25'
-                      : 'Press here to show balance'}{' '}
+                      ? `$${userMoney.toLocaleString()}`
+                      : 'Press here to show balance'}
                   </Text>
                 </Pressable>
               </View>

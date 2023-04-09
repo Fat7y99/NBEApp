@@ -5,33 +5,97 @@ const baseUrl = 'https://nbe-project-7c641-default-rtdb.firebaseio.com/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const postData = async () => {
-  const value = JSON.stringify({
-    name: 'sayed',
-    age: 28,
-    married: false,
-    money: 1000.25,
-  });
-  // await AsyncStorage.setItem('user', value);
-  console.log('Loading Object');
-  const recoveredValue = await AsyncStorage.getItem('user');
-  const user = JSON.parse(recoveredValue);
-  console.log(user);
-  console.log(user.married ? 'yes' : 'no');
-  // axios
-  //   .post(`${baseUrl}/cars.json`, {
-  //     name: 'sayed',
-  //     age: 28,
-  //     married: false,
-  //     money: 1000.25,
-  //   })
-  //   .then(response => {
+  const Accounts = [];
 
-  //     console.log(response.data);
-  //   });
+  // // send amount to specific account using account number using axios
+  // axios.post(`${baseUrl}/users.json`, {
+  //   name: 'Sayed',
+  //   phoneNumber: '01273965628',
+  //   amount: 10000,
+  // })
+
+  axios.post(`${baseUrl}/users.json`, {
+    name: 'Ayman',
+    phoneNumber: '01273965628',
+    amount: 10000,
+    accountNum: '12345',
+    accounts: Accounts,
+  });
+};
+export const getAmount = async userID =>
+  await axios
+    .get(`${baseUrl}/users/${userID}.json`)
+    .then(response => response.data)
+    .then(data => data.amount);
+
+export const getAccountsData = async userID =>
+  await axios
+    .get(`${baseUrl}/users/${userID}/accounts.json`)
+    .then(response => response.data);
+
+export const transactToAccount = async (
+  myAccountNum,
+  myAmount,
+  accountNum,
+  amount,
+) => {
+  // get all accounts
+  axios.get(`${baseUrl}/users.json`).then(response => {
+    for (const key in response.data) {
+      console.log(response.data[key].accountNum);
+      if (response.data[key].accountNum === accountNum) {
+        console.log('found');
+        // update amount
+        axios.patch(`${baseUrl}/users/${key}.json`, {
+          amount: response.data[key].amount + amount,
+        });
+        axios.patch(`${baseUrl}/users/${myAccountNum}.json`, {
+          amount: myAmount - amount,
+        });
+      }
+    }
+  });
 };
 
 export const fetchData = () => {
-  axios.get(`${baseUrl}/cars.json`).then(response => {
-    console.log(response.data);
+  // const HistoryData = [
+  //   {
+  //     name: 'Carrefour',
+  //     date: '15-12-2021',
+  //     amount: 250.21,
+  //     icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/History%2FCarrefour.png?alt=media&token=e43594e1-37fd-4a18-941c-18e7783a0dfa',
+  //     // icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Carrefour.png'),
+  //   },
+  //   {
+  //     name: 'Amazon',
+  //     date: '02-12-2021',
+  //     amount: 3004.21,
+  //     // icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Amazon.png'),
+  //     icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/History%2FAmazon.png?alt=media&token=389de0bd-c07',
+  //   },
+  //   {
+  //     name: 'Jumia',
+  //     date: '28-11-2021',
+  //     amount: 2146.63,
+  //     // icon: require('../../../assets/images/ProfilePage/HomePageImages/History/Jumia.png'),
+  //     icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/History%2FJumia.png?alt=media&token=389de0bd-c0',
+  //   },
+  //   {
+  //     name: 'Carrefour2',
+  //     date: '15-12-2021',
+  //     amount: 250.21,
+  //     icon: 'https://firebasestorage.googleapis.com/v0/b/nbe-project-7c641.appspot.com/o/History%2FCarrefour.png?alt=media&token=e43594e1-37fd-4a18-941c-18e7783a0dfa',
+  //   },
+  // ];
+  axios.get(`${baseUrl}/users/-NSX79Ib24MZk09QfekF.json`).then(response => {
+    // check if its amount >5000
+    console.log(response.data.accounts[0].id);
+
+    // console.log(d);
+    // for (const key in response.data.accounts[0].id) {
+    //   console.log(key);
+    // }
+    // console.log(response.data);
+    // }
   });
 };

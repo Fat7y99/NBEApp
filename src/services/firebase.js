@@ -25,7 +25,8 @@ import {
 } from 'firebase/storage';
 import {useDispatch} from 'react-redux';
 import {setbeneficiaryData} from '../redux/beneficiary';
-
+import {getAmount} from './API';
+import {getAccountsData} from './API';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyANre1jo8f6Uuayi1q-cwwnKq328JWYxJU',
@@ -132,19 +133,19 @@ export const deleteBeneficiary = async docID => {
   // addDoc(colRef, beneficiary);
 };
 
-export const getAccountsData = async dispatch => {
-  const docRef = doc(db, 'users', 'user1');
-  const colRef = collection(docRef, 'accounts');
-  const snapshot = await getDocs(colRef);
-  const Accounts = [];
+// export const getAccountsData = async dispatch => {
+//   const docRef = doc(db, 'users', 'user1');
+//   const colRef = collection(docRef, 'accounts');
+//   const snapshot = await getDocs(colRef);
+//   const Accounts = [];
 
-  snapshot.forEach(doc => {
-    Accounts.push({id: doc.id, ...doc.data()});
-  });
-  dispatch(setUserAccounts(Accounts));
-  console.log('Added Successfully');
-  return Accounts;
-};
+//   snapshot.forEach(doc => {
+//     Accounts.push({id: doc.id, ...doc.data()});
+//   });
+//   dispatch(setUserAccounts(Accounts));
+//   console.log('Added Successfully');
+//   return Accounts;
+// };
 
 export const addHistoryData = async () => {
   const HistoryData = [
@@ -210,20 +211,23 @@ export const signUp = async (email, password) => {
 export const login = async (email, password, dispatch) => {
   try {
     // const dispatch = useDispatch();
+    const userID = '-NSX79Ib24MZk09QfekF';
 
     const response = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
     console.log(response.user.displayName);
     console.log('Signed', await response.user?.getIdToken());
-
     const userData = {
       userName: response.user.displayName,
       uid: response.user.uid,
       token: await response.user.getIdToken(),
-      accounts: await getAccountsData(dispatch),
+      accounts: await getAccountsData(userID),
       history: await getHistoryData(),
+      id: userID,
+      amount: await getAmount(userID),
     };
+    console.log(userData.accounts.length);
     await AsyncStorage.setItem('userData', JSON.stringify(userData));
     console.log('Loading Object');
     const recoveredData = await AsyncStorage.getItem('userData');

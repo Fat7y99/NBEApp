@@ -28,6 +28,8 @@ import ProfileDrawer from './src/components/HomeComponents/ProfileDrawer';
 import NewBeneficiary from './src/components/HomeComponents/BeneficiariesComponents/NewBeneficiary';
 import FingerPrintSheet from './src/components/CommonComponents/FingerPrintSheet';
 import {deleteBeneficiary} from './src/services/firebase';
+import {postData} from './src/services/API';
+import {fetchData} from './src/services/API';
 const appWrapper = () => {
   return (
     <Provider store={Store}>
@@ -36,6 +38,7 @@ const appWrapper = () => {
   );
 };
 const App = () => {
+  // fetchData();
   console.log('Starting...');
   const loading = useSelector(state => state.appState.loading);
   // addHistoryData();

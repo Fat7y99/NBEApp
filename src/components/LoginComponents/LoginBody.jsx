@@ -39,7 +39,6 @@ const LoginBody = ({navigation, language}) => {
       dispatch(setUserData(userData));
       callBackHandler();
       dispatch(setAppState(false));
-
       navigation.navigate('ProfilePage');
     });
     // login(email, password);

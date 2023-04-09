@@ -13,16 +13,29 @@ import PrimaryInput from '../../components/CommonComponents/PrimaryInput';
 import PrimaryButton from '../../components/CommonComponents/PrimaryButton';
 import {SheetManager} from 'react-native-actions-sheet';
 import TransferAccountsBottomSheet from '../../components/HomeComponents/TransferPageComponents/TransferAccountsBottomSheet';
-const TransferPage = () => {
+import {useSelector} from 'react-redux';
+import {transactToAccount} from '../../services/API';
+const TransferPage = ({navigation}) => {
+  const userID = useSelector(state => state.user.id);
+
+  const userAmount = useSelector(state => state.user.amount);
+  const transferToAccounts = useSelector(state => state.user.accounts).map(
+    (item, index) => {
+      return item.accountNum;
+    },
+  );
+  // const temp = accounts
+
   const transferTypes = ['Between your accounts', 'Outside of your account'];
   const transferFromAccounts = [
     '042-653214521245   -   $2,145,5874.25',
     '058-42586521245   -   $8,243,5874.25',
   ];
-  const transferToAccounts = [
-    '056-32154875423   -   $1,523.48',
-    '099-43254875423   -   $7,663.48',
-  ];
+  const [toAccountNumber, setAccountNum] = useState('');
+  // const transferToAccounts = [
+  //   '056-32154875423   -   $1,523.48',
+  //   '099-43254875423   -   $7,663.48',
+  // ];
 
   return (
     <KeyboardAvoidingView
@@ -55,7 +68,8 @@ const TransferPage = () => {
           <TransferDropdown
             values={transferToAccounts}
             title="Transfer to"
-            selectedValue="056-32154875423   -   $1,523.48"></TransferDropdown>
+            setToAccount={setAccountNum}
+            selectedValue={transferToAccounts[0]}></TransferDropdown>
         </View>
         <PrimaryInput
           label="Amount to transfer"
@@ -78,6 +92,9 @@ const TransferPage = () => {
           }}>
           <PrimaryButton
             callBackFunction={() => {
+              transactToAccount(userID, userAmount, toAccountNumber, 100);
+              navigation.navigate('Home');
+
               console.log('transfered ');
             }}
             height={50}
@@ -94,9 +111,10 @@ const TransferPage = () => {
 };
 export default TransferPage;
 
-const TransferDropdown = ({title, values}) => {
+const TransferDropdown = ({title, values, setToAccount}) => {
   const [selectedValue, SetSelectedValue] = useState(values[0]);
   const changeValueHandler = value => {
+    setToAccount(value);
     SetSelectedValue(value);
   };
   return (

@@ -7,6 +7,8 @@ export const userSlice = createSlice({
     token: '',
     accounts: [],
     history: [],
+    amount: 0,
+    id: '',
   },
   reducers: {
     setUserData: (state, action) => {
@@ -15,9 +17,12 @@ export const userSlice = createSlice({
     setUserAccounts: (state, action) => {
       return {...state, accounts: action.payload};
     },
+    setUserAmount: (state, action) => {
+      return {...state, amount: action.payload};
+    },
   },
 });
 
-export const {setUserData, setUserAccounts} = userSlice.actions;
+export const {setUserData, setUserAccounts, setUserAmount} = userSlice.actions;
 
 export default userSlice.reducer;
