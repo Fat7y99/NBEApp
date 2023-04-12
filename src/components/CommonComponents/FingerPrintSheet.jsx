@@ -12,7 +12,7 @@ import {
 import {Colors} from '../../constants/Colors';
 import RNActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import t from '../../../assets/Translations.json';
-import {useSelector} from 'react-redux';
+import {getCurrentLanguage} from '../../services/hooks/Hooks';
 const FingerPrintSheet = ({
   children,
   containerStyle,
@@ -22,7 +22,7 @@ const FingerPrintSheet = ({
   gestureEnabled = true,
   ...reset
 }) => {
-  const language = useSelector(state => state.appState.language);
+  const language = getCurrentLanguage();
   const text = t[language];
   console.log(payload);
   const actionSheetRef = useRef(null);

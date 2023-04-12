@@ -3,10 +3,10 @@ import {SheetManager} from 'react-native-actions-sheet';
 import {FlatList} from 'react-native-gesture-handler';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {Colors} from '../../constants/Colors';
-import {useSelector} from 'react-redux';
 import AccountCard from '../../components/HomeComponents/BeneficiariesComponents/AccountCard';
+import {getHistoryData} from '../../services/hooks/Hooks';
 const HistoryPage = ({navigation, route}) => {
-  const HistoryData = useSelector(state => state.user.history);
+  const HistoryData = getHistoryData();
 
   return (
     <View style={{flex: 1, backgroundColor: '#F0F2FA'}}>
@@ -21,23 +21,6 @@ const HistoryPage = ({navigation, route}) => {
           style={{marginHorizontal: 20}}
           ListHeaderComponent={() => (
             <View>
-              {/* <ImageBackground
-                  imageStyle={{height: 86, width: 250}}
-                  source={require('../../../assets/images/ProfilePage/TransferImages/userInfo.png')}>
-                  <Pressable
-                    onPress={() => SheetManager.show('transfer-sheet')}>
-                    <View
-                      style={{
-                        marginTop: 10,
-                        marginHorizontal: 10,
-                        borderRadius: 18,
-                        alignItems: 'flex-end',
-                      }}>
-                      <Image
-                        source={require('../../../assets/images/ProfilePage/TransferImages/dots.png')}></Image>
-                    </View>
-                  </Pressable>
-                </ImageBackground> */}
               <AccountCard
                 navigation={navigation}
                 account={route.params.card}></AccountCard>

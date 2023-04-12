@@ -2,12 +2,22 @@ import {View, FlatList, Text, Image, ImageBackground} from 'react-native';
 import {Colors} from '../../constants/Colors';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
 import {SheetManager} from 'react-native-actions-sheet';
 import SectionHeader from '../../components/HomeComponents/SectionHeader';
-
+import {
+  getAccountsData,
+  getCurrentUserID,
+  getHistoryData,
+  getUserBalance,
+} from '../../services/hooks/Hooks';
+import {getAmount} from '../../services/API';
+import {useQuery} from '@tanstack/react-query';
 function HomePage({navigation}) {
-  const userMoney = useSelector(state => state.user.amount);
+  const userID = getCurrentUserID();
+  const {data: userMoney} = useQuery(['userMoney'], () => getAmount(userID), {
+    refetchInterval: 1000,
+  });
+  console.log(userMoney);
   const [isBalanceVisible, SetBalanceVisibility] = useState(false);
   const showBalanceHandler = () => {
     SetBalanceVisibility(prevState => !prevState);
@@ -35,9 +45,9 @@ function HomePage({navigation}) {
     },
   ];
 
-  const HistoryData = useSelector(state => state.user.history);
-  const Accounts = useSelector(state => state.user.accounts);
-  // console.log(HistoryData);
+  const HistoryData = getHistoryData();
+  const Accounts = getAccountsData();
+
   return (
     <FlatList
       ListHeaderComponent={() => (

@@ -1,19 +1,12 @@
 import {View, Text, FlatList, Image} from 'react-native';
 import ActionsButtonContainer from '../../components/HomeComponents/ActionsButtonContainer';
-import {
-  Colors,
-  windowHeightFactor,
-  windowWidthFactor,
-} from '../../constants/Colors';
-import {useSelector} from 'react-redux';
+import {Colors} from '../../constants/Colors';
 import BeneficiaryCard from '../../components/HomeComponents/BeneficiariesComponents/BeneficiaryCard';
 import HistoryPage from './HistoryPage';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
 import {getAccountsData} from '../../services/API';
-const userID = '-NSX79Ib24MZk09QfekF';
-
+import {getCurrentUserID} from '../../services/hooks/Hooks';
 const BeneficiariesPage = ({navigation}) => {
   const Stack = createNativeStackNavigator();
   return (
@@ -32,17 +25,16 @@ const BeneficiariesPage = ({navigation}) => {
 };
 
 const SubBeneficiariesPage = ({navigation}) => {
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-  const {data, isLoading, isError} = useQuery(
-    ['BenfeiciariesData'],
-    () => getAccountsData(userID),
-    {refetchInterval: 1000},
-  );
-  //   {// console.log('isloading:', isLoading, 'isError:', isError);
-  //   // console.log('data is', data);
-  //   // const BenfeiciariesData = useSelector(state => state.user.accounts);
-  //   // console.log('sayed', windowWidthFactor);
-  // }
+  const userID = getCurrentUserID();
+
+  const {
+    data: BeneficiariesData,
+    isLoading,
+    isError,
+  } = useQuery(['BenfeiciariesData'], () => getAccountsData(userID), {
+    refetchInterval: 1000,
+  });
+
   const onPressHandler = () => {
     console.log('navigating..');
     navigation.navigate('NewBeneficiary');
@@ -51,8 +43,7 @@ const SubBeneficiariesPage = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
+
         backgroundColor: '#F0F2FA',
       }}>
       <View
@@ -94,19 +85,13 @@ const SubBeneficiariesPage = ({navigation}) => {
       {!isLoading ? (
         <FlatList
           numColumns={3}
-          data={data}
+          data={BeneficiariesData}
           keyExtractor={item => item.name}
           contentContainerStyle={{
-            // backgroundColor: 'red',
             flexGrow: 1,
             marginLeft: 8,
-            // flex: 1,
-            // alignItems: 'center',
-            // marginHorizontal: 25,
           }}
           renderItem={item => {
-            // console.log('object');
-            // console.log(item.item);
             return (
               <BeneficiaryCard
                 navigation={navigation}
@@ -117,7 +102,6 @@ const SubBeneficiariesPage = ({navigation}) => {
         <View
           style={{
             flex: 1,
-            // backgroundColor: 'red',
             justifyContent: 'center',
             alignItems: 'center',
           }}>

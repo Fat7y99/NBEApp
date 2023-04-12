@@ -3,11 +3,11 @@ import {View, ImageBackground, StyleSheet, StatusBar} from 'react-native';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import LoginBody from '../components/LoginComponents/LoginBody';
 import Footer from '../components/LoginComponents/Footer';
-import t from '../../assets/Translations.json';
 import {setLanguage} from '../redux/appState';
-import {useDispatch, useSelector} from 'react-redux';
+import {getCurrentLanguage} from '../services/hooks/Hooks';
+import {useDispatch} from 'react-redux';
 const LoginPage = ({navigation}) => {
-  const language = useSelector(state => state.appState.language); //useSelector(state => state.language.language);
+  const language = getCurrentLanguage();
   const dispatch = useDispatch();
   return (
     <View style={styles.entireContaier}>

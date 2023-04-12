@@ -1,27 +1,23 @@
 import {View, ScrollView, Image} from 'react-native';
-import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import LogoHeader from '../../CommonComponents/LogoHeader';
 import PrimaryButton from '../../CommonComponents/PrimaryButton';
 import PrimaryInput from '../../CommonComponents/PrimaryInput';
 import {Colors} from '../../../constants/Colors';
 import {Images} from '../../../constants/Images';
-import {
-  // addBeneficiary,
-  getAccountsData,
-  uploadImage,
-} from '../../../services/Firebase';
+import {uploadImage} from '../../../services/Firebase';
 import {addBeneficiary} from '../../../services/API';
 import {setbeneficiaryData} from '../../../redux/beneficiary';
 import {setAppState} from '../../../redux/appState';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-
+import {getCurrentBeneficiary} from '../../../services/hooks/Hooks';
+import {getCurrentUserID} from '../../../services/hooks/Hooks';
 const NewBeneficiary = ({navigation}) => {
-  const userID = '-NSX79Ib24MZk09QfekF';
+  const userID = getCurrentUserID();
 
   const dispatch = useDispatch();
-  const beneficiary = useSelector(state => state.beneficiary);
+  const beneficiary = getCurrentBeneficiary();
 
   return (
     <ScrollView style={{flex: 1}}>

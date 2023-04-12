@@ -12,19 +12,19 @@ import {Colors} from '../../constants/Colors';
 import PrimaryInput from '../../components/CommonComponents/PrimaryInput';
 import PrimaryButton from '../../components/CommonComponents/PrimaryButton';
 import {SheetManager} from 'react-native-actions-sheet';
-import TransferAccountsBottomSheet from '../../components/HomeComponents/TransferPageComponents/TransferAccountsBottomSheet';
-import {useSelector} from 'react-redux';
 import {transactToAccount} from '../../services/API';
+import {
+  getAccountsData,
+  getCurrentUserID,
+  getUserBalance,
+} from '../../services/hooks/Hooks';
 const TransferPage = ({navigation}) => {
-  const userID = useSelector(state => state.user.id);
+  const userID = getCurrentUserID();
   const [transferredamount, setTransferredAmount] = useState(0);
-  const userAmount = useSelector(state => state.user.amount);
-  const transferToAccounts = useSelector(state => state.user.accounts).map(
-    (item, index) => {
-      return item.accountNum;
-    },
-  );
-  // const temp = accounts
+  const userAmount = getUserBalance();
+  const transferToAccounts = getAccountsData().map(item => {
+    return item.accountNum;
+  });
 
   const transferTypes = ['Between your accounts', 'Outside of your account'];
   const transferFromAccounts = [
@@ -32,10 +32,7 @@ const TransferPage = ({navigation}) => {
     '058-42586521245   -   $8,243,5874.25',
   ];
   const [toAccountNumber, setAccountNum] = useState('');
-  // const transferToAccounts = [
-  //   '056-32154875423   -   $1,523.48',
-  //   '099-43254875423   -   $7,663.48',
-  // ];
+  const [fromAccountNumber, setFromAccountNum] = useState('');
 
   return (
     <KeyboardAvoidingView
@@ -64,6 +61,7 @@ const TransferPage = ({navigation}) => {
           <TransferDropdown
             values={transferFromAccounts}
             title="Transfer from"
+            setToAccount={setFromAccountNum}
             selectedValue="042-653214521245   -   $2,145,5874.25"></TransferDropdown>
           <TransferDropdown
             values={transferToAccounts}

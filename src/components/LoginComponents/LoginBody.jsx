@@ -12,16 +12,18 @@ import EmailInput from './EmailInput';
 import PrimaryInput from '../CommonComponents/PrimaryInput';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {login} from '../../services/Firebase';
 import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
 import {setAppState} from '../../redux/appState';
 import t from '../../../assets/Translations.json';
+import {getLoginData} from '../../services/hooks/Hooks';
 const LoginBody = ({navigation, language}) => {
   const text = t[language];
-  const email = useSelector(state => state.login.userName);
-  const password = useSelector(state => state.login.password);
+  const loginData = getLoginData();
+  const email = loginData.userName;
+  const password = loginData.password;
 
   const callBackHandler = () => {
     SheetManager.hide('fingerPrint-sheet');

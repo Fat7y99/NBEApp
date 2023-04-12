@@ -5,8 +5,9 @@ import {deleteBeneficiary} from '../../../services/API';
 import {getAccountsData} from '../../../services/Firebase';
 import {useDispatch} from 'react-redux';
 import {setAppState} from '../../../redux/appState';
+import {getCurrentUserID} from '../../../services/hooks/Hooks';
 const AccountCard = ({account, elevation, width, height, navigation}) => {
-  const userID = '-NSX79Ib24MZk09QfekF';
+  const userID = getCurrentUserID();
 
   const dispatch = useDispatch();
   return (
