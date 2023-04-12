@@ -8,15 +8,18 @@ import PrimaryInput from '../../CommonComponents/PrimaryInput';
 import {Colors} from '../../../constants/Colors';
 import {Images} from '../../../constants/Images';
 import {
-  addBeneficiary,
+  // addBeneficiary,
   getAccountsData,
   uploadImage,
-} from '../../../services/firebase';
+} from '../../../services/Firebase';
+import {addBeneficiary} from '../../../services/API';
 import {setbeneficiaryData} from '../../../redux/beneficiary';
 import {setAppState} from '../../../redux/appState';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 const NewBeneficiary = ({navigation}) => {
+  const userID = '-NSX79Ib24MZk09QfekF';
+
   const dispatch = useDispatch();
   const beneficiary = useSelector(state => state.beneficiary);
 
@@ -136,14 +139,16 @@ const NewBeneficiary = ({navigation}) => {
               !!beneficiary.bankBranch &&
               !!beneficiary.email &&
               !!beneficiary.phoneNumber &&
-              // beneficiary.imageUrl &&
+              beneficiary.imageUrl &&
               !!beneficiary.accountNumber
             ) {
               dispatch(setAppState(true));
-              await addBeneficiary(beneficiary);
-              await getAccountsData(dispatch);
+              await addBeneficiary(userID, beneficiary);
+              // await addBeneficiary(beneficiary);
+              // await getAccountsData(dispatch);
               dispatch(setAppState(false));
               console.log('Coming from new beneficiary');
+
               navigation.goBack();
             } else alert('invalid account data');
           }}

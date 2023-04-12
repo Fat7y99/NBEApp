@@ -7,13 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const postData = async () => {
   const Accounts = [];
 
-  // // send amount to specific account using account number using axios
-  // axios.post(`${baseUrl}/users.json`, {
-  //   name: 'Sayed',
-  //   phoneNumber: '01273965628',
-  //   amount: 10000,
-  // })
-
   axios.post(`${baseUrl}/users.json`, {
     name: 'Ayman',
     phoneNumber: '01273965628',
@@ -28,10 +21,43 @@ export const getAmount = async userID =>
     .then(response => response.data)
     .then(data => data.amount);
 
+export const addBeneficiary = async (userID, beneficiary) => {
+  await axios
+    .get(`${baseUrl}/users/${userID}.json`)
+    .then(response => response.data)
+    .then(data => {
+      const Accounts = data.accounts;
+      Accounts.push({
+        id: Accounts.length,
+        accountNum: beneficiary.accountNumber,
+        imageUrl: beneficiary.imageUrl,
+        name: beneficiary.firstName,
+      });
+      axios.patch(`${baseUrl}/users/${userID}.json`, {
+        accounts: Accounts,
+      });
+    });
+};
+export const deleteBeneficiary = async (userID, beneficiary) => {
+  await axios
+    .get(`${baseUrl}/users/${userID}.json`)
+    .then(response => response.data)
+    .then(data => {
+      let Accounts = data.accounts;
+      Accounts = Accounts.filter(item => item.id != beneficiary.id);
+      // Accounts.splice(beneficiary.id, 1);
+
+      axios.patch(`${baseUrl}/users/${userID}.json`, {
+        accounts: Accounts,
+      });
+    });
+};
+
 export const getAccountsData = async userID =>
   await axios
     .get(`${baseUrl}/users/${userID}/accounts.json`)
     .then(response => response.data);
+// print the data
 
 export const transactToAccount = async (
   myAccountNum,

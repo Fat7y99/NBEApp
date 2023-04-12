@@ -9,6 +9,11 @@ import {useSelector} from 'react-redux';
 import BeneficiaryCard from '../../components/HomeComponents/BeneficiariesComponents/BeneficiaryCard';
 import HistoryPage from './HistoryPage';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useQuery} from '@tanstack/react-query';
+import axios from 'axios';
+import {getAccountsData} from '../../services/API';
+const userID = '-NSX79Ib24MZk09QfekF';
+
 const BeneficiariesPage = ({navigation}) => {
   const Stack = createNativeStackNavigator();
   return (
@@ -27,9 +32,17 @@ const BeneficiariesPage = ({navigation}) => {
 };
 
 const SubBeneficiariesPage = ({navigation}) => {
-  const BenfeiciariesData = useSelector(state => state.user.accounts);
-  console.log('sayed', windowWidthFactor);
-
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const {data, isLoading, isError} = useQuery(
+    ['BenfeiciariesData'],
+    () => getAccountsData(userID),
+    {refetchInterval: 1000},
+  );
+  //   {// console.log('isloading:', isLoading, 'isError:', isError);
+  //   // console.log('data is', data);
+  //   // const BenfeiciariesData = useSelector(state => state.user.accounts);
+  //   // console.log('sayed', windowWidthFactor);
+  // }
   const onPressHandler = () => {
     console.log('navigating..');
     navigation.navigate('NewBeneficiary');
@@ -78,10 +91,10 @@ const SubBeneficiariesPage = ({navigation}) => {
         </View>
       </View>
 
-      {BenfeiciariesData.length ? (
+      {!isLoading ? (
         <FlatList
           numColumns={3}
-          data={BenfeiciariesData}
+          data={data}
           keyExtractor={item => item.name}
           contentContainerStyle={{
             // backgroundColor: 'red',
@@ -92,8 +105,8 @@ const SubBeneficiariesPage = ({navigation}) => {
             // marginHorizontal: 25,
           }}
           renderItem={item => {
-            console.log('object');
-            console.log(item.item);
+            // console.log('object');
+            // console.log(item.item);
             return (
               <BeneficiaryCard
                 navigation={navigation}

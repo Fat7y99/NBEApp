@@ -5,12 +5,13 @@ import LoginPage from './src/pages/LoginPage';
 import CongratulationPage from './src/pages/CongratulationPage';
 import {Provider, useSelector} from 'react-redux';
 import {Store} from './src/redux/Store';
+import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
 import {
   signUp,
   login,
   addHistoryData,
   getHistoryData,
-} from './src/services/firebase';
+} from './src/services/Firebase';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import OTPPage from './src/pages/OTPPage';
@@ -31,10 +32,13 @@ import {deleteBeneficiary} from './src/services/firebase';
 import {postData} from './src/services/API';
 import {fetchData} from './src/services/API';
 const appWrapper = () => {
+  const queryClient= new QueryClient()
   return (
+    <QueryClientProvider client={queryClient}>
     <Provider store={Store}>
       <App></App>
     </Provider>
+    </QueryClientProvider>
   );
 };
 const App = () => {

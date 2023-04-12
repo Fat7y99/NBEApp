@@ -1,11 +1,13 @@
 import {View, Text, Image, Pressable} from 'react-native';
 import {Colors} from '../../../constants/Colors';
 import {SheetManager} from 'react-native-actions-sheet';
-import {deleteBeneficiary} from '../../../services/firebase';
-import {getAccountsData} from '../../../services/firebase';
+import {deleteBeneficiary} from '../../../services/API';
+import {getAccountsData} from '../../../services/Firebase';
 import {useDispatch} from 'react-redux';
 import {setAppState} from '../../../redux/appState';
 const AccountCard = ({account, elevation, width, height, navigation}) => {
+  const userID = '-NSX79Ib24MZk09QfekF';
+
   const dispatch = useDispatch();
   return (
     <View
@@ -58,8 +60,8 @@ const AccountCard = ({account, elevation, width, height, navigation}) => {
                           // console.log(account.id);
                           dispatch(setAppState(true));
 
-                          await deleteBeneficiary(account.id);
-                          await getAccountsData(dispatch);
+                          await deleteBeneficiary(userID, account);
+                          // await getAccountsData(dispatch);
                           dispatch(setAppState(false));
                           SheetManager.hideAll();
                           navigation.goBack();
