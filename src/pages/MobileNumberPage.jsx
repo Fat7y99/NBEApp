@@ -7,6 +7,8 @@ import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import PrimaryInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Footer from '../components/MobileNumberComponents/Footer';
+import t from '../../assets/Translations.json';
+import {getCurrentLanguage} from '../services/hooks/Hooks';
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -42,7 +44,9 @@ const styles = StyleSheet.create({
 });
 
 const MobileNumberPage = ({navigation}) => {
+  const language = getCurrentLanguage();
   [previousValue, SetValue] = useState(null);
+  const text = t[language];
   const onChangeHandler = value => {
     const currentValue = value;
     const cvLength = currentValue.length;
@@ -94,17 +98,15 @@ const MobileNumberPage = ({navigation}) => {
         firstColor={Colors.primaryGreenColor}
         logoImage={Images.primaryLogo}></LogoHeader>
       <View style={[styles.root, {paddingHorizontal: 20}]}>
-        <Text style={styles.labelStyle}>Mobile number</Text>
-        <Text style={styles.secondaryLabel}>
-          Enter the mobile number registred in the bank
-        </Text>
+        <Text style={styles.labelStyle}>{text['mobile-title']}</Text>
+        <Text style={styles.secondaryLabel}>{text['mobile-subtitle']}</Text>
         <PrimaryInput
           maxLength={17}
           value={previousValue}
           onChangeHandler={onChangeHandler}
-          label="Mobile number"
+          label={text['mobile-title']}
           isSecured={false}
-          language={'english'}
+          language={language}
           marginHorizontal={0}
           flex={0}
           prefixIcon={require('../../assets/images/OTPPage/phoneIcon.png')}></PrimaryInput>

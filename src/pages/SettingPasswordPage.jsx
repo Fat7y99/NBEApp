@@ -6,7 +6,8 @@ import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import PrimaryInput from '../components/CommonComponents/PrimaryInput';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-
+import {getCurrentLanguage} from '../services/hooks/Hooks';
+import t from '../../assets/Translations.json';
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ValidationEntry = ({Validations, validation, index}) => {
+const ValidationEntry = ({Validations, validation, index, language}) => {
   const validColor = Colors.primaryGreenColor;
   const nonValidColor = Colors.greyColor;
   return (
@@ -39,7 +40,7 @@ const ValidationEntry = ({Validations, validation, index}) => {
       }}>
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: language === 'arabic' ? 'row-reverse' : 'row',
           justifyContent: 'space-between',
           marginBottom: 12,
           paddingRight: 10,
@@ -47,20 +48,22 @@ const ValidationEntry = ({Validations, validation, index}) => {
         }}>
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: language === 'arabic' ? 'row-reverse' : 'row',
             width: 170,
             alignItems: 'center',
           }}>
           <View
-            style={{
-              height: 12,
-              width: 12,
-              borderRadius: 55,
-              marginRight: 10,
-              backgroundColor: Validations[validation.id1]
-                ? validColor
-                : nonValidColor,
-            }}></View>
+            style={[
+              {
+                height: 12,
+                width: 12,
+                borderRadius: 55,
+                backgroundColor: Validations[validation.id1]
+                  ? validColor
+                  : nonValidColor,
+              },
+              language === 'arabic' ? {marginLeft: 10} : {marginRight: 10},
+            ]}></View>
           <Text
             style={{
               color: Colors.darkBlueColor,
@@ -73,20 +76,22 @@ const ValidationEntry = ({Validations, validation, index}) => {
         {validation.second ? (
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: language === 'arabic' ? 'row-reverse' : 'row',
               width: 130,
               alignItems: 'center',
             }}>
             <View
-              style={{
-                height: 12,
-                width: 12,
-                borderRadius: 55,
-                marginRight: 10,
-                backgroundColor: Validations[validation.id2]
-                  ? validColor
-                  : nonValidColor,
-              }}></View>
+              style={[
+                {
+                  height: 12,
+                  width: 12,
+                  borderRadius: 55,
+                  backgroundColor: Validations[validation.id1]
+                    ? validColor
+                    : nonValidColor,
+                },
+                language === 'arabic' ? {marginLeft: 10} : {marginRight: 10},
+              ]}></View>
             <Text
               style={{
                 color: Colors.darkBlueColor,
@@ -105,6 +110,8 @@ const ValidationEntry = ({Validations, validation, index}) => {
 };
 
 const SettingPasswordPage = ({navigation}) => {
+  const language = getCurrentLanguage();
+  const text = t[language];
   const initialValidations = {
     Lower: false,
     Upper: false,
@@ -166,19 +173,19 @@ const SettingPasswordPage = ({navigation}) => {
   };
   const validationsList = [
     {
-      first: 'Lower case letter',
+      first: text['lower-case'],
       id1: 'Lower',
-      second: 'Upper case letter',
+      second: text['upper-case'],
       id2: 'Upper',
     },
     {
-      first: 'Minimum 8 characters',
+      first: text['min-charchters'],
       id1: 'Minimum',
-      second: 'Number',
+      second: text['number-charchter'],
       id2: 'Number',
     },
     {
-      first: 'Special character',
+      first: text['special-charchter'],
       id1: 'Special',
       second: null,
     },
@@ -200,7 +207,7 @@ const SettingPasswordPage = ({navigation}) => {
             // fontFamily: 'Roboto',
             color: Colors.darkBlueColor,
           }}>
-          Mobile number
+          {text['set-password-title']}
         </Text>
         <Text
           style={{
@@ -210,13 +217,13 @@ const SettingPasswordPage = ({navigation}) => {
             marginBottom: 20,
             color: Colors.greyColor,
           }}>
-          Enter the mobile number registred in the bank
+          {text['set-password-subtitle']}
         </Text>
         <PrimaryInput
           maxLength={17}
-          placeHolder="Write your password here"
-          label="Password"
-          language={'english'}
+          placeHolder={language === 'arabic' ? '' : 'Write your password here'}
+          label={text['set-password-input']}
+          language={language}
           flex={0}
           marginHorizontal={0}
           onChangeHandler={onChangeHandler}
@@ -224,16 +231,19 @@ const SettingPasswordPage = ({navigation}) => {
 
         <PrimaryInput
           maxLength={17}
-          placeHolder="Re-Write your password here"
+          placeHolder={
+            language === 'arabic' ? '' : 'Re-Write your password here'
+          }
           onChangeHandler={onConfirmPasswordHandler}
-          label="Confirm Password"
-          language={'english'}
+          label={text['confirm-password-input']}
+          language={language}
           marginHorizontal={0}
           flex={0}
           prefixIcon={require('../../assets/images/LoginImages/passwordIcon.png')}></PrimaryInput>
 
         {validationsList.map((validation, index) => (
           <ValidationEntry
+            language={language}
             key={index}
             validation={validation}
             Validations={Validations}
@@ -256,7 +266,7 @@ const SettingPasswordPage = ({navigation}) => {
             height={50}
             width={345}
             backgroundColor={Colors.primaryGreenColor}
-            title="Submit"
+            title={text['set-password-button']}
             textColor="white"></PrimaryButton>
         </View>
       </View>

@@ -10,7 +10,8 @@ import {
 import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
-
+import {getCurrentLanguage} from '../services/hooks/Hooks';
+import t from '../../assets/Translations.json';
 const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: Colors.backgroundColor},
   codeFieldRoot: {marginTop: 20},
@@ -29,6 +30,9 @@ const styles = StyleSheet.create({
 });
 
 const OTPPage = ({navigation, route}) => {
+  const language = getCurrentLanguage();
+  const text = t[language];
+  // console.log(text);
   const otpCount = 5;
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: otpCount});
@@ -54,10 +58,10 @@ const OTPPage = ({navigation, route}) => {
               // fontFamily: 'Roboto',
               color: Colors.darkBlueColor,
             }}>
-            Verification
+            {text['verification-title']}
           </Text>
           <Text style={{fontSize: 16, fontWeight: '400', color: '#B7B7B7'}}>
-            Enter 5 digit code we sent to +20 101 131 5412
+            {text['verification-subtitle']} +20 101 131 5412
           </Text>
 
           <CodeField
@@ -94,7 +98,7 @@ const OTPPage = ({navigation, route}) => {
               fontWeight: '400',
               color: '#B7B7B7',
             }}>
-            Didn’t receive the code?
+            {text['verification-not-recieved']}{' '}
           </Text>
           <Text
             style={{
@@ -102,7 +106,7 @@ const OTPPage = ({navigation, route}) => {
               fontWeight: '700',
               color: Colors.darkBlueColor,
             }}>
-            Request new one in 00:12
+            {text['verification-request']} 00:12
           </Text>
           <View
             style={{
@@ -114,7 +118,7 @@ const OTPPage = ({navigation, route}) => {
             }}>
             <PrimaryButton
               callBackFunction={route.params.callBackFunction}
-              title="Submit"
+              title={text['verification-button']}
               backgroundColor="#007236"
               textColor="white"></PrimaryButton>
           </View>

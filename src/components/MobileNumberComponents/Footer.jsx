@@ -1,7 +1,11 @@
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
 import {Colors} from '../../constants/Colors';
+import t from '../../../assets/Translations.json';
+import {getCurrentLanguage} from '../../services/hooks/Hooks';
 const Footer = ({navigation}) => {
+  const language = getCurrentLanguage();
+  const text = t[language];
   return (
     <View style={styles.root}>
       <PrimaryButton
@@ -10,14 +14,14 @@ const Footer = ({navigation}) => {
             callBackFunction: () => navigation.navigate('SettingPasswordPage'),
           })
         }
-        title="Submit"
+        title={text['mobile-button']}
         backgroundColor="#007236"
         textColor="white"></PrimaryButton>
       <Text style={styles.footerStyle}>
-        By signing up, you agree to our
-        <Text style={styles.specialLinks}> Terms of Service </Text>
-        and acknowledge that you have read our
-        <Text style={styles.specialLinks}> Privacy Policy</Text>.
+        {text['mobile-footer1']}
+        <Text style={styles.specialLinks}> {text['mobile-footer2']} </Text>
+        {text['mobile-footer3']}
+        <Text style={styles.specialLinks}> {text['mobile-footer4']}</Text>.
       </Text>
     </View>
   );

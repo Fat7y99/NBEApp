@@ -2,7 +2,11 @@ import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import {Colors} from '../constants/Colors';
+import {getCurrentLanguage} from '../services/hooks/Hooks';
+import t from '../../assets/Translations.json';
 const CongratulationPage = ({navigation}) => {
+  const language = getCurrentLanguage();
+  const text = t[language];
   return (
     <View
       style={{
@@ -30,10 +34,10 @@ const CongratulationPage = ({navigation}) => {
           }}>
           <View style={{marginLeft: 50}}>
             <Text style={{color: '#F7F7F7', fontSize: 30, fontWeight: '700'}}>
-              Congratulations
+              {text['congratulations-title']}
             </Text>
             <Text style={{color: '#F7F7F7', fontSize: 16, fontWeight: '400'}}>
-              You have successfully registered in NBE online banking service
+              {text['congratulations-subtitle']}
             </Text>
           </View>
         </View>
@@ -48,7 +52,7 @@ const CongratulationPage = ({navigation}) => {
             }}>
             <PrimaryButton
               backgroundColor="white"
-              title="Finish"
+              title={text['congratulations-button']}
               textColor="#007236"
               callBackFunction={() =>
                 navigation.navigate('LoginPage')
