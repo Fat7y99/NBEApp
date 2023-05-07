@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import {Store} from './src/redux/Store';
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import Spinner from 'react-native-loading-spinner-overlay';
-
 import OTPPage from './src/pages/OTPPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';

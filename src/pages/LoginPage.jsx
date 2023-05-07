@@ -1,5 +1,4 @@
 import {View, ImageBackground, StyleSheet, StatusBar} from 'react-native';
-
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import LoginBody from '../components/LoginComponents/LoginBody';
 import Footer from '../components/LoginComponents/Footer';

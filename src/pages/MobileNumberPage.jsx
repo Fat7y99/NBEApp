@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
-import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import PrimaryInput from '../components/CommonComponents/PrimaryInput';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Footer from '../components/MobileNumberComponents/Footer';
 import t from '../../assets/Translations.json';
 import {getCurrentLanguage} from '../services/hooks/Hooks';

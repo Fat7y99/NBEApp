@@ -5,7 +5,6 @@ import {Images} from '../constants/Images';
 import LogoHeader from '../components/CommonComponents/LogoHeader';
 import PrimaryButton from '../components/CommonComponents/PrimaryButton';
 import PrimaryInput from '../components/CommonComponents/PrimaryInput';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {getCurrentLanguage} from '../services/hooks/Hooks';
 import t from '../../assets/Translations.json';
 const styles = StyleSheet.create({

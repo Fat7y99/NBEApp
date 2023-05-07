@@ -8,7 +8,6 @@ import {
   getAccountsData,
   getCurrentUserID,
   getHistoryData,
-  getUserBalance,
 } from '../../services/hooks/Hooks';
 import {getAmount} from '../../services/API';
 import {useQuery} from '@tanstack/react-query';
