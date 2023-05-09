@@ -79,6 +79,7 @@ const AirPayPage = ({navigation}) => {
       }}>
       <FlatList
         horizontal={true}
+        pagingEnabled={true}
         data={Cards}
         showsHorizontalScrollIndicator={false}
         style={{elevation: 3}}

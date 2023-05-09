@@ -11,7 +11,9 @@ const Footer = ({navigation}) => {
       <PrimaryButton
         callBackFunction={() =>
           navigation.navigate('OTPPage', {
-            callBackFunction: () => navigation.navigate('SettingPasswordPage'),
+            callBackFunction: () => {
+              navigation.navigate('SettingPasswordPage');
+            },
           })
         }
         title={text['mobile-button']}

@@ -20,7 +20,7 @@ const NewBeneficiary = ({navigation}) => {
   const beneficiary = getCurrentBeneficiary();
 
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
       <LogoHeader
         navigation={navigation}
         logoImage={Images.primaryLogo}
@@ -122,9 +122,10 @@ const NewBeneficiary = ({navigation}) => {
       <View
         style={{
           flex: 1,
+
           alignItems: 'center',
           justifyContent: 'flex-end',
-          //   backgroundColor: 'red',
+          // backgroundColor: 'red',
           marginBottom: 25,
         }}>
         <PrimaryButton
