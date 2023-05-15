@@ -6,7 +6,7 @@ import PrimaryButton from '../../CommonComponents/PrimaryButton';
 import PrimaryInput from '../../CommonComponents/PrimaryInput';
 import {Colors} from '../../../constants/Colors';
 import {Images} from '../../../constants/Images';
-import {uploadImage} from '../../../services/Firebase';
+import {uploadImage} from '../../../services/firebase';
 import {addBeneficiary} from '../../../services/API';
 import {setbeneficiaryData} from '../../../redux/beneficiary';
 import {setAppState} from '../../../redux/appState';

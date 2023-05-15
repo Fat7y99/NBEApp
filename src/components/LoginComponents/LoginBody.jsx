@@ -13,7 +13,7 @@ import PrimaryInput from '../CommonComponents/PrimaryInput';
 import PrimaryButton from '../CommonComponents/PrimaryButton';
 import ForgotPassword from './ForgotPassword';
 import {useDispatch} from 'react-redux';
-import {login} from '../../services/Firebase';
+import {login} from '../../services/firebase';
 import {setUserData} from '../../redux/user';
 import {setPassword} from '../../redux/login';
 import {setAppState} from '../../redux/appState';
